@@ -1,0 +1,68 @@
+{
+  "admin": {
+    "dashboard": {
+      "title": "Admin Panel",
+      "description": "Welcome to the admin panel. Choose a section you want to edit."
+    },
+    "homepage": {
+      "title": "Homepage",
+      "description": "Edit homepage content",
+      "welcomeText": "Welcome Text",
+      "welcomePlaceholder": "Enter welcome text...",
+      "specializationText": "Specialization",
+      "specializationPlaceholder": "Enter specialization text...",
+      "aboutMeText": "About Me",
+      "aboutMePlaceholder": "Enter about me text...",
+      "updateSuccess": "Homepage updated successfully"
+    },
+    "save": "Save",
+    "saving": "Saving..."
+  },
+  "common": {
+    "loading": "Loading...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "checking": "Checking...",
+    "save": "Save",
+    "saving": "Saving...",
+    "saved": "Changes saved successfully!"
+  },
+  "welcome": "Welcome",
+  "login": {
+    "title": "Admin Panel",
+    "email": "Email address",
+    "password": "Password",
+    "signIn": "Sign in",
+    "success": "Sign in successful",
+    "submit": "Sign in"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back",
+    "welcomeUser": "Welcome {{name}}",
+    "privateData": "Private data: {{message}}",
+    "nav": {
+      "homepage": "Homepage",
+      "skills": "Skills"
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "settings": "Settings"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "userMenu": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "myAccount": "My Account"
+  },
+  "home": {
+    "apiStatus": "API Status"
+  }
+}

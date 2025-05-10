@@ -8,11 +8,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
 import { useNavigate } from "@tanstack/react-router";
-import { Button } from "./ui/button";
-import { Skeleton } from "./ui/skeleton";
+import { useTranslation } from 'react-i18next';
+import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
 import { Link } from "@tanstack/react-router";
 
 export default function UserMenu() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { data: session, isPending } = authClient.useSession();
 
@@ -23,7 +25,7 @@ export default function UserMenu() {
   if (!session) {
     return (
       <Button variant="outline" asChild>
-        <Link to="/login">Sign In</Link>
+        <Link to="/login">{t('userMenu.signIn')}</Link>
       </Button>
     );
   }
@@ -34,7 +36,7 @@ export default function UserMenu() {
         <Button variant="outline">{session.user.name}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-card">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{t('userMenu.myAccount')}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>{session.user.email}</DropdownMenuItem>
         <DropdownMenuItem asChild>
@@ -46,14 +48,14 @@ export default function UserMenu() {
                 fetchOptions: {
                   onSuccess: () => {
                     navigate({
-                      to: "/",
+                      to: "/login",
                     });
                   },
                 },
               });
             }}
           >
-            Sign Out
+            {t('userMenu.signOut')}
           </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -12,8 +12,12 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
-import { Route as DashboardImport } from './routes/dashboard'
+import { Route as HomeImport } from './routes/home'
+import { Route as AdminImport } from './routes/admin'
 import { Route as IndexImport } from './routes/index'
+import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as AdminSkillsImport } from './routes/admin/skills'
+import { Route as AdminHomepageImport } from './routes/admin/homepage'
 
 // Create/Update Routes
 
@@ -23,9 +27,15 @@ const LoginRoute = LoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardRoute = DashboardImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const HomeRoute = HomeImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminRoute = AdminImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -33,6 +43,24 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const AdminIndexRoute = AdminIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+
+const AdminSkillsRoute = AdminSkillsImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => AdminRoute,
+} as any)
+
+const AdminHomepageRoute = AdminHomepageImport.update({
+  id: '/homepage',
+  path: '/homepage',
+  getParentRoute: () => AdminRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -46,11 +74,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminImport
+      parentRoute: typeof rootRoute
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -60,48 +95,111 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
+    '/admin/homepage': {
+      id: '/admin/homepage'
+      path: '/homepage'
+      fullPath: '/admin/homepage'
+      preLoaderRoute: typeof AdminHomepageImport
+      parentRoute: typeof AdminImport
+    }
+    '/admin/skills': {
+      id: '/admin/skills'
+      path: '/skills'
+      fullPath: '/admin/skills'
+      preLoaderRoute: typeof AdminSkillsImport
+      parentRoute: typeof AdminImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexImport
+      parentRoute: typeof AdminImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface AdminRouteChildren {
+  AdminHomepageRoute: typeof AdminHomepageRoute
+  AdminSkillsRoute: typeof AdminSkillsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminHomepageRoute: AdminHomepageRoute,
+  AdminSkillsRoute: AdminSkillsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/skills': typeof AdminSkillsRoute
+  '/admin/': typeof AdminIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/skills': typeof AdminSkillsRoute
+  '/admin': typeof AdminIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/home': typeof HomeRoute
   '/login': typeof LoginRoute
+  '/admin/homepage': typeof AdminHomepageRoute
+  '/admin/skills': typeof AdminSkillsRoute
+  '/admin/': typeof AdminIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/login'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/home'
+    | '/login'
+    | '/admin/homepage'
+    | '/admin/skills'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/login'
-  id: '__root__' | '/' | '/dashboard' | '/login'
+  to: '/' | '/home' | '/login' | '/admin/homepage' | '/admin/skills' | '/admin'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/home'
+    | '/login'
+    | '/admin/homepage'
+    | '/admin/skills'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DashboardRoute: typeof DashboardRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  HomeRoute: typeof HomeRoute
   LoginRoute: typeof LoginRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DashboardRoute: DashboardRoute,
+  AdminRoute: AdminRouteWithChildren,
+  HomeRoute: HomeRoute,
   LoginRoute: LoginRoute,
 }
 
@@ -116,18 +214,39 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/dashboard",
+        "/admin",
+        "/home",
         "/login"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/dashboard": {
-      "filePath": "dashboard.tsx"
+    "/admin": {
+      "filePath": "admin.tsx",
+      "children": [
+        "/admin/homepage",
+        "/admin/skills",
+        "/admin/"
+      ]
+    },
+    "/home": {
+      "filePath": "home.tsx"
     },
     "/login": {
       "filePath": "login.tsx"
+    },
+    "/admin/homepage": {
+      "filePath": "admin/homepage.tsx",
+      "parent": "/admin"
+    },
+    "/admin/skills": {
+      "filePath": "admin/skills.tsx",
+      "parent": "/admin"
+    },
+    "/admin/": {
+      "filePath": "admin/index.tsx",
+      "parent": "/admin"
     }
   }
 }

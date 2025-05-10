@@ -1,0 +1,68 @@
+{
+  "admin": {
+    "dashboard": {
+      "title": "Panel Administracyjny",
+      "description": "Witaj w panelu administracyjnym. Wybierz sekcję, którą chcesz edytować."
+    },
+    "homepage": {
+      "title": "Strona Główna",
+      "description": "Edytuj zawartość strony głównej",
+      "welcomeText": "Tekst powitalny",
+      "welcomePlaceholder": "Wprowadź tekst powitalny...",
+      "specializationText": "Specjalizacja",
+      "specializationPlaceholder": "Wprowadź tekst o specjalizacji...",
+      "aboutMeText": "O mnie",
+      "aboutMePlaceholder": "Wprowadź tekst o sobie...",
+      "updateSuccess": "Pomyślnie zaktualizowano stronę główną"
+    },
+    "save": "Zapisz",
+    "saving": "Zapisywanie..."
+  },
+  "common": {
+    "loading": "Ładowanie...",
+    "connected": "Połączono",
+    "disconnected": "Rozłączono",
+    "checking": "Sprawdzanie...",
+    "save": "Zapisz",
+    "saving": "Zapisywanie...",
+    "saved": "Zmiany zostały zapisane!"
+  },
+  "welcome": "Witaj",
+  "login": {
+    "title": "Panel Administracyjny",
+    "email": "Adres email",
+    "password": "Hasło",
+    "signIn": "Zaloguj się",
+    "success": "Logowanie udane",
+    "submit": "Zaloguj się"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "welcome": "Witaj ponownie",
+    "welcomeUser": "Witaj {{name}}",
+    "privateData": "Prywatne dane: {{message}}",
+    "nav": {
+      "homepage": "Strona główna",
+      "skills": "Umiejętności"
+    }
+  },
+  "navigation": {
+    "home": "Strona główna",
+    "dashboard": "Panel",
+    "settings": "Ustawienia"
+  },
+  "theme": {
+    "toggle": "Przełącz motyw",
+    "light": "Jasny",
+    "dark": "Ciemny",
+    "system": "Systemowy"
+  },
+  "userMenu": {
+    "signIn": "Zaloguj się",
+    "signOut": "Wyloguj się",
+    "myAccount": "Moje konto"
+  },
+  "home": {
+    "apiStatus": "Status API"
+  }
+}
