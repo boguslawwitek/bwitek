@@ -1,3 +1,0 @@
-[remote "all"]
-    url = git@github.com:YOUR_USERNAME/YOUR_REPO.git
-    url = git@your-gitea-instance:YOUR_USERNAME/YOUR_REPO.git
