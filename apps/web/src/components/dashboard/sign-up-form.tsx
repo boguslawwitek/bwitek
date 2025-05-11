@@ -4,10 +4,10 @@ import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from 'react-i18next';
 import { toast } from "sonner";
 import { z } from "zod";
-import Loader from "./loader";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import Loader from "../loader";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 
 export default function SignUpForm({
 	onSwitchToSignIn,
@@ -38,7 +38,7 @@ export default function SignUpForm({
 						navigate({
 							to: "/admin",
 						});
-						toast.success("Sign up successful");
+						toast.success(t('register.success'));
 					},
 					onError: (error) => {
 						toast.error(error.error.message);
@@ -97,7 +97,7 @@ export default function SignUpForm({
 					<form.Field name="email">
 						{(field) => (
 							<div className="space-y-2">
-								<Label htmlFor={field.name}>{t('register.email')}</Label>
+								<Label htmlFor={field.name}>{t('login.email')}</Label>
 								<Input
 									id={field.name}
 									name={field.name}
@@ -120,7 +120,7 @@ export default function SignUpForm({
 					<form.Field name="password">
 						{(field) => (
 							<div className="space-y-2">
-								<Label htmlFor={field.name}>{t('register.password')}</Label>
+								<Label htmlFor={field.name}>{t('login.password')}</Label>
 								<Input
 									id={field.name}
 									name={field.name}
@@ -153,12 +153,13 @@ export default function SignUpForm({
 			</form>
 
 			<div className="mt-4 text-center">
+				<p className="text-sm text-gray-600">{t('register.haveAccount')}</p>
 				<Button
 					variant="link"
 					onClick={onSwitchToSignIn}
-					className="text-indigo-600 hover:text-indigo-800"
+					className="mt-1"
 				>
-					{t('register.login')}
+					{t('register.signIn')}
 				</Button>
 			</div>
 		</div>

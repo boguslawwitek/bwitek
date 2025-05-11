@@ -34,7 +34,18 @@
     "password": "Hasło",
     "signIn": "Zaloguj się",
     "success": "Logowanie udane",
-    "submit": "Zaloguj się"
+    "submit": "Zaloguj się",
+    "noAccount": "Nie masz jeszcze konta?",
+    "register": "Zarejestruj się"
+  },
+  "register": {
+    "title": "Rejestracja",
+    "success": "Rejestracja udana",
+    "submit": "Zarejestruj się",
+    "haveAccount": "Masz już konto?",
+    "signIn": "Zaloguj się",
+    "name": "Imię i nazwisko",
+    "login": "Logowanie"
   },
   "dashboard": {
     "title": "Panel",

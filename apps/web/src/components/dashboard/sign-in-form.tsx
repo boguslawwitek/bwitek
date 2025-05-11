@@ -13,7 +13,7 @@ import { useEffect } from "react";
 export default function SignInForm({
 	onSwitchToSignUp,
 }: {
-	onSwitchToSignUp: () => void;
+	onSwitchToSignUp?: () => void;
 }) {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
@@ -129,7 +129,18 @@ export default function SignInForm({
 				</form.Subscribe>
 			</form>
 
-			{/* Removed sign up button */}
+			{onSwitchToSignUp && (
+				<div className="mt-4 text-center">
+					<p className="text-sm text-gray-600">{t('login.noAccount')}</p>
+					<Button
+						variant="link"
+						onClick={onSwitchToSignUp}
+						className="mt-1"
+					>
+						{t('login.register')}
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 }

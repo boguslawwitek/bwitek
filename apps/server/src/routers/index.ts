@@ -6,6 +6,9 @@ import {
 import { contentRouter } from "./content";
 
 export const appRouter = router({
+  getRegistrationStatus: publicProcedure.query(() => {
+    return { enabled: process.env.REGISTRATION_ENABLED === "true" };
+  }),
   healthCheck: publicProcedure.query(() => {
     return "OK";
   }),

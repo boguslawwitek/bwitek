@@ -34,7 +34,18 @@
     "password": "Password",
     "signIn": "Sign in",
     "success": "Sign in successful",
-    "submit": "Sign in"
+    "submit": "Sign in",
+    "noAccount": "Don't have an account yet?",
+    "register": "Register"
+  },
+  "register": {
+    "title": "Register",
+    "success": "Registration successful",
+    "submit": "Register",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "name": "Full name",
+    "login": "Login"  
   },
   "dashboard": {
     "title": "Dashboard",

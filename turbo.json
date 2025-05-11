@@ -36,10 +36,6 @@
 		"db:seed": {
 			"cache": false,
 			"persistent": true
-		},
-		"db:create-user": {
-			"cache": false,
-			"persistent": true
 		}
 	}
 }
