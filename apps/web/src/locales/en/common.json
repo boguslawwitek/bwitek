@@ -61,7 +61,9 @@
     "updated": "Updated successfully",
     "deleting": "Deleting...",
     "deleted": "Deleted successfully",
-    "select": "Select"
+    "select": "Select",
+    "search": "Search",
+    "changeOrder": "Change order mode"
   },
   "welcome": "Welcome",
   "login": {

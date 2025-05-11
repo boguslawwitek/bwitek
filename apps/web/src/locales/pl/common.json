@@ -61,7 +61,9 @@
     "updated": "Zaktualizowano pomyślnie",
     "deleting": "Usuwanie...",
     "deleted": "Usunięto pomyślnie",
-    "select": "Wybierz"
+    "select": "Wybierz",
+    "search": "Szukaj",
+    "changeOrder": "Tryb zmiany kolejności"
   },
   "welcome": "Witaj",
   "login": {

@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -206,12 +205,22 @@ function SkillsRoute() {
     {
       key: "name.pl",
       header: t("admin.skills.namePl"),
-      render: (item) => item.name.pl
+      render: (item) => item.name.pl,
+      sortable: true,
+      searchable: true
     },
     {
       key: "name.en",
       header: t("admin.skills.nameEn"),
-      render: (item) => item.name.en
+      render: (item) => item.name.en,
+      sortable: true,
+      searchable: true
+    },
+    {
+      key: "order",
+      header: t("admin.skills.order"),
+      render: (item) => item.order,
+      sortable: true
     }
   ];
 
@@ -219,17 +228,23 @@ function SkillsRoute() {
     {
       key: "name.pl",
       header: t("admin.skills.namePl"),
-      render: (item) => item.name.pl
+      render: (item) => item.name.pl,
+      sortable: true,
+      searchable: true
     },
     {
       key: "name.en",
       header: t("admin.skills.nameEn"),
-      render: (item) => item.name.en
+      render: (item) => item.name.en,
+      sortable: true,
+      searchable: true
     },
     {
       key: "category",
       header: t("admin.skills.category"),
-      render: (item) => item.category ? `${item.category.pl} / ${item.category.en}` : "-"
+      render: (item) => item.category ? `${item.category.pl} / ${item.category.en}` : "-",
+      sortable: true,
+      searchable: true
     },
     {
       key: "icon",
@@ -237,12 +252,21 @@ function SkillsRoute() {
       render: (item) => {
         if (!item.iconName) return "-";
         return item.iconProvider ? `${item.iconName} (${item.iconProvider})` : item.iconName;
-      }
+      },
+      sortable: true,
+      searchable: true
     },
     {
       key: "isActive",
       header: t("admin.skills.active"),
-      render: (item) => item.isActive ? t("common.yes") : t("common.no")
+      render: (item) => item.isActive ? t("common.yes") : t("common.no"),
+      sortable: true
+    },
+    {
+      key: "order",
+      header: t("admin.skills.order"),
+      render: (item) => item.order,
+      sortable: true
     }
   ];
 
