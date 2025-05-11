@@ -13,6 +13,10 @@ const navItems = [
     path: "/admin/skills",
     labelKey: "dashboard.nav.skills",
   },
+  {
+    path: "/admin/projects",
+    labelKey: "dashboard.nav.projects",
+  },
 ];
 
 export function DashboardNav() {

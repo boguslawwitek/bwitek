@@ -126,15 +126,20 @@ export const contentRouter = router({
 
   // Projects
   getProjects: protectedProcedure.query(async () => {
-    return db.select().from(projects).orderBy(projects.order);
+    const results = await db.select().from(projects).orderBy(projects.order);
+    return results.map(project => ({
+      ...project,
+      title: typeof project.title === 'string' ? JSON.parse(project.title) : project.title,
+      description: typeof project.description === 'string' ? JSON.parse(project.description) : project.description,
+    }));
   }),
   createProject: protectedProcedure
     .input(z.object({
       title: translationSchema,
       description: translationSchema,
-      url: z.string().optional(),
-      repoUrl: z.string().optional(),
-      imageUrl: z.string().optional(),
+      url: z.string().nullable().optional(),
+      repoUrl: z.string().nullable().optional(),
+      imageUrl: z.string().nullable().optional(),
       order: z.number(),
     }))
     .mutation(async ({ input }) => {
@@ -148,9 +153,9 @@ export const contentRouter = router({
       id: z.string(),
       title: translationSchema,
       description: translationSchema,
-      url: z.string().optional(),
-      repoUrl: z.string().optional(),
-      imageUrl: z.string().optional(),
+      url: z.string().nullable().optional(),
+      repoUrl: z.string().nullable().optional(),
+      imageUrl: z.string().nullable().optional(),
       order: z.number(),
       isActive: z.boolean(),
     }))
@@ -165,6 +170,42 @@ export const contentRouter = router({
     .mutation(async ({ input }) => {
       return db.delete(projects)
         .where(eq(projects.id, input));
+    }),
+  changeProjectOrder: protectedProcedure
+    .input(z.object({
+      id: z.string(),
+      direction: z.enum(["up", "down"])
+    }))
+    .mutation(async ({ input }) => {
+      const { id, direction } = input;
+      
+      const allProjects = await db.select().from(projects).orderBy(projects.order);
+      
+      const currentIndex = allProjects.findIndex((project) => project.id === id);
+      if (currentIndex === -1) {
+        throw new Error("Project not found");
+      }
+      
+      if (direction === "up" && currentIndex === 0) {
+        throw new Error("Cannot move the first project up");
+      }
+      if (direction === "down" && currentIndex === allProjects.length - 1) {
+        throw new Error("Cannot move the last project down");
+      }
+      
+      const targetIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+      
+      const temp = allProjects[currentIndex];
+      allProjects[currentIndex] = allProjects[targetIndex];
+      allProjects[targetIndex] = temp;
+      
+      for (let i = 0; i < allProjects.length; i++) {
+        await db.update(projects)
+          .set({ order: i + 1 })
+          .where(eq(projects.id, allProjects[i].id));
+      }
+      
+      return { success: true };
     }),
 
   // Skills Category

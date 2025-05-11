@@ -188,7 +188,7 @@ export const DataTable = ({
             <DialogTrigger asChild>
               <Button>{addButtonText}</Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="max-h-[80vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>{addDialogTitle}</DialogTitle>
               </DialogHeader>
@@ -274,7 +274,7 @@ export const DataTable = ({
                                 {t("common.edit")}
                               </Button>
                             </DialogTrigger>
-                            <DialogContent>
+                            <DialogContent className="max-h-[80vh] overflow-y-auto">
                               <DialogHeader>
                                 <DialogTitle>{editDialogTitle}</DialogTitle>
                               </DialogHeader>
@@ -318,7 +318,7 @@ export const DataTable = ({
                                 {t("common.delete")}
                               </Button>
                             </DialogTrigger>
-                            <DialogContent>
+                            <DialogContent className="max-h-[80vh] overflow-y-auto">
                               <DialogHeader>
                                 <DialogTitle>{deleteDialogTitle}</DialogTitle>
                               </DialogHeader>

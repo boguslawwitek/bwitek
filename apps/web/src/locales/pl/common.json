@@ -39,6 +39,23 @@
       "active": "Aktywny",
       "deleteTitle": "Usuwanie umiejętności",
       "deleteConfirm": "Czy na pewno chcesz usunąć tę umiejętność?"
+    },
+    "projects": {
+      "title": "Projekty",
+      "addNew": "Dodaj projekt",
+      "addNewTitle": "Dodaj nowy projekt",
+      "editTitle": "Edytuj projekt",
+      "titlePl": "Tytuł (PL)",
+      "titleEn": "Tytuł (EN)",
+      "descriptionPl": "Opis (PL)",
+      "descriptionEn": "Opis (EN)",
+      "url": "Adres URL projektu",
+      "repoUrl": "Adres URL repozytorium",
+      "imageUrl": "Adres URL obrazka",
+      "order": "Kolejność",
+      "active": "Aktywny",
+      "deleteTitle": "Usuwanie projektu",
+      "deleteConfirm": "Czy na pewno chcesz usunąć ten projekt?"
     }
   },
   "common": {
@@ -86,17 +103,18 @@
     "login": "Logowanie"
   },
   "dashboard": {
-    "title": "Panel",
+    "title": "Panel administracyjny",
     "welcome": "Witaj ponownie",
     "welcomeUser": "Witaj {{name}}",
     "privateData": "Prywatne dane: {{message}}",
     "nav": {
       "homepage": "Strona główna",
-      "skills": "Umiejętności"
+      "skills": "Umiejętności",
+      "projects": "Projekty"
     }
   },
   "navigation": {
-    "home": "Strona główna",
+    "home": "Powrót do strony",
     "dashboard": "Panel",
     "settings": "Ustawienia"
   },

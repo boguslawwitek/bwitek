@@ -39,6 +39,23 @@
       "active": "Active",
       "deleteTitle": "Delete skill",
       "deleteConfirm": "Are you sure you want to delete this skill?"
+    },
+    "projects": {
+      "title": "Projects",
+      "addNew": "Add project",
+      "addNewTitle": "Add new project",
+      "editTitle": "Edit project",
+      "titlePl": "Title (PL)",
+      "titleEn": "Title (EN)",
+      "descriptionPl": "Description (PL)",
+      "descriptionEn": "Description (EN)",
+      "url": "Project URL",
+      "repoUrl": "Repository URL",
+      "imageUrl": "Image URL",
+      "order": "Order",
+      "active": "Active",
+      "deleteTitle": "Delete project",
+      "deleteConfirm": "Are you sure you want to delete this project?"
     }
   },
   "common": {
@@ -92,11 +109,12 @@
     "privateData": "Private data: {{message}}",
     "nav": {
       "homepage": "Homepage",
-      "skills": "Skills"
+      "skills": "Skills",
+      "projects": "Projects"
     }
   },
   "navigation": {
-    "home": "Home",
+    "home": "Return to website",
     "dashboard": "Dashboard",
     "settings": "Settings"
   },

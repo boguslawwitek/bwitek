@@ -14,10 +14,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 
 export type FieldConfig = {
   name: string;
-  type: "text" | "number" | "email" | "password" | "switch" | "select" | "custom";
+  type: "text" | "number" | "email" | "password" | "switch" | "select" | "custom" | "textarea";
   label: string;
   required?: boolean;
   customComponent?: (field: any, props: any) => ReactNode;
@@ -207,6 +208,15 @@ export const EntityForm = ({
                       />
                       <span>{formField.value ? t("common.yes") : t("common.no")}</span>
                     </div>
+                  ) : field.type === "textarea" ? (
+                    <Textarea
+                      value={formField.value || ""}
+                      onChange={formField.onChange}
+                      onBlur={formField.onBlur}
+                      name={formField.name}
+                      ref={formField.ref}
+                      className="min-h-[100px] max-h-[300px] overflow-y-auto"
+                    />
                   ) : field.type === "select" && field.options ? (
                     <select
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
