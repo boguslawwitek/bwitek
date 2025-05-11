@@ -114,6 +114,7 @@ export const DataTable = ({
   useEffect(() => {
     if (orderingMode) {
       setSortConfig(null);
+      setSearchTerm("");
     }
   }, [orderingMode]);
 

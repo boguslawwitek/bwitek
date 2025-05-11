@@ -18,11 +18,11 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
   head: () => ({
     meta: [
       {
-        title: "My App",
+        title: "BWitek.dev",
       },
       {
         name: "description",
-        content: "My App is a web application",
+        content: "Full-stack developer portfolio.",
       },
     ],
     links: [
