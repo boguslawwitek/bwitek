@@ -15,8 +15,31 @@
       "aboutMePlaceholder": "Wprowadź tekst o sobie...",
       "updateSuccess": "Pomyślnie zaktualizowano stronę główną"
     },
-    "save": "Zapisz",
-    "saving": "Zapisywanie..."
+    "skills": {
+      "title": "Umiejętności",
+      "addNew": "Dodaj umiejętność",
+      "addNewTitle": "Dodaj nową umiejętność",
+      "editTitle": "Edytuj umiejętność",
+      "namePl": "Nazwa (PL)",
+      "nameEn": "Nazwa (EN)",
+      "categoryPl": "Kategoria (PL)",
+      "categoryEn": "Kategoria (EN)",
+      "category": "Kategoria",
+      "selectCategory": "Wybierz kategorię",
+      "categoriesTitle": "Kategorie umiejętności",
+      "addNewCategory": "Dodaj kategorię",
+      "addNewCategoryTitle": "Dodaj nową kategorię",
+      "editCategoryTitle": "Edytuj kategorię",
+      "deleteCategoryTitle": "Usuwanie kategorii",
+      "deleteCategoryConfirm": "Czy na pewno chcesz usunąć tę kategorię? Umiejętności przypisane do tej kategorii nie będą przypisane do żadnej kategorii.",
+      "icon": "Ikona",
+      "iconName": "Nazwa ikony",
+      "iconProvider": "Dostawca ikony",
+      "order": "Kolejność",
+      "active": "Aktywny",
+      "deleteTitle": "Usuwanie umiejętności",
+      "deleteConfirm": "Czy na pewno chcesz usunąć tę umiejętność?"
+    }
   },
   "common": {
     "loading": "Ładowanie...",
@@ -25,7 +48,20 @@
     "checking": "Sprawdzanie...",
     "save": "Zapisz",
     "saving": "Zapisywanie...",
-    "saved": "Zmiany zostały zapisane!"
+    "saved": "Zmiany zostały zapisane!",
+    "add": "Dodaj",
+    "edit": "Edytuj",
+    "update": "Aktualizuj",
+    "delete": "Usuń",
+    "cancel": "Anuluj",
+    "actions": "Akcje",
+    "yes": "Tak",
+    "no": "Nie",
+    "updating": "Aktualizowanie...",
+    "updated": "Zaktualizowano pomyślnie",
+    "deleting": "Usuwanie...",
+    "deleted": "Usunięto pomyślnie",
+    "select": "Wybierz"
   },
   "welcome": "Witaj",
   "login": {

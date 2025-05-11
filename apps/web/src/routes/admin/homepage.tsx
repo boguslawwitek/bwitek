@@ -90,7 +90,6 @@ function HomepageRoute() {
         <CardTitle>{t("admin.homepage.title")}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
-        {/* Welcome Text */}
         <div className="space-y-4">
           <Label>{t("admin.homepage.welcomeText")}</Label>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -117,7 +116,6 @@ function HomepageRoute() {
           </div>
         </div>
 
-        {/* Specialization Text */}
         <div className="space-y-4">
           <Label>{t("admin.homepage.specializationText")}</Label>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -144,7 +142,6 @@ function HomepageRoute() {
           </div>
         </div>
 
-        {/* About Me Text */}
         <div className="space-y-4">
           <Label>{t("admin.homepage.aboutMeText")}</Label>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -171,7 +168,7 @@ function HomepageRoute() {
           </div>
         </div>
 
-        <Button onClick={handleSubmit}>{t("admin.save")}</Button>
+        <Button onClick={handleSubmit}>{t("common.save")}</Button>
       </CardContent>
     </Card>
   );

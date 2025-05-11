@@ -5,6 +5,7 @@ import {
   int,
   boolean,
   json,
+  timestamp,
 } from "drizzle-orm/mysql-core";
 
 export type Translation = {
@@ -40,10 +41,16 @@ export const projects = mysqlTable("projects", {
   isActive: boolean("is_active").notNull().default(true),
 });
 
+export const skillCategories = mysqlTable("skill_categories", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  name: json("name").$type<Translation>().notNull(),
+  order: int("order").notNull(),
+});
+
 export const skills = mysqlTable("skills", {
   id: varchar("id", { length: 36 }).primaryKey(),
   name: json("name").$type<Translation>().notNull(),
-  category: json("category").$type<Translation>().notNull(),
+  categoryId: varchar("category_id", { length: 36 }).references(() => skillCategories.id, { onDelete: 'set null' }),
   iconName: varchar("icon_name", { length: 50 }),
   iconProvider: varchar("icon_provider", { length: 50 }),
   order: int("order").notNull(),

@@ -91,10 +91,17 @@ CREATE TABLE `projects` (
 	CONSTRAINT `projects_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
+CREATE TABLE `skill_categories` (
+	`id` varchar(36) NOT NULL,
+	`name` json NOT NULL,
+	`order` int NOT NULL,
+	CONSTRAINT `skill_categories_id` PRIMARY KEY(`id`)
+);
+--> statement-breakpoint
 CREATE TABLE `skills` (
 	`id` varchar(36) NOT NULL,
 	`name` json NOT NULL,
-	`category` json NOT NULL,
+	`category_id` varchar(36),
 	`icon_name` varchar(50),
 	`icon_provider` varchar(50),
 	`order` int NOT NULL,
@@ -115,4 +122,5 @@ CREATE TABLE `top_bar` (
 );
 --> statement-breakpoint
 ALTER TABLE `account` ADD CONSTRAINT `account_user_id_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE `session` ADD CONSTRAINT `session_user_id_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE cascade ON UPDATE no action;
+ALTER TABLE `session` ADD CONSTRAINT `session_user_id_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `skills` ADD CONSTRAINT `skills_category_id_skill_categories_id_fk` FOREIGN KEY (`category_id`) REFERENCES `skill_categories`(`id`) ON DELETE set null ON UPDATE no action;
