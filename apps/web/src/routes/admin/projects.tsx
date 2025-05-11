@@ -83,6 +83,7 @@ function ProjectsRoute() {
       ...data,
       url: data.url || null,
       repoUrl: data.repoUrl || null,
+      repoUrl2: data.repoUrl2 || null,
       imageUrl: data.imageUrl || null,
       order: maxOrder + 1
     });
@@ -98,6 +99,7 @@ function ProjectsRoute() {
       description: data.description,
       url: data.url || null,
       repoUrl: data.repoUrl || null,
+      repoUrl2: data.repoUrl2 || null,
       imageUrl: data.imageUrl || null,
       isActive: data.isActive,
       order: project.order

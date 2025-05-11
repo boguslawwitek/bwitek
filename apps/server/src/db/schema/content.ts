@@ -36,6 +36,7 @@ export const projects = mysqlTable("projects", {
   description: json("description").$type<Translation>().notNull(),
   url: text("url"),
   repoUrl: text("repo_url"),
+  repoUrl2: text("repo_url2"),
   imageUrl: text("image_url"),
   order: int("order").notNull(),
   isActive: boolean("is_active").notNull().default(true),

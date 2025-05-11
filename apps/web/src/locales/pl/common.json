@@ -50,7 +50,8 @@
       "descriptionPl": "Opis (PL)",
       "descriptionEn": "Opis (EN)",
       "url": "Adres URL projektu",
-      "repoUrl": "Adres URL repozytorium",
+      "repoUrl": "Adres URL repozytorium (GitHub)",
+      "repoUrl2": "Adres URL repozytorium (Gitea)",
       "imageUrl": "Adres URL obrazka",
       "order": "Kolejność",
       "active": "Aktywny",
@@ -166,13 +167,42 @@
   "navigation": {
     "home": "Powrót do strony",
     "dashboard": "Panel",
-    "settings": "Ustawienia"
+    "settings": "Ustawienia",
+    "keyboardHint": "Możesz użyć klawiszy strzałkowych do nawigacji"
   },
   "theme": {
     "toggle": "Przełącz motyw",
     "light": "Jasny",
     "dark": "Ciemny",
     "system": "Systemowy"
+  },
+  "footer": {
+    "copyright": "Wszelkie prawa zastrzeżone"
+  },
+  "projects": {
+    "title": "Moje projekty",
+    "noProjects": "Brak projektów do wyświetlenia",
+    "github": "GitHub",
+    "demo": "Demo"
+  },
+  "skills": {
+    "title": "Umiejętności",
+    "noSkills": "Brak umiejętności w tej kategorii",
+    "noCategories": "Brak kategorii umiejętności"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "directContact": "Dane kontaktowe",
+    "quickMessage": "Wyślij wiadomość",
+    "form": {
+      "name": "Imię i nazwisko",
+      "email": "Adres e-mail",
+      "message": "Wiadomość",
+      "send": "Wyślij wiadomość"
+    }
+  },
+  "language": {
+    "switch": "Zmień język"
   },
   "userMenu": {
     "signIn": "Zaloguj się",

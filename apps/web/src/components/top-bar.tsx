@@ -6,7 +6,7 @@ import { trpc } from '@/utils/trpc';
 import { useTranslation } from 'react-i18next';
 
 export default function TopBar() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data: topBarItems, isLoading } = useQuery(trpc.content.getTopBar.queryOptions());
   const locale = i18n.language || 'en';
 
@@ -37,7 +37,7 @@ export default function TopBar() {
 
                 <div className='flex items-center gap-4'>
                     {isLoading ? (
-                      <div className="text-gray-400">Loading...</div>
+                      <div className="text-gray-400">{t('common.loading')}</div>
                     ) : (
                       topBarItems?.map((item, index) => {
                         const icon = getIcon(item.iconName, item.iconProvider);

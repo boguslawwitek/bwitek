@@ -11,8 +11,10 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SkillsImport } from './routes/skills'
+import { Route as ProjectsImport } from './routes/projects'
 import { Route as LoginImport } from './routes/login'
-import { Route as HomeImport } from './routes/home'
+import { Route as ContactImport } from './routes/contact'
 import { Route as AdminImport } from './routes/admin'
 import { Route as IndexImport } from './routes/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
@@ -24,15 +26,27 @@ import { Route as AdminContactImport } from './routes/admin/contact'
 
 // Create/Update Routes
 
+const SkillsRoute = SkillsImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProjectsRoute = ProjectsImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const LoginRoute = LoginImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
-const HomeRoute = HomeImport.update({
-  id: '/home',
-  path: '/home',
+const ContactRoute = ContactImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -102,11 +116,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminImport
       parentRoute: typeof rootRoute
     }
-    '/home': {
-      id: '/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof HomeImport
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -114,6 +128,20 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsImport
+      parentRoute: typeof rootRoute
+    }
+    '/skills': {
+      id: '/skills'
+      path: '/skills'
+      fullPath: '/skills'
+      preLoaderRoute: typeof SkillsImport
       parentRoute: typeof rootRoute
     }
     '/admin/contact': {
@@ -186,8 +214,10 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/home': typeof HomeRoute
+  '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
+  '/projects': typeof ProjectsRoute
+  '/skills': typeof SkillsRoute
   '/admin/contact': typeof AdminContactRoute
   '/admin/homepage': typeof AdminHomepageRoute
   '/admin/navigation': typeof AdminNavigationRoute
@@ -198,8 +228,10 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/home': typeof HomeRoute
+  '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
+  '/projects': typeof ProjectsRoute
+  '/skills': typeof SkillsRoute
   '/admin/contact': typeof AdminContactRoute
   '/admin/homepage': typeof AdminHomepageRoute
   '/admin/navigation': typeof AdminNavigationRoute
@@ -212,8 +244,10 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/home': typeof HomeRoute
+  '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
+  '/projects': typeof ProjectsRoute
+  '/skills': typeof SkillsRoute
   '/admin/contact': typeof AdminContactRoute
   '/admin/homepage': typeof AdminHomepageRoute
   '/admin/navigation': typeof AdminNavigationRoute
@@ -227,8 +261,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
-    | '/home'
+    | '/contact'
     | '/login'
+    | '/projects'
+    | '/skills'
     | '/admin/contact'
     | '/admin/homepage'
     | '/admin/navigation'
@@ -238,8 +274,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/home'
+    | '/contact'
     | '/login'
+    | '/projects'
+    | '/skills'
     | '/admin/contact'
     | '/admin/homepage'
     | '/admin/navigation'
@@ -250,8 +288,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
-    | '/home'
+    | '/contact'
     | '/login'
+    | '/projects'
+    | '/skills'
     | '/admin/contact'
     | '/admin/homepage'
     | '/admin/navigation'
@@ -264,15 +304,19 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
-  HomeRoute: typeof HomeRoute
+  ContactRoute: typeof ContactRoute
   LoginRoute: typeof LoginRoute
+  ProjectsRoute: typeof ProjectsRoute
+  SkillsRoute: typeof SkillsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
-  HomeRoute: HomeRoute,
+  ContactRoute: ContactRoute,
   LoginRoute: LoginRoute,
+  ProjectsRoute: ProjectsRoute,
+  SkillsRoute: SkillsRoute,
 }
 
 export const routeTree = rootRoute
@@ -287,8 +331,10 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/admin",
-        "/home",
-        "/login"
+        "/contact",
+        "/login",
+        "/projects",
+        "/skills"
       ]
     },
     "/": {
@@ -305,11 +351,17 @@ export const routeTree = rootRoute
         "/admin/"
       ]
     },
-    "/home": {
-      "filePath": "home.tsx"
+    "/contact": {
+      "filePath": "contact.tsx"
     },
     "/login": {
       "filePath": "login.tsx"
+    },
+    "/projects": {
+      "filePath": "projects.tsx"
+    },
+    "/skills": {
+      "filePath": "skills.tsx"
     },
     "/admin/contact": {
       "filePath": "admin/contact.tsx",

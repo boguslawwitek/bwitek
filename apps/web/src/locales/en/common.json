@@ -50,7 +50,8 @@
       "descriptionPl": "Description (PL)",
       "descriptionEn": "Description (EN)",
       "url": "Project URL",
-      "repoUrl": "Repository URL",
+      "repoUrl": "Repository URL (GitHub)",
+      "repoUrl2": "Repository URL (Gitea)",
       "imageUrl": "Image URL",
       "order": "Order",
       "active": "Active",
@@ -166,13 +167,42 @@
   "navigation": {
     "home": "Return to website",
     "dashboard": "Dashboard",
-    "settings": "Settings"
+    "settings": "Settings",
+    "keyboardHint": "You can use arrow keys for navigation"
   },
   "theme": {
     "toggle": "Toggle theme",
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "footer": {
+    "copyright": "Bogusław Witek. All rights reserved."
+  },
+  "projects": {
+    "title": "My Projects",
+    "noProjects": "No projects to display",
+    "github": "GitHub",
+    "demo": "Demo"
+  },
+  "skills": {
+    "title": "Skills",
+    "noSkills": "No skills in this category",
+    "noCategories": "No skill categories"
+  },
+  "contact": {
+    "title": "Contact",
+    "directContact": "Contact Information",
+    "quickMessage": "Quick Message",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "message": "Message",
+      "send": "Send Message"
+    }
+  },
+  "language": {
+    "switch": "Switch language"
   },
   "userMenu": {
     "signIn": "Sign In",

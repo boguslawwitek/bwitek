@@ -51,6 +51,11 @@ export const ProjectForm = ({
       label: t("admin.projects.repoUrl"),
     },
     {
+      name: "repoUrl2",
+      type: "text",
+      label: t("admin.projects.repoUrl2"),
+    },
+    {
       name: "imageUrl",
       type: "text",
       label: t("admin.projects.imageUrl"),
@@ -74,6 +79,7 @@ export const ProjectForm = ({
     }),
     url: z.string().nullable().optional(),
     repoUrl: z.string().nullable().optional(),
+    repoUrl2: z.string().nullable().optional(),
     imageUrl: z.string().nullable().optional(),
     isActive: z.boolean().default(true),
   });

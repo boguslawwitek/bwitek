@@ -221,6 +221,7 @@ export const contentRouter = router({
       description: translationSchema,
       url: z.string().nullable().optional(),
       repoUrl: z.string().nullable().optional(),
+      repoUrl2: z.string().nullable().optional(),
       imageUrl: z.string().nullable().optional(),
       order: z.number(),
     }))
@@ -237,6 +238,7 @@ export const contentRouter = router({
       description: translationSchema,
       url: z.string().nullable().optional(),
       repoUrl: z.string().nullable().optional(),
+      repoUrl2: z.string().nullable().optional(),
       imageUrl: z.string().nullable().optional(),
       order: z.number(),
       isActive: z.boolean(),
