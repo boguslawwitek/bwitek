@@ -56,6 +56,53 @@
       "active": "Aktywny",
       "deleteTitle": "Usuwanie projektu",
       "deleteConfirm": "Czy na pewno chcesz usunąć ten projekt?"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "addNew": "Dodaj element kontaktu",
+      "addNewTitle": "Dodaj nowy element kontaktu",
+      "editTitle": "Edytuj element kontaktu",
+      "namePl": "Nazwa (PL)",
+      "nameEn": "Nazwa (EN)",
+      "iconName": "Nazwa ikony",
+      "iconProvider": "Dostawca ikony",
+      "url": "URL",
+      "external": "Link zewnętrzny",
+      "newTab": "Otwórz w nowej karcie",
+      "order": "Kolejność",
+      "deleteTitle": "Usuwanie elementu kontaktu",
+      "deleteConfirm": "Czy na pewno chcesz usunąć ten element kontaktu?"
+    },
+    "navigation": {
+      "title": "Nawigacja",
+      "addNew": "Dodaj element nawigacji",
+      "addNewTitle": "Dodaj nowy element nawigacji",
+      "editTitle": "Edytuj element nawigacji",
+      "labelPl": "Etykieta (PL)",
+      "labelEn": "Etykieta (EN)",
+      "url": "URL",
+      "external": "Link zewnętrzny",
+      "newTab": "Otwórz w nowej karcie",
+      "active": "Aktywny",
+      "order": "Kolejność",
+      "deleteTitle": "Usuwanie elementu nawigacji",
+      "deleteConfirm": "Czy na pewno chcesz usunąć ten element nawigacji?"
+    },
+    "topBar": {
+      "title": "Górny pasek",
+      "addNew": "Dodaj element górnego paska",
+      "addNewTitle": "Dodaj nowy element górnego paska",
+      "editTitle": "Edytuj element górnego paska",
+      "namePl": "Nazwa (PL)",
+      "nameEn": "Nazwa (EN)",
+      "iconName": "Nazwa ikony",
+      "iconProvider": "Dostawca ikony",
+      "url": "URL",
+      "external": "Link zewnętrzny",
+      "newTab": "Otwórz w nowej karcie",
+      "order": "Kolejność",
+      "deleteTitle": "Usuwanie elementu górnego paska",
+      "deleteConfirm": "Czy na pewno chcesz usunąć ten element górnego paska?"
     }
   },
   "common": {
@@ -110,7 +157,10 @@
     "nav": {
       "homepage": "Strona główna",
       "skills": "Umiejętności",
-      "projects": "Projekty"
+      "projects": "Projekty",
+      "navigation": "Nawigacja",
+      "topbar": "Górny pasek",
+      "contact": "Kontakt"
     }
   },
   "navigation": {

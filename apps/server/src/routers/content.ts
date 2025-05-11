@@ -19,7 +19,11 @@ const linkSchema = z.object({
 export const contentRouter = router({
   // Navigation
   getNavigation: protectedProcedure.query(async () => {
-    return db.select().from(navigation).orderBy(navigation.order);
+    const results = await db.select().from(navigation).orderBy(navigation.order);
+    return results.map(item => ({
+      ...item,
+      label: typeof item.label === 'string' ? JSON.parse(item.label) : item.label,
+    }));
   }),
   createNavItem: protectedProcedure
     .input(z.object({
@@ -53,15 +57,56 @@ export const contentRouter = router({
       return db.delete(navigation)
         .where(eq(navigation.id, input));
     }),
+  changeNavigationOrder: protectedProcedure
+    .input(z.object({
+      id: z.string(),
+      direction: z.enum(["up", "down"])
+    }))
+    .mutation(async ({ input }) => {
+      const { id, direction } = input;
+      
+      const allItems = await db.select().from(navigation).orderBy(navigation.order);
+      
+      const currentIndex = allItems.findIndex((item) => item.id === id);
+      if (currentIndex === -1) {
+        throw new Error("Navigation item not found");
+      }
+      
+      if (direction === "up" && currentIndex === 0) {
+        throw new Error("Cannot move the first item up");
+      }
+      if (direction === "down" && currentIndex === allItems.length - 1) {
+        throw new Error("Cannot move the last item down");
+      }
+      
+      const targetIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+      
+      const temp = allItems[currentIndex];
+      allItems[currentIndex] = allItems[targetIndex];
+      allItems[targetIndex] = temp;
+      
+      for (let i = 0; i < allItems.length; i++) {
+        await db.update(navigation)
+          .set({ order: i + 1 })
+          .where(eq(navigation.id, allItems[i].id));
+      }
+      
+      return { success: true };
+    }),
 
   // Top Bar
   getTopBar: protectedProcedure.query(async () => {
-    return db.select().from(topBar).orderBy(topBar.order);
+    const results = await db.select().from(topBar).orderBy(topBar.order);
+    return results.map(item => ({
+      ...item,
+      name: typeof item.name === 'string' ? JSON.parse(item.name) : item.name,
+    }));
   }),
   createTopBarItem: protectedProcedure
     .input(z.object({
       name: translationSchema,
-      iconName: z.string(),
+      iconName: z.string().nullable().optional(),
+      iconProvider: z.string().nullable().optional(),
       order: z.number(),
       ...linkSchema.shape,
     }))
@@ -75,7 +120,8 @@ export const contentRouter = router({
     .input(z.object({
       id: z.string(),
       name: translationSchema,
-      iconName: z.string(),
+      iconName: z.string().nullable().optional(),
+      iconProvider: z.string().nullable().optional(),
       order: z.number(),
       ...linkSchema.shape,
     }))
@@ -90,6 +136,42 @@ export const contentRouter = router({
     .mutation(async ({ input }) => {
       return db.delete(topBar)
         .where(eq(topBar.id, input));
+    }),
+  changeTopBarOrder: protectedProcedure
+    .input(z.object({
+      id: z.string(),
+      direction: z.enum(["up", "down"])
+    }))
+    .mutation(async ({ input }) => {
+      const { id, direction } = input;
+      
+      const allItems = await db.select().from(topBar).orderBy(topBar.order);
+      
+      const currentIndex = allItems.findIndex((item) => item.id === id);
+      if (currentIndex === -1) {
+        throw new Error("Top bar item not found");
+      }
+      
+      if (direction === "up" && currentIndex === 0) {
+        throw new Error("Cannot move the first item up");
+      }
+      if (direction === "down" && currentIndex === allItems.length - 1) {
+        throw new Error("Cannot move the last item down");
+      }
+      
+      const targetIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+      
+      const temp = allItems[currentIndex];
+      allItems[currentIndex] = allItems[targetIndex];
+      allItems[targetIndex] = temp;
+      
+      for (let i = 0; i < allItems.length; i++) {
+        await db.update(topBar)
+          .set({ order: i + 1 })
+          .where(eq(topBar.id, allItems[i].id));
+      }
+      
+      return { success: true };
     }),
 
   // Homepage
@@ -392,11 +474,17 @@ export const contentRouter = router({
 
   // Contact
   getContact: protectedProcedure.query(async () => {
-    return db.select().from(contact).orderBy(contact.order);
+    const results = await db.select().from(contact).orderBy(contact.order);
+    return results.map(item => ({
+      ...item,
+      name: typeof item.name === 'string' ? JSON.parse(item.name) : item.name,
+    }));
   }),
   createContact: protectedProcedure
     .input(z.object({
       name: translationSchema,
+      iconName: z.string().nullable().optional(),
+      iconProvider: z.string().nullable().optional(),
       order: z.number(),
       ...linkSchema.shape,
     }))
@@ -410,6 +498,8 @@ export const contentRouter = router({
     .input(z.object({
       id: z.string(),
       name: translationSchema,
+      iconName: z.string().nullable().optional(),
+      iconProvider: z.string().nullable().optional(),
       order: z.number(),
       ...linkSchema.shape,
     }))
@@ -424,5 +514,41 @@ export const contentRouter = router({
     .mutation(async ({ input }) => {
       return db.delete(contact)
         .where(eq(contact.id, input));
+    }),
+  changeContactOrder: protectedProcedure
+    .input(z.object({
+      id: z.string(),
+      direction: z.enum(["up", "down"])
+    }))
+    .mutation(async ({ input }) => {
+      const { id, direction } = input;
+      
+      const allItems = await db.select().from(contact).orderBy(contact.order);
+      
+      const currentIndex = allItems.findIndex((item) => item.id === id);
+      if (currentIndex === -1) {
+        throw new Error("Contact item not found");
+      }
+      
+      if (direction === "up" && currentIndex === 0) {
+        throw new Error("Cannot move the first item up");
+      }
+      if (direction === "down" && currentIndex === allItems.length - 1) {
+        throw new Error("Cannot move the last item down");
+      }
+      
+      const targetIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+      
+      const temp = allItems[currentIndex];
+      allItems[currentIndex] = allItems[targetIndex];
+      allItems[targetIndex] = temp;
+      
+      for (let i = 0; i < allItems.length; i++) {
+        await db.update(contact)
+          .set({ order: i + 1 })
+          .where(eq(contact.id, allItems[i].id));
+      }
+      
+      return { success: true };
     }),
 });

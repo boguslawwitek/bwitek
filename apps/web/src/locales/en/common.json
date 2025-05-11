@@ -56,6 +56,53 @@
       "active": "Active",
       "deleteTitle": "Delete project",
       "deleteConfirm": "Are you sure you want to delete this project?"
+    },
+    "contact": {
+      "title": "Contact",
+      "addNew": "Add contact item",
+      "addNewTitle": "Add new contact item",
+      "editTitle": "Edit contact item",
+      "namePl": "Name (PL)",
+      "nameEn": "Name (EN)",
+      "iconName": "Icon name",
+      "iconProvider": "Icon provider",
+      "url": "URL",
+      "external": "External link",
+      "newTab": "Open in new tab",
+      "order": "Order",
+      "deleteTitle": "Delete contact item",
+      "deleteConfirm": "Are you sure you want to delete this contact item?"
+    },
+    "navigation": {
+      "title": "Navigation",
+      "addNew": "Add navigation item",
+      "addNewTitle": "Add new navigation item",
+      "editTitle": "Edit navigation item",
+      "labelPl": "Label (PL)",
+      "labelEn": "Label (EN)",
+      "url": "URL",
+      "external": "External link",
+      "newTab": "Open in new tab",
+      "active": "Active",
+      "order": "Order",
+      "deleteTitle": "Delete navigation item",
+      "deleteConfirm": "Are you sure you want to delete this navigation item?"
+    },
+    "topBar": {
+      "title": "Top Bar",
+      "addNew": "Add top bar item",
+      "addNewTitle": "Add new top bar item",
+      "editTitle": "Edit top bar item",
+      "namePl": "Name (PL)",
+      "nameEn": "Name (EN)",
+      "iconName": "Icon name",
+      "iconProvider": "Icon provider",
+      "url": "URL",
+      "external": "External link",
+      "newTab": "Open in new tab",
+      "order": "Order",
+      "deleteTitle": "Delete top bar item",
+      "deleteConfirm": "Are you sure you want to delete this top bar item?"
     }
   },
   "common": {
@@ -110,7 +157,10 @@
     "nav": {
       "homepage": "Homepage",
       "skills": "Skills",
-      "projects": "Projects"
+      "projects": "Projects",
+      "navigation": "Navigation",
+      "topbar": "Top Bar",
+      "contact": "Contact"
     }
   },
   "navigation": {

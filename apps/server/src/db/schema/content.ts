@@ -72,6 +72,8 @@ export const contact = mysqlTable("contact", {
   id: varchar("id", { length: 36 }).primaryKey(),
   order: int("order").notNull(),
   name: json("name").$type<Translation>().notNull(),
+  iconName: varchar("icon_name", { length: 50 }),
+  iconProvider: varchar("icon_provider", { length: 50 }),
   url: text("url"),
   external: boolean("external").notNull().default(false),
   newTab: boolean("new_tab").notNull().default(false),

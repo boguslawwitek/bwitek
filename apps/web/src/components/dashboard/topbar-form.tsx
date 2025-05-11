@@ -1,54 +1,42 @@
-import { useTranslation } from "react-i18next";
 import { z } from "zod";
-import { useQuery } from "@tanstack/react-query";
-import { trpc } from "@/utils/trpc";
+import { useTranslation } from "react-i18next";
 import { EntityForm, type FieldConfig } from "./entity-form";
 
-type SkillFormProps = {
+type TopBarFormProps = {
   initialData?: any;
   onSubmit: (data: any) => void;
   onCancel: () => void;
 };
 
-export const SkillForm = ({
+export const TopBarForm = ({
   initialData,
   onSubmit,
   onCancel,
-}: SkillFormProps) => {
+}: TopBarFormProps) => {
   const { t } = useTranslation();
-  const { data: categories } = useQuery(trpc.content.getSkillCategories.queryOptions());
 
   const fields: FieldConfig[] = [
     {
       name: "name.pl",
       type: "text",
-      label: t("admin.skills.namePl"),
+      label: t("admin.topBar.namePl"),
       required: true,
     },
     {
       name: "name.en",
       type: "text",
-      label: t("admin.skills.nameEn"),
+      label: t("admin.topBar.nameEn"),
       required: true,
-    },
-    {
-      name: "categoryId",
-      type: "select",
-      label: t("admin.skills.category"),
-      options: categories?.map(category => ({
-        value: category.id,
-        label: `${category.name.pl} / ${category.name.en}`
-      })) || [],
     },
     {
       name: "iconName",
       type: "text",
-      label: t("admin.skills.iconName"),
+      label: t("admin.topBar.iconName"),
     },
     {
       name: "iconProvider",
       type: "select",
-      label: t("admin.skills.iconProvider"),
+      label: t("admin.topBar.iconProvider"),
       options: [
         { value: "", label: t("common.select") },
         { value: "lucide", label: "Lucide React" },
@@ -56,10 +44,21 @@ export const SkillForm = ({
       ]
     },
     {
-      name: "isActive",
+      name: "url",
+      type: "text",
+      label: t("admin.topBar.url"),
+    },
+    {
+      name: "external",
       type: "switch",
-      label: t("admin.skills.active"),
-      defaultValue: true,
+      label: t("admin.topBar.external"),
+      defaultValue: false,
+    },
+    {
+      name: "newTab",
+      type: "switch",
+      label: t("admin.topBar.newTab"),
+      defaultValue: false,
     },
   ];
 
@@ -68,10 +67,11 @@ export const SkillForm = ({
       pl: z.string().min(1, t("validation.required") as string),
       en: z.string().min(1, t("validation.required") as string),
     }),
-    categoryId: z.string().nullable(),
-    iconName: z.string().optional().nullable(),
-    iconProvider: z.string().optional().nullable(),
-    isActive: z.boolean().default(true),
+    iconName: z.string().nullable().optional(),
+    iconProvider: z.string().nullable().optional(),
+    url: z.string().nullable().optional(),
+    external: z.boolean().default(false),
+    newTab: z.boolean().default(false),
   });
 
   return (

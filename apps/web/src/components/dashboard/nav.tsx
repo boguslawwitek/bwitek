@@ -17,6 +17,14 @@ const navItems = [
     path: "/admin/projects",
     labelKey: "dashboard.nav.projects",
   },
+  {
+    path: "/admin/navigation",
+    labelKey: "dashboard.nav.navigation",
+  },
+  {
+    path: "/admin/contact",
+    labelKey: "dashboard.nav.contact",
+  },
 ];
 
 export function DashboardNav() {
