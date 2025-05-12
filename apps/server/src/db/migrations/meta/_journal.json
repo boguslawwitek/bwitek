@@ -22,6 +22,13 @@
       "when": 1747004185334,
       "tag": "0002_zippy_justin_hammer",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1747082755765,
+      "tag": "0003_cool_wallop",
+      "breakpoints": true
     }
   ]
 }

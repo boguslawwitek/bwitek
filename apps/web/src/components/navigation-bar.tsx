@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { trpc } from '@/utils/trpc';
 import { useTranslation } from 'react-i18next';
-import { Link, useRouter, useRouterState } from '@tanstack/react-router';
+import { useRouter, useRouterState } from '@tanstack/react-router';
 import { MoveLeft, MoveRight } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
 
 export default function NavigationBar() {
   const { t, i18n } = useTranslation();
@@ -23,13 +24,15 @@ export default function NavigationBar() {
         const prevIndex = currentIndex <= 0 ? activeItems.length - 1 : currentIndex - 1;
         const prevItem = activeItems[prevIndex];
         if (prevItem && !prevItem.external) {
-          router.navigate({ to: prevItem.url || '/' });
+          const url = prevItem.url || '/';
+          router.navigate({ to: url as any });
         }
       } else if (e.key === 'ArrowRight') {
         const nextIndex = currentIndex >= activeItems.length - 1 ? 0 : currentIndex + 1;
         const nextItem = activeItems[nextIndex];
         if (nextItem && !nextItem.external) {
-          router.navigate({ to: nextItem.url || '/' });
+          const url = nextItem.url || '/';
+          router.navigate({ to: url as any });
         }
       }
     };
@@ -40,12 +43,12 @@ export default function NavigationBar() {
 
   return (
     <nav className="bg-gray-100 dark:bg-gray-900 py-3 w-full select-none border-b border-gray-200 dark:border-gray-800">
-      <div className="max-w-screen-lg mx-auto px-6 md:px-24">
+      <div className="max-w-screen-lg mx-auto px-2 md:px-24">
         {isLoading ? (
           <div className="text-sm text-gray-600 dark:text-gray-400">{t('common.loading')}</div>
         ) : (
           <div className="flex flex-col items-center justify-center">
-            <ul className="flex space-x-8 items-center justify-center">
+            <ul className="flex flex-wrap gap-4 md:gap-0 md:space-x-8 items-center justify-center px-2">
               {activeItems.map((item, index) => {
                 const isCurrent = item.url === currentPath;
                 const linkClasses = `py-2 px-3 font-medium transition-colors ${
@@ -59,7 +62,7 @@ export default function NavigationBar() {
                     {item.external ? (
                       <a
                         href={item.url || '#'}
-                        className={`relative px-3 py-1 rounded-md text-sm font-medium transition-colors ${item.url === currentPath ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400'} focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50`}
+                        className={`relative px-2 md:px-3 py-1 rounded-md text-sm font-medium transition-colors ${item.url === currentPath ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400'} focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50`}
                         tabIndex={index}
                         rel="noopener noreferrer"
                       >
@@ -78,7 +81,7 @@ export default function NavigationBar() {
                 );
               })}
             </ul>
-            <div className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center flex items-center justify-center">
+            <div className="hidden md:flex text-xs text-gray-500 dark:text-gray-400 mt-4 text-center items-center justify-center">
               <MoveLeft className="inline mr-1" />{t('navigation.keyboardHint')}<MoveRight className="inline ml-1" />
             </div>
           </div>
