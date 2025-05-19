@@ -1,6 +1,9 @@
 {
   "name": "bwitek",
   "private": true,
+  "version": "0.0.1",
+  "author": "Bogusław Witek",
+  "license": "GPL-3.0-only",
   "workspaces": [
     "apps/*",
     "packages/*"
