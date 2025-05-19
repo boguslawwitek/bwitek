@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { protectedProcedure, router } from "../lib/trpc";
+import { protectedProcedure, publicProcedure, router } from "../lib/trpc";
 import { db } from "../db";
 import { contact, homepage, navigation, projects, skills, skillCategories, topBar } from "../db/schema/content";
 import { eq, sql } from "drizzle-orm";
@@ -18,7 +18,7 @@ const linkSchema = z.object({
 
 export const contentRouter = router({
   // Navigation
-  getNavigation: protectedProcedure.query(async () => {
+  getNavigation: publicProcedure.query(async () => {
     const results = await db.select().from(navigation).orderBy(navigation.order);
     return results.map(item => ({
       ...item,
@@ -95,7 +95,7 @@ export const contentRouter = router({
     }),
 
   // Top Bar
-  getTopBar: protectedProcedure.query(async () => {
+  getTopBar: publicProcedure.query(async () => {
     const results = await db.select().from(topBar).orderBy(topBar.order);
     return results.map(item => ({
       ...item,
@@ -175,7 +175,7 @@ export const contentRouter = router({
     }),
 
   // Homepage
-  getHomepage: protectedProcedure.query(async () => {
+  getHomepage: publicProcedure.query(async () => {
     const result = await db.select().from(homepage).limit(1);
     if (!result[0]) return null;
     
@@ -207,7 +207,7 @@ export const contentRouter = router({
     }),
 
   // Projects
-  getProjects: protectedProcedure.query(async () => {
+  getProjects: publicProcedure.query(async () => {
     const results = await db.select().from(projects).orderBy(projects.order);
     return results.map(project => ({
       ...project,
@@ -293,7 +293,7 @@ export const contentRouter = router({
     }),
 
   // Skills Category
-  getSkillCategories: protectedProcedure.query(async () => {
+  getSkillCategories: publicProcedure.query(async () => {
     const results = await db.select().from(skillCategories).orderBy(skillCategories.order);
     return results.map(category => ({
       ...category,
@@ -377,7 +377,7 @@ export const contentRouter = router({
     }),
   
   // Skills
-  getSkills: protectedProcedure.query(async () => {
+  getSkills: publicProcedure.query(async () => {
     const skillsData = await db.select()
       .from(skills)
       .leftJoin(skillCategories, eq(skills.categoryId, skillCategories.id))
@@ -475,7 +475,7 @@ export const contentRouter = router({
     }),
 
   // Contact
-  getContact: protectedProcedure.query(async () => {
+  getContact: publicProcedure.query(async () => {
     const results = await db.select().from(contact).orderBy(contact.order);
     return results.map(item => ({
       ...item,

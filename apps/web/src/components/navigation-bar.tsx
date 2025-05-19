@@ -1,18 +1,20 @@
+"use client"
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { trpc } from '@/utils/trpc';
-import { useTranslation } from 'react-i18next';
-import { useRouter, useRouterState } from '@tanstack/react-router';
 import { MoveLeft, MoveRight } from 'lucide-react';
-import { Link } from '@tanstack/react-router';
+import {useTranslations, useLocale} from 'next-intl';
+import {Link, useRouter, usePathname} from '@/i18n/navigation';
 
 export default function NavigationBar() {
-  const { t, i18n } = useTranslation();
-  const { data: navigationItems, isLoading } = useQuery(trpc.content.getNavigation.queryOptions());
-  const locale = i18n.language || 'en';
+  const t = useTranslations();
+  const locale = useLocale();
+  const pathname = usePathname();
   const router = useRouter();
-  const currentPath = useRouterState({ select: state => state.location.pathname });
   
+  const { data: navigationItems, isLoading } = useQuery(trpc.content.getNavigation.queryOptions());
+  
+  const currentPath = pathname
   const activeItems = navigationItems?.filter(item => item.isActive) || [];
   const currentIndex = activeItems.findIndex(item => (item.url || '#') === currentPath);
 
@@ -25,14 +27,14 @@ export default function NavigationBar() {
         const prevItem = activeItems[prevIndex];
         if (prevItem && !prevItem.external) {
           const url = prevItem.url || '/';
-          router.navigate({ to: url as any });
+          router.push(url as any);
         }
       } else if (e.key === 'ArrowRight') {
         const nextIndex = currentIndex >= activeItems.length - 1 ? 0 : currentIndex + 1;
         const nextItem = activeItems[nextIndex];
         if (nextItem && !nextItem.external) {
           const url = nextItem.url || '/';
-          router.navigate({ to: url as any });
+          router.push(url as any);
         }
       }
     };
@@ -70,7 +72,7 @@ export default function NavigationBar() {
                       </a>
                     ) : (
                       <Link
-                        to={item.url || '#'}
+                        href={item.url || '#'}
                         className={linkClasses}
                         tabIndex={index}
                       >

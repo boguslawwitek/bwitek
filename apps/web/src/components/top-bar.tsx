@@ -1,14 +1,14 @@
+"use client"
 import * as LucideIcons from 'lucide-react';
 import * as SimpleIcons from '@icons-pack/react-simple-icons';
 import { Terminal } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { trpc } from '@/utils/trpc';
-import { useTranslation } from 'react-i18next';
+import {useTranslations} from 'next-intl';
 
 export default function TopBar() {
-  const { t, i18n } = useTranslation();
+  const t = useTranslations();
   const { data: topBarItems, isLoading } = useQuery(trpc.content.getTopBar.queryOptions());
-  const locale = i18n.language || 'en';
 
   const getIcon = (iconName: string | null | undefined, iconProvider: string | null | undefined) => {
     const size = typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32;
