@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { protectedProcedure, publicProcedure, router } from "../lib/trpc";
 import { db } from "../db";
-import { contact, homepage, navigation, projects, skills, skillCategories, topBar } from "../db/schema/content";
+import { contact, homepage, navigation, projects, skills, skillCategories, topBar, projectsPageMeta, skillsPageMeta, contactPageMeta, blogPageMeta } from "../db/schema/content";
 import { eq, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 
@@ -14,6 +14,13 @@ const linkSchema = z.object({
   url: z.string().optional(),
   external: z.boolean(),
   newTab: z.boolean(),
+});
+
+const metaTagsSchema = z.object({
+  metaTitle: translationSchema.optional(),
+  metaDescription: translationSchema.optional(),
+  metaKeywords: translationSchema.optional(),
+  ogImage: z.string().optional(),
 });
 
 export const contentRouter = router({
@@ -185,6 +192,9 @@ export const contentRouter = router({
       welcomeText: typeof data.welcomeText === 'string' ? JSON.parse(data.welcomeText) : data.welcomeText,
       specializationText: typeof data.specializationText === 'string' ? JSON.parse(data.specializationText) : data.specializationText,
       aboutMeText: typeof data.aboutMeText === 'string' ? JSON.parse(data.aboutMeText) : data.aboutMeText,
+      metaTitle: typeof data.metaTitle === 'string' ? JSON.parse(data.metaTitle) : data.metaTitle,
+      metaDescription: typeof data.metaDescription === 'string' ? JSON.parse(data.metaDescription) : data.metaDescription,
+      metaKeywords: typeof data.metaKeywords === 'string' ? JSON.parse(data.metaKeywords) : data.metaKeywords,
     };
   }),
   updateHomepage: protectedProcedure
@@ -192,6 +202,7 @@ export const contentRouter = router({
       welcomeText: translationSchema,
       specializationText: translationSchema,
       aboutMeText: translationSchema,
+      ...metaTagsSchema.shape,
     }))
     .mutation(async ({ input }) => {
       const existing = await db.select().from(homepage).limit(1);
@@ -552,5 +563,113 @@ export const contentRouter = router({
       }
       
       return { success: true };
+    }),
+
+  getProjectsPageMeta: publicProcedure.query(async () => {
+    const result = await db.select().from(projectsPageMeta).limit(1);
+    if (!result[0]) return null;
+    
+    const data = result[0];
+    return {
+      ...data,
+      metaTitle: typeof data.metaTitle === 'string' ? JSON.parse(data.metaTitle) : data.metaTitle,
+      metaDescription: typeof data.metaDescription === 'string' ? JSON.parse(data.metaDescription) : data.metaDescription,
+      metaKeywords: typeof data.metaKeywords === 'string' ? JSON.parse(data.metaKeywords) : data.metaKeywords,
+    };
+  }),
+  updateProjectsPageMeta: protectedProcedure
+    .input(metaTagsSchema)
+    .mutation(async ({ input }) => {
+      const existing = await db.select().from(projectsPageMeta).limit(1);
+      if (existing.length === 0) {
+        return db.insert(projectsPageMeta).values({
+          id: nanoid(),
+          ...input,
+        });
+      }
+      return db.update(projectsPageMeta)
+        .set(input)
+        .where(eq(projectsPageMeta.id, existing[0].id));
+    }),
+
+  getSkillsPageMeta: publicProcedure.query(async () => {
+    const result = await db.select().from(skillsPageMeta).limit(1);
+    if (!result[0]) return null;
+    
+    const data = result[0];
+    return {
+      ...data,
+      metaTitle: typeof data.metaTitle === 'string' ? JSON.parse(data.metaTitle) : data.metaTitle,
+      metaDescription: typeof data.metaDescription === 'string' ? JSON.parse(data.metaDescription) : data.metaDescription,
+      metaKeywords: typeof data.metaKeywords === 'string' ? JSON.parse(data.metaKeywords) : data.metaKeywords,
+    };
+  }),
+  updateSkillsPageMeta: protectedProcedure
+    .input(metaTagsSchema)
+    .mutation(async ({ input }) => {
+      const existing = await db.select().from(skillsPageMeta).limit(1);
+      if (existing.length === 0) {
+        return db.insert(skillsPageMeta).values({
+          id: nanoid(),
+          ...input,
+        });
+      }
+      return db.update(skillsPageMeta)
+        .set(input)
+        .where(eq(skillsPageMeta.id, existing[0].id));
+    }),
+
+  getContactPageMeta: publicProcedure.query(async () => {
+    const result = await db.select().from(contactPageMeta).limit(1);
+    if (!result[0]) return null;
+    
+    const data = result[0];
+    return {
+      ...data,
+      metaTitle: typeof data.metaTitle === 'string' ? JSON.parse(data.metaTitle) : data.metaTitle,
+      metaDescription: typeof data.metaDescription === 'string' ? JSON.parse(data.metaDescription) : data.metaDescription,
+      metaKeywords: typeof data.metaKeywords === 'string' ? JSON.parse(data.metaKeywords) : data.metaKeywords,
+    };
+  }),
+  updateContactPageMeta: protectedProcedure
+    .input(metaTagsSchema)
+    .mutation(async ({ input }) => {
+      const existing = await db.select().from(contactPageMeta).limit(1);
+      if (existing.length === 0) {
+        return db.insert(contactPageMeta).values({
+          id: nanoid(),
+          ...input,
+        });
+      }
+      return db.update(contactPageMeta)
+        .set(input)
+        .where(eq(contactPageMeta.id, existing[0].id));
+    }),
+
+  getBlogPageMeta: publicProcedure.query(async () => {
+    const result = await db.select().from(blogPageMeta).limit(1);
+    if (!result[0]) return null;
+    
+    const data = result[0];
+    return {
+      ...data,
+      metaTitle: typeof data.metaTitle === 'string' ? JSON.parse(data.metaTitle) : data.metaTitle,
+      metaDescription: typeof data.metaDescription === 'string' ? JSON.parse(data.metaDescription) : data.metaDescription,
+      metaKeywords: typeof data.metaKeywords === 'string' ? JSON.parse(data.metaKeywords) : data.metaKeywords,
+    };
+  }),
+  updateBlogPageMeta: protectedProcedure
+    .input(metaTagsSchema)
+    .mutation(async ({ input }) => {
+      const existing = await db.select().from(blogPageMeta).limit(1);
+      if (existing.length === 0) {
+        return db.insert(blogPageMeta).values({
+          id: nanoid(),
+          ...input,
+        });
+      }
+      return db.update(blogPageMeta)
+        .set(input)
+        .where(eq(blogPageMeta.id, existing[0].id));
     }),
 });

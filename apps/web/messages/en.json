@@ -104,6 +104,24 @@
       "order": "Order",
       "deleteTitle": "Delete top bar item",
       "deleteConfirm": "Are you sure you want to delete this top bar item?"
+    },
+    "metaTags": {
+      "title": "Meta Tags",
+      "description": "Manage SEO meta tags for the homepage",
+      "projectsPageTitle": "Settings",
+      "projectsPageDescription": "Manage SEO meta tags for the projects page",
+      "skillsPageTitle": "Settings",
+      "skillsPageDescription": "Manage SEO meta tags for the skills page",
+      "contactPageTitle": "Settings",
+      "contactPageDescription": "Manage SEO meta tags for the contact page",
+      "metaTitle": "Meta Title",
+      "metaTitlePlaceholder": "Enter page title for search engines...",
+      "metaDescription": "Meta Description",
+      "metaDescriptionPlaceholder": "Enter page description for search engines...",
+      "metaKeywords": "Meta Keywords",
+      "metaKeywordsPlaceholder": "Enter keywords separated by commas...",
+      "ogImage": "Open Graph Image",
+      "ogImagePlaceholder": "Enter image URL for social media sharing..."
     }
   },
   "common": {

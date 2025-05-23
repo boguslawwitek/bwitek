@@ -33,8 +33,7 @@ const Hack = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "BWitek.dev",
-  description: "Full-stack developer portfolio.",
+  title: "BWitek.dev"
 };
 
 export default async function RootLayout({

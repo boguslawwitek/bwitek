@@ -28,6 +28,10 @@ export const homepage = mysqlTable("homepage", {
   welcomeText: json("welcome_text").$type<Translation>().notNull(),
   specializationText: json("specialization_text").$type<Translation>().notNull(),
   aboutMeText: json("about_me_text").$type<Translation>().notNull(),
+  metaTitle: json("meta_title").$type<Translation>(),
+  metaDescription: json("meta_description").$type<Translation>(),
+  metaKeywords: json("meta_keywords").$type<Translation>(),
+  ogImage: text("og_image"),
 });
 
 export const projects = mysqlTable("projects", {
@@ -78,4 +82,36 @@ export const contact = mysqlTable("contact", {
   url: text("url"),
   external: boolean("external").notNull().default(false),
   newTab: boolean("new_tab").notNull().default(false),
+});
+
+export const projectsPageMeta = mysqlTable("projects_page_meta", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  metaTitle: json("meta_title").$type<Translation>(),
+  metaDescription: json("meta_description").$type<Translation>(),
+  metaKeywords: json("meta_keywords").$type<Translation>(),
+  ogImage: text("og_image"),
+});
+
+export const skillsPageMeta = mysqlTable("skills_page_meta", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  metaTitle: json("meta_title").$type<Translation>(),
+  metaDescription: json("meta_description").$type<Translation>(),
+  metaKeywords: json("meta_keywords").$type<Translation>(),
+  ogImage: text("og_image"),
+});
+
+export const contactPageMeta = mysqlTable("contact_page_meta", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  metaTitle: json("meta_title").$type<Translation>(),
+  metaDescription: json("meta_description").$type<Translation>(),
+  metaKeywords: json("meta_keywords").$type<Translation>(),
+  ogImage: text("og_image"),
+});
+
+export const blogPageMeta = mysqlTable("blog_page_meta", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  metaTitle: json("meta_title").$type<Translation>(),
+  metaDescription: json("meta_description").$type<Translation>(),
+  metaKeywords: json("meta_keywords").$type<Translation>(),
+  ogImage: text("og_image"),
 });

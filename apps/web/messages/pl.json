@@ -104,6 +104,24 @@
       "order": "Kolejność",
       "deleteTitle": "Usuwanie elementu górnego paska",
       "deleteConfirm": "Czy na pewno chcesz usunąć ten element górnego paska?"
+    },
+    "metaTags": {
+      "title": "Meta Tagi",
+      "description": "Zarządzaj meta tagami SEO dla strony głównej",
+      "projectsPageTitle": "Ustawienia",
+      "projectsPageDescription": "Zarządzaj meta tagami SEO dla strony projektów",
+      "skillsPageTitle": "Ustawienia",
+      "skillsPageDescription": "Zarządzaj meta tagami SEO dla strony umiejętności",
+      "contactPageTitle": "Ustawienia",
+      "contactPageDescription": "Zarządzaj meta tagami SEO dla strony kontaktu",
+      "metaTitle": "Tytuł Meta",
+      "metaTitlePlaceholder": "Wprowadź tytuł strony dla wyszukiwarek...",
+      "metaDescription": "Opis Meta",
+      "metaDescriptionPlaceholder": "Wprowadź opis strony dla wyszukiwarek...",
+      "metaKeywords": "Słowa Kluczowe Meta",
+      "metaKeywordsPlaceholder": "Wprowadź słowa kluczowe oddzielone przecinkami...",
+      "ogImage": "Obraz Open Graph",
+      "ogImagePlaceholder": "Wprowadź adres URL obrazka do udostępniania w mediach społecznościowych..."
     }
   },
   "common": {

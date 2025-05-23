@@ -29,6 +29,20 @@
       "when": 1747082755765,
       "tag": "0003_cool_wallop",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1748031295535,
+      "tag": "0004_giant_zodiak",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1748033507050,
+      "tag": "0005_true_gunslinger",
+      "breakpoints": true
     }
   ]
 }

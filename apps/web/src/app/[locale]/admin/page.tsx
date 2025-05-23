@@ -4,11 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import {useTranslations, useLocale} from 'next-intl';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 type TranslatedField = {
   pl: string;
@@ -19,6 +21,10 @@ type HomepageFormData = {
   welcomeText: TranslatedField;
   specializationText: TranslatedField;
   aboutMeText: TranslatedField;
+  metaTitle?: TranslatedField;
+  metaDescription?: TranslatedField;
+  metaKeywords?: TranslatedField;
+  ogImage?: string;
 };
 
 export default function AdminPanel() {
@@ -26,6 +32,8 @@ export default function AdminPanel() {
   const currentLang = useLocale();
 
   const homepage = useQuery(trpc.content.getHomepage.queryOptions());
+  const [isMetaExpanded, setIsMetaExpanded] = useState(false);
+  
   const { mutate: updateHomepage } = useMutation(trpc.content.updateHomepage.mutationOptions({
     onMutate: () => {
       toast.loading(t("common.saving"));
@@ -46,6 +54,10 @@ export default function AdminPanel() {
     welcomeText: { pl: "", en: "" },
     specializationText: { pl: "", en: "" },
     aboutMeText: { pl: "", en: "" },
+    metaTitle: { pl: "", en: "" },
+    metaDescription: { pl: "", en: "" },
+    metaKeywords: { pl: "", en: "" },
+    ogImage: "",
   });
 
   useEffect(() => {
@@ -55,6 +67,10 @@ export default function AdminPanel() {
         welcomeText: homepageData.welcomeText as TranslatedField,
         specializationText: homepageData.specializationText as TranslatedField,
         aboutMeText: homepageData.aboutMeText as TranslatedField,
+        metaTitle: homepageData.metaTitle as TranslatedField || { pl: "", en: "" },
+        metaDescription: homepageData.metaDescription as TranslatedField || { pl: "", en: "" },
+        metaKeywords: homepageData.metaKeywords as TranslatedField || { pl: "", en: "" },
+        ogImage: homepageData.ogImage || "",
       });
     }
   }, [homepage.data]);
@@ -67,9 +83,16 @@ export default function AdminPanel() {
     setFormData((prev) => ({
       ...prev,
       [field]: {
-        ...prev[field],
+        ...(prev[field] as TranslatedField),
         [lang]: value,
       },
+    }));
+  };
+
+  const handleSimpleFieldChange = (field: keyof HomepageFormData, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
     }));
   };
 
@@ -163,6 +186,118 @@ export default function AdminPanel() {
               />
             </div>
           </div>
+        </div>
+
+        <div className="border-t my-6">
+          <div 
+            className="flex items-center justify-between py-4 cursor-pointer hover:bg-muted/50 transition-colors rounded"
+            onClick={() => setIsMetaExpanded(!isMetaExpanded)}
+          >
+            <div>
+              <h3 className="text-lg font-medium">{t("admin.metaTags.title")}</h3>
+              <p className="text-sm text-muted-foreground">{t("admin.metaTags.description")}</p>
+            </div>
+            {isMetaExpanded ? (
+              <ChevronUp className="h-4 w-4" />
+            ) : (
+              <ChevronDown className="h-4 w-4" />
+            )}
+          </div>
+
+          {isMetaExpanded && (
+            <div className="space-y-6 pb-4">
+              <div className="space-y-4">
+                <Label>{t("admin.metaTags.metaTitle")}</Label>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label>Polski</Label>
+                    <Input
+                      value={formData.metaTitle?.pl || ""}
+                      onChange={(e) =>
+                        handleFieldChange("metaTitle", "pl", e.target.value)
+                      }
+                      placeholder={t("admin.metaTags.metaTitlePlaceholder")}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>English</Label>
+                    <Input
+                      value={formData.metaTitle?.en || ""}
+                      onChange={(e) =>
+                        handleFieldChange("metaTitle", "en", e.target.value)
+                      }
+                      placeholder={t("admin.metaTags.metaTitlePlaceholder")}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Label>{t("admin.metaTags.metaDescription")}</Label>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label>Polski</Label>
+                    <Textarea
+                      value={formData.metaDescription?.pl || ""}
+                      onChange={(e) =>
+                        handleFieldChange("metaDescription", "pl", e.target.value)
+                      }
+                      placeholder={t("admin.metaTags.metaDescriptionPlaceholder")}
+                      className="min-h-[80px]"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>English</Label>
+                    <Textarea
+                      value={formData.metaDescription?.en || ""}
+                      onChange={(e) =>
+                        handleFieldChange("metaDescription", "en", e.target.value)
+                      }
+                      placeholder={t("admin.metaTags.metaDescriptionPlaceholder")}
+                      className="min-h-[80px]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Label>{t("admin.metaTags.metaKeywords")}</Label>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label>Polski</Label>
+                    <Input
+                      value={formData.metaKeywords?.pl || ""}
+                      onChange={(e) =>
+                        handleFieldChange("metaKeywords", "pl", e.target.value)
+                      }
+                      placeholder={t("admin.metaTags.metaKeywordsPlaceholder")}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>English</Label>
+                    <Input
+                      value={formData.metaKeywords?.en || ""}
+                      onChange={(e) =>
+                        handleFieldChange("metaKeywords", "en", e.target.value)
+                      }
+                      placeholder={t("admin.metaTags.metaKeywordsPlaceholder")}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Label>{t("admin.metaTags.ogImage")}</Label>
+                <Input
+                  value={formData.ogImage || ""}
+                  onChange={(e) =>
+                    handleSimpleFieldChange("ogImage", e.target.value)
+                  }
+                  placeholder={t("admin.metaTags.ogImagePlaceholder")}
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         <Button onClick={handleSubmit}>{t("common.save")}</Button>
