@@ -4,6 +4,7 @@ import {
   router,
 } from "../lib/trpc";
 import { contentRouter } from "./content";
+import { blogRouter } from "./blog";
 
 export const appRouter = router({
   getRegistrationStatus: publicProcedure.query(() => {
@@ -19,5 +20,6 @@ export const appRouter = router({
     };
   }),
   content: contentRouter,
+  blog: blogRouter,
 });
 export type AppRouter = typeof appRouter;

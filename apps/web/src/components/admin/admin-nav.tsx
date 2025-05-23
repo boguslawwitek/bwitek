@@ -10,6 +10,10 @@ const navItems = [
     labelKey: "dashboard.nav.homepage",
   },
   {
+    path: "/admin/blog",
+    labelKey: "dashboard.nav.blog",
+  },
+  {
     path: "/admin/skills",
     labelKey: "dashboard.nav.skills",
   },

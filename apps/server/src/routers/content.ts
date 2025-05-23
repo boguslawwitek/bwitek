@@ -646,30 +646,5 @@ export const contentRouter = router({
         .where(eq(contactPageMeta.id, existing[0].id));
     }),
 
-  getBlogPageMeta: publicProcedure.query(async () => {
-    const result = await db.select().from(blogPageMeta).limit(1);
-    if (!result[0]) return null;
-    
-    const data = result[0];
-    return {
-      ...data,
-      metaTitle: typeof data.metaTitle === 'string' ? JSON.parse(data.metaTitle) : data.metaTitle,
-      metaDescription: typeof data.metaDescription === 'string' ? JSON.parse(data.metaDescription) : data.metaDescription,
-      metaKeywords: typeof data.metaKeywords === 'string' ? JSON.parse(data.metaKeywords) : data.metaKeywords,
-    };
-  }),
-  updateBlogPageMeta: protectedProcedure
-    .input(metaTagsSchema)
-    .mutation(async ({ input }) => {
-      const existing = await db.select().from(blogPageMeta).limit(1);
-      if (existing.length === 0) {
-        return db.insert(blogPageMeta).values({
-          id: nanoid(),
-          ...input,
-        });
-      }
-      return db.update(blogPageMeta)
-        .set(input)
-        .where(eq(blogPageMeta.id, existing[0].id));
-    }),
+
 });
