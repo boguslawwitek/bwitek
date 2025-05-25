@@ -24,6 +24,7 @@ import { useCallback, useEffect, useState } from "react"
 import FileUpload from "./file-upload"
 import { useMutation } from "@tanstack/react-query"
 import { trpc } from "@/utils/trpc"
+import { useTranslations } from 'next-intl'
 
 interface RichTextEditorProps {
   content: string
@@ -70,6 +71,8 @@ const extractImageUrls = (html: string): string[] => {
 };
 
 export default function RichTextEditor({ content, onChange, placeholder }: RichTextEditorProps) {
+  const t = useTranslations();
+
   const { mutate: deleteOldImage } = useMutation(
     trpc.upload.deleteImageByUrl.mutationOptions({
       onError: (error: any) => {
@@ -350,11 +353,11 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
       {showImageUpload && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-background p-6 rounded-lg max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold mb-4">Add Image</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('common.addImage')}</h3>
             <FileUpload
               category="blog"
               onChange={handleImageUpload}
-              label="Select or upload an image"
+              label={t('fileUpload.selectOrUploadImage')}
             />
             <div className="flex gap-2 mt-4">
               <Button
@@ -362,7 +365,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
                 onClick={() => setShowImageUpload(false)}
                 className="flex-1"
               >
-                Cancel
+                {t('common.cancel')}
               </Button>
             </div>
           </div>

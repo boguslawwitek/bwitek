@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
-import type { EmailTemplate, ContactFormData } from '../templates';
-import { EmailType, contactFormTemplate } from '../templates';
+import type { EmailTemplate, ContactFormData, NewCommentData } from '../templates';
+import { EmailType, contactFormTemplate, newCommentTemplate } from '../templates';
 
 const createTransporter = () => {
   return nodemailer.createTransport({
@@ -27,22 +27,6 @@ export class EmailService {
     this.transporter = createTransporter();
   }
 
-  async testConnection(): Promise<{ success: boolean; message: string }> {
-    try {
-      await this.transporter.verify();
-      return {
-        success: true,
-        message: 'SMTP connection is working'
-      };
-    } catch (error) {
-      console.error('SMTP connection test failed:', error);
-      return {
-        success: false,
-        message: error instanceof Error ? error.message : 'Unknown error'
-      };
-    }
-  }
-
   private async sendWithTemplate<T>(
     template: EmailTemplate<T>,
     data: T,
@@ -61,8 +45,6 @@ export class EmailService {
       };
 
       const info = await this.transporter.sendMail(mailOptions);
-      
-      console.log('Email sent successfully:', info.messageId);
       
       return {
         success: true,
@@ -89,6 +71,16 @@ export class EmailService {
     };
 
     return this.sendWithTemplate(contactFormTemplate, data, options);
+  }
+
+  async sendNewCommentNotification(data: NewCommentData) {
+    const options: SendEmailOptions = {
+      to: process.env.CONTACT_EMAIL || process.env.SMTP_USER!,
+      from: `"BWitek.dev Komentarze" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+      replyTo: data.authorEmail,
+    };
+
+    return this.sendWithTemplate(newCommentTemplate, data, options);
   }
 }
 

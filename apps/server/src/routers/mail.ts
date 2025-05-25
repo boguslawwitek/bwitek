@@ -14,9 +14,4 @@ export const mailRouter = router({
     .mutation(async ({ input }) => {
       return emailService.sendContactForm(input);
     }),
-
-  // testSmtpConnection: publicProcedure
-  //   .query(async () => {
-  //     return emailService.testConnection();
-  //   }),
 }); 

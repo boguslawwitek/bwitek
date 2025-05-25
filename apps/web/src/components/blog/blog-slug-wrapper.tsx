@@ -12,6 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 import * as LucideIcons from 'lucide-react';
 import * as SimpleIcons from '@icons-pack/react-simple-icons';
 import ArticleContent from "@/components/admin/article-content";
+import CommentsSection from "@/components/blog/comments-section";
 
 interface Translation {
   pl: string;
@@ -273,6 +274,10 @@ export default function BlogPostClient({
             ))}
           </div>
         </section>
+      )}
+
+      {postData && postData.id && (
+        <CommentsSection postId={postData.id} />
       )}
     </div>
   );

@@ -14,6 +14,10 @@ const navItems = [
     labelKey: "dashboard.nav.blog",
   },
   {
+    path: "/admin/blog/comments",
+    labelKey: "admin.comments.title",
+  },
+  {
     path: "/admin/projects",
     labelKey: "dashboard.nav.projects",
   },

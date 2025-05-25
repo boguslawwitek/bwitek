@@ -192,6 +192,35 @@
       "backToBlog": "Back to blog",
       "articleNotFound": "Article not found",
       "readMore": "Read more"
+    },
+    "comments": {
+      "title": "Comments",
+      "description": "Manage blog comments - approve, reject and delete comments",
+      "searchPlaceholder": "Search by author, content or article title...",
+      "statusUpdated": "Comment status has been updated",
+      "updateError": "An error occurred while updating comment status",
+      "deleted": "Comment has been deleted",
+      "deleteError": "An error occurred while deleting comment",
+      "confirmDelete": "Are you sure you want to delete this comment? This action cannot be undone.",
+      "deleteTitle": "Delete Comment",
+      "deleteMessage": "Are you sure you want to delete the comment from {authorName}? This action cannot be undone.",
+      "pending": "Pending",
+      "approved": "Approved",
+      "total": "Total",
+      "all": "All",
+      "statusPending": "Pending",
+      "statusApproved": "Approved",
+      "approve": "Approve",
+      "reject": "Reject",
+      "delete": "Delete",
+      "article": "Article:",
+      "replyToComment": "Reply to comment",
+      "replyTo": "Reply to:",
+      "noCommentsFound": "No comments found matching the search",
+      "noComments": "No comments",
+      "previous": "Previous",
+      "next": "Next",
+      "replyButton": "Reply"
     }
   },
   "common": {
@@ -203,6 +232,7 @@
     "saving": "Saving...",
     "saved": "Changes saved successfully!",
     "add": "Add",
+    "addImage": "Add Image",
     "edit": "Edit",
     "update": "Update",
     "delete": "Delete",
@@ -223,7 +253,8 @@
     "uploading": "Uploading...",
     "dragAndDrop": "Drag & drop an image here, or",
     "chooseFile": "Choose File",
-    "clear": "Clear"
+    "clear": "Clear",
+    "selectOrUploadImage": "Select or upload an image"
   },
   "welcome": "Welcome",
   "login": {
@@ -319,7 +350,31 @@
     "maxLength": "This field must be at most {max} characters long",
     "minValue": "This field must be at least {min} value",
     "maxValue": "This field must be at most {max} value",
-    "invalid": "This field is invalid"
+    "invalid": "This field is invalid",
+    "invalidUrl": "Enter a valid URL (http:// or https://)"
+  },
+  "comments": {
+    "title": "Comments",
+    "addComment": "Add Comment",
+    "reply": "Reply",
+    "replyButton": "Reply",
+    "replyForm": "Reply to Comment",
+    "noComments": "No comments yet. Be the first!",
+    "moderationNotice": "Your comment will be published after approval by a moderator.",
+    "loadError": "Cannot load comments - invalid article identifier.",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email address (will not be public)",
+      "website": "Website",
+      "websitePlaceholder": "https://your-website.com (optional)",
+      "content": "Comment Content",
+      "contentPlaceholder": "Write your comment...",
+      "submit": "Add Comment",
+      "success": "Comment added and awaiting approval!",
+      "error": "An error occurred while adding the comment. Please try again."
+    }
   },
   "blog": {
     "title": "Blog",

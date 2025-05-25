@@ -33,7 +33,8 @@ const Hack = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "BWitek.dev"
+  title: "BWitek.dev",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'),
 };
 
 export default async function RootLayout({

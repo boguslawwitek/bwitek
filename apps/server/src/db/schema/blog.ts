@@ -52,3 +52,18 @@ export const blogAttachments = mysqlTable("blog_attachments", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
 });
+
+export const blogComments = mysqlTable("blog_comments", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  postId: varchar("post_id", { length: 36 }).references(() => blogPosts.id, { onDelete: 'cascade' }).notNull(),
+  parentId: varchar("parent_id", { length: 36 }),
+  authorName: varchar("author_name", { length: 100 }).notNull(),
+  authorEmail: varchar("author_email", { length: 255 }).notNull(),
+  authorWebsite: varchar("author_website", { length: 255 }),
+  content: text("content").notNull(),
+  isApproved: boolean("is_approved").notNull().default(false),
+  ipAddress: varchar("ip_address", { length: 45 }),
+  userAgent: text("user_agent"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
+});

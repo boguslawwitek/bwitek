@@ -192,6 +192,40 @@
       "backToBlog": "Powrót do bloga",
       "articleNotFound": "Artykuł nie znaleziony",
       "readMore": "Czytaj więcej"
+    },
+    "comments": {
+      "title": "Komentarze",
+      "description": "Zarządzaj komentarzami na blogu - zatwierdzaj, odrzucaj i usuwaj komentarze",
+      "searchPlaceholder": "Szukaj po autorze, treści lub tytule artykułu...",
+      "statusUpdated": "Status komentarza został zaktualizowany",
+      "updateError": "Wystąpił błąd podczas aktualizacji statusu komentarza",
+      "deleted": "Komentarz został usunięty",
+      "deleteError": "Wystąpił błąd podczas usuwania komentarza",
+      "confirmDelete": "Czy na pewno chcesz usunąć ten komentarz? Ta akcja jest nieodwracalna.",
+      "deleteTitle": "Usuwanie komentarza",
+      "deleteMessage": "Czy na pewno chcesz usunąć komentarz od {authorName}? Ta akcja jest nieodwracalna.",
+      "pending": "Oczekujące",
+      "approved": "Zatwierdzone",
+      "total": "Łącznie",
+      "all": "Wszystkie",
+      "statusPending": "Oczekujący",
+      "statusApproved": "Zatwierdzony",
+      "approve": "Zatwierdź",
+      "reject": "Odrzuć",
+      "delete": "Usuń",
+      "article": "Artykuł:",
+      "replyToComment": "Odpowiedź na komentarz",
+      "replyTo": "Odpowiedź na:",
+      "noCommentsFound": "Nie znaleziono komentarzy pasujących do wyszukiwania",
+      "noComments": "Brak komentarzy",
+      "previous": "Poprzednia",
+      "next": "Następna",
+      "addComment": "Dodaj komentarz",
+      "reply": "Odpowiedź",
+      "replyButton": "Odpowiedz",
+      "replyForm": "Odpowiedz na komentarz",
+      "moderationNotice": "Twój komentarz zostanie opublikowany po zatwierdzeniu przez moderatora.",
+      "loadError": "Nie można załadować komentarzy - nieprawidłowy identyfikator artykułu."
     }
   },
   "common": {
@@ -203,6 +237,7 @@
     "saving": "Zapisywanie...",
     "saved": "Zmiany zostały zapisane!",
     "add": "Dodaj",
+    "addImage": "Dodaj obraz",
     "edit": "Edytuj",
     "update": "Aktualizuj",
     "delete": "Usuń",
@@ -223,7 +258,8 @@
     "uploading": "Przesyłanie...",
     "dragAndDrop": "Przeciągnij i upuść obraz tutaj, lub",
     "chooseFile": "Wybierz plik",
-    "clear": "Wyczyść"
+    "clear": "Wyczyść",
+    "selectOrUploadImage": "Wybierz lub prześlij obraz"
   },
   "welcome": "Witaj",
   "login": {
@@ -319,7 +355,8 @@
     "maxLength": "To pole musi mieć co najwyżej {max} znaków",
     "minValue": "To pole musi mieć co najmniej {min} wartość",
     "maxValue": "To pole musi mieć co najwyżej {max} wartość",
-    "invalid": "To pole jest nieprawidłowe"
+    "invalid": "To pole jest nieprawidłowe",
+    "invalidUrl": "Wprowadź prawidłowy adres URL (http:// lub https://)"
   },
   "blog": {
     "title": "Blog",
@@ -340,5 +377,28 @@
     "title": "Strona nie znaleziona",
     "description": "Szukana strona nie została znaleziona. Możliwe, że została przeniesiona lub usunięta.",
     "homepage": "Strona główna"
+  },
+  "comments": {
+    "title": "Komentarze",
+    "addComment": "Dodaj komentarz",
+    "reply": "Odpowiedź",
+    "replyButton": "Odpowiedz",
+    "replyForm": "Odpowiedz na komentarz",
+    "noComments": "Brak komentarzy. Bądź pierwszy!",
+    "moderationNotice": "Twój komentarz zostanie opublikowany po zatwierdzeniu przez moderatora.",
+    "loadError": "Nie można załadować komentarzy - nieprawidłowy identyfikator artykułu.",
+    "form": {
+      "name": "Imię i nazwisko",
+      "namePlaceholder": "Wprowadź swoje imię i nazwisko",
+      "email": "Adres e-mail",
+      "emailPlaceholder": "Wprowadź swój adres e-mail (nie będzie publiczny)",
+      "website": "Strona internetowa",
+      "websitePlaceholder": "https://twoja-strona.pl (opcjonalnie)",
+      "content": "Treść komentarza",
+      "contentPlaceholder": "Napisz swój komentarz...",
+      "submit": "Dodaj komentarz",
+      "success": "Komentarz został dodany i oczekuje na zatwierdzenie!",
+      "error": "Wystąpił błąd podczas dodawania komentarza. Spróbuj ponownie."
+    }
   }
 }
