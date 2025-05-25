@@ -181,7 +181,17 @@
       "categoryActive": "Aktywna",
       "iconName": "Nazwa Ikony",
       "iconProvider": "Dostawca Ikony",
-      "noCategories": "Nie znaleziono kategorii"
+      "noCategories": "Nie znaleziono kategorii",
+      "subtitle": "Artykuły o programowaniu, technologii i rozwoju oprogramowania",
+      "searchPlaceholder": "Szukaj artykułów...",
+      "allCategories": "Wszystkie",
+      "featuredArticles": "Wyróżnione artykuły",
+      "allArticles": "Wszystkie artykuły",
+      "noArticlesFound": "Nie znaleziono artykułów spełniających kryteria wyszukiwania.",
+      "relatedArticles": "Powiązane artykuły",
+      "backToBlog": "Powrót do bloga",
+      "articleNotFound": "Artykuł nie znaleziony",
+      "readMore": "Czytaj więcej"
     }
   },
   "common": {
@@ -308,5 +318,25 @@
     "minValue": "To pole musi mieć co najmniej {min} wartość",
     "maxValue": "To pole musi mieć co najwyżej {max} wartość",
     "invalid": "To pole jest nieprawidłowe"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Artykuły o programowaniu, technologii i rozwoju oprogramowania",
+    "searchPlaceholder": "Szukaj artykułów...",
+    "allCategories": "Wszystkie",
+    "featuredArticles": "Wyróżnione artykuły",
+    "allArticles": "Wszystkie artykuły",
+    "noArticlesFound": "Nie znaleziono artykułów spełniających kryteria wyszukiwania.",
+    "relatedArticles": "Powiązane artykuły",
+    "backToBlog": "Powrót do bloga",
+    "articleNotFound": "Artykuł nie znaleziony",
+    "readMore": "Czytaj więcej",
+    "featured": "Wyróżniony",
+    "views": "wyświetleń"
+  },
+  "notFound": {
+    "title": "Strona nie znaleziona",
+    "description": "Szukana strona nie została znaleziona. Możliwe, że została przeniesiona lub usunięta.",
+    "homepage": "Strona główna"
   }
 }

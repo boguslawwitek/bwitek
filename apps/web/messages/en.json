@@ -181,7 +181,17 @@
       "categoryActive": "Active",
       "iconName": "Icon Name",
       "iconProvider": "Icon Provider",
-      "noCategories": "No categories found"
+      "noCategories": "No categories found",
+      "subtitle": "Articles about programming, technology and software development",
+      "searchPlaceholder": "Search articles...",
+      "allCategories": "All",
+      "featuredArticles": "Featured Articles",
+      "allArticles": "All Articles",
+      "noArticlesFound": "No articles found matching your search criteria.",
+      "relatedArticles": "Related Articles",
+      "backToBlog": "Back to blog",
+      "articleNotFound": "Article not found",
+      "readMore": "Read more"
     }
   },
   "common": {
@@ -308,5 +318,25 @@
     "minValue": "This field must be at least {min} value",
     "maxValue": "This field must be at most {max} value",
     "invalid": "This field is invalid"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Articles about programming, technology and software development",
+    "searchPlaceholder": "Search articles...",
+    "allCategories": "All",
+    "featuredArticles": "Featured Articles",
+    "allArticles": "All Articles",
+    "noArticlesFound": "No articles found matching your search criteria.",
+    "relatedArticles": "Related Articles",
+    "backToBlog": "Back to blog",
+    "articleNotFound": "Article not found",
+    "readMore": "Read more",
+    "featured": "Featured",
+    "views": "views"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for was not found. It may have been moved or deleted.",
+    "homepage": "Homepage"
   }
 }
