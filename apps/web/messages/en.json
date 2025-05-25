@@ -295,7 +295,9 @@
       "name": "Full Name",
       "email": "Email Address",
       "message": "Message",
-      "send": "Send Message"
+      "send": "Send Message",
+      "success": "Message sent successfully!",
+      "error": "An error occurred while sending the message. Please try again."
     }
   },
   "language": {

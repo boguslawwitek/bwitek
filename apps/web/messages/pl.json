@@ -295,7 +295,9 @@
       "name": "Imię i nazwisko",
       "email": "Adres e-mail",
       "message": "Wiadomość",
-      "send": "Wyślij wiadomość"
+      "send": "Wyślij wiadomość",
+      "success": "Wiadomość została wysłana pomyślnie!",
+      "error": "Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie."
     }
   },
   "language": {

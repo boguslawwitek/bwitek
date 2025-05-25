@@ -5,6 +5,7 @@ import {
 import { contentRouter } from "./content";
 import { blogRouter } from "./blog";
 import { uploadRouter } from "./upload";
+import { mailRouter } from "./mail";
 
 export const appRouter = router({
   getRegistrationStatus: publicProcedure.query(() => {
@@ -22,5 +23,6 @@ export const appRouter = router({
   content: contentRouter,
   blog: blogRouter,
   upload: uploadRouter,
+  mail: mailRouter,
 });
 export type AppRouter = typeof appRouter;

@@ -1,5 +1,5 @@
 "use client"
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { trpc } from "@/utils/trpc";
 import {useTranslations} from 'next-intl';
 import MainLayout from "@/components/main-layout";
@@ -10,16 +10,87 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import * as LucideIcons from 'lucide-react';
 import * as SimpleIcons from '@icons-pack/react-simple-icons';
+import { useState } from "react";
+import { toast } from "sonner";
 
 interface Props {
   locale: string;
+}
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
 }
 
 export default function ContactClientWrapper({ locale }: Props) {
     const t = useTranslations();
     const { data: contactItems, isLoading } = useQuery(trpc.content.getContact.queryOptions());
     
+    const [formData, setFormData] = useState<FormData>({
+      name: '',
+      email: '',
+      message: ''
+    });
+
+    const [errors, setErrors] = useState<Partial<FormData>>({});
+    
     const activeContacts = contactItems || [];
+
+    const sendEmailMutation = useMutation(
+      trpc.mail.sendContactForm.mutationOptions({
+        onSuccess: () => {
+          toast.success(t('contact.form.success'));
+          setFormData({ name: '', email: '', message: '' });
+          setErrors({});
+        },
+        onError: (error) => {
+          toast.error(t('contact.form.error'));
+          console.error('Error sending email:', error);
+        }
+      })
+    );
+
+    const validateForm = (): boolean => {
+      const newErrors: Partial<FormData> = {};
+
+      if (!formData.name.trim()) {
+        newErrors.name = t('validation.required');
+      }
+
+      if (!formData.email.trim()) {
+        newErrors.email = t('validation.required');
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        newErrors.email = t('validation.invalid');
+      }
+
+      if (!formData.message.trim()) {
+        newErrors.message = t('validation.required');
+      } else if (formData.message.trim().length < 10) {
+        newErrors.message = t('validation.minLength', { min: 10 });
+      }
+
+      setErrors(newErrors);
+      return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      
+      if (!validateForm()) {
+        return;
+      }
+
+      sendEmailMutation.mutate(formData);
+    };
+
+    const handleInputChange = (field: keyof FormData, value: string) => {
+      setFormData(prev => ({ ...prev, [field]: value }));
+      
+      if (errors[field]) {
+        setErrors(prev => ({ ...prev, [field]: undefined }));
+      }
+    };
   
     return (
       <MainLayout>
@@ -93,14 +164,20 @@ export default function ContactClientWrapper({ locale }: Props) {
                     {t('contact.quickMessage')}
                   </h2>
                   
-                  <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                  <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="grid w-full items-center gap-1.5">
                       <Label htmlFor="name">{t('contact.form.name')}</Label>
                       <Input
                         type="text"
                         id="name"
                         placeholder={t('contact.form.name')}
+                        value={formData.name}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
+                        className={errors.name ? 'border-red-500' : ''}
                       />
+                      {errors.name && (
+                        <p className="text-sm text-red-500">{errors.name}</p>
+                      )}
                     </div>
                     
                     <div className="grid w-full items-center gap-1.5">
@@ -109,7 +186,13 @@ export default function ContactClientWrapper({ locale }: Props) {
                         type="email"
                         id="email"
                         placeholder={t('contact.form.email')}
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        className={errors.email ? 'border-red-500' : ''}
                       />
+                      {errors.email && (
+                        <p className="text-sm text-red-500">{errors.email}</p>
+                      )}
                     </div>
                     
                     <div className="grid w-full items-center gap-1.5">
@@ -117,12 +200,21 @@ export default function ContactClientWrapper({ locale }: Props) {
                       <Textarea
                         id="message"
                         placeholder={t('contact.form.message')}
-                        className="min-h-[120px]"
+                        className={`min-h-[120px] ${errors.message ? 'border-red-500' : ''}`}
+                        value={formData.message}
+                        onChange={(e) => handleInputChange('message', e.target.value)}
                       />
+                      {errors.message && (
+                        <p className="text-sm text-red-500">{errors.message}</p>
+                      )}
                     </div>
                     
-                    <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
-                      {t('contact.form.send')}
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white"
+                      disabled={sendEmailMutation.isPending}
+                    >
+                      {sendEmailMutation.isPending ? t('common.saving') : t('contact.form.send')}
                     </Button>
                   </form>
                 </CardContent>
