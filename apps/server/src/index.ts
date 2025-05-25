@@ -6,6 +6,7 @@ import { logger } from "hono/logger";
 import { createContext } from "./lib/context";
 import { appRouter } from "./routers/index";
 import { auth } from "./lib/auth";
+import { serveStatic } from '@hono/node-server/serve-static';
 
 const app = new Hono();
 
@@ -20,8 +21,12 @@ app.use(
   })
 );
 
-app.on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw));
+app.use('/api/uploads/*', serveStatic({
+  root: './uploads',
+  rewriteRequestPath: (path: string) => path.replace(/^\/api\/uploads/, ''),
+}));
 
+app.on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw));
 
 app.use("/trpc/*", trpcServer({
   router: appRouter,
@@ -29,7 +34,6 @@ app.use("/trpc/*", trpcServer({
     return createContext({ context });
   },
 }));
-
 
 app.get("/", (c) => {
   return c.text("OK");

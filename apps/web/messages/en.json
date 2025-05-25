@@ -209,6 +209,12 @@
     "changeOrder": "Change order mode",
     "back": "Back"
   },
+  "fileUpload": {
+    "uploading": "Uploading...",
+    "dragAndDrop": "Drag & drop an image here, or",
+    "chooseFile": "Choose File",
+    "clear": "Clear"
+  },
   "welcome": "Welcome",
   "login": {
     "title": "Admin Panel",

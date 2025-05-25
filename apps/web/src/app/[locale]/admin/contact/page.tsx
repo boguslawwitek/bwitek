@@ -13,6 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 import { DataTable, type Column } from "@/components/admin/data-table";
 import { ContactForm } from "@/components/admin/contact-form";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import FileUpload from "@/components/admin/file-upload";
 
 type TranslatedField = {
   pl: string;
@@ -49,6 +50,14 @@ export default function AdminPanelContact() {
       toast.dismiss();
     }
   }));
+
+  const { mutate: deleteOldImage } = useMutation(
+    trpc.upload.deleteImageByUrl.mutationOptions({
+      onError: (error: any) => {
+        console.warn("Failed to delete old image:", error);
+      }
+    })
+  );
 
   const [metaFormData, setMetaFormData] = useState<ContactPageMetaFormData>({
     metaTitle: { pl: "", en: "" },
@@ -91,6 +100,13 @@ export default function AdminPanelContact() {
   };
 
   const handleMetaSubmit = () => {
+    const originalOgImage = contactPageMeta.data?.ogImage || "";
+    const newOgImage = metaFormData.ogImage || "";
+    
+    if (originalOgImage && !newOgImage) {
+      deleteOldImage({ url: originalOgImage });
+    }
+    
     updateContactPageMeta(metaFormData);
   };
 
@@ -329,12 +345,12 @@ export default function AdminPanelContact() {
             </div>
 
             <div className="space-y-4">
-              <Label>{t("admin.metaTags.ogImage")}</Label>
-              <Input
+              <FileUpload
                 value={metaFormData.ogImage || ""}
-                onChange={(e) =>
-                  handleMetaSimpleFieldChange("ogImage", e.target.value)
-                }
+                onChange={(url) => handleMetaSimpleFieldChange("ogImage", url)}
+                onOldFileDelete={(oldUrl) => deleteOldImage({ url: oldUrl })}
+                category="meta"
+                label={t("admin.metaTags.ogImage")}
                 placeholder={t("admin.metaTags.ogImagePlaceholder")}
               />
             </div>

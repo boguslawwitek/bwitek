@@ -209,6 +209,12 @@
     "changeOrder": "Tryb zmiany kolejności",
     "back": "Wstecz"
   },
+  "fileUpload": {
+    "uploading": "Przesyłanie...",
+    "dragAndDrop": "Przeciągnij i upuść obraz tutaj, lub",
+    "chooseFile": "Wybierz plik",
+    "clear": "Wyczyść"
+  },
   "welcome": "Witaj",
   "login": {
     "title": "Panel Administracyjny",

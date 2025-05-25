@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { trpc } from "@/utils/trpc";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import RichTextEditor from "@/components/admin/rich-text-editor";
+import FileUpload from "@/components/admin/file-upload";
 
 type TranslatedField = {
   pl: string;
@@ -64,6 +65,14 @@ export default function EditBlogPostPage() {
     publishedAt: "",
     isFeatured: false,
   });
+
+  const { mutate: deleteOldImage } = useMutation(
+    trpc.upload.deleteImageByUrl.mutationOptions({
+      onError: (error: any) => {
+        console.warn("Failed to delete old image:", error);
+      }
+    })
+  );
 
   useEffect(() => {
     if (post) {
@@ -143,6 +152,13 @@ export default function EditBlogPostPage() {
     if (!post?.id) {
       toast.error("Post ID not found");
       return;
+    }
+
+    const originalOgImage = post.ogImage || "";
+    const newOgImage = formData.ogImage || "";
+    
+    if (originalOgImage && !newOgImage) {
+      deleteOldImage({ url: originalOgImage });
     }
 
     const submitData = {
@@ -359,10 +375,12 @@ export default function EditBlogPostPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>{t("admin.metaTags.ogImage")}</Label>
-                  <Input
-                    value={formData.ogImage}
-                    onChange={(e) => handleSimpleFieldChange("ogImage", e.target.value)}
+                  <FileUpload
+                    value={formData.ogImage || ""}
+                    onChange={(url) => handleSimpleFieldChange("ogImage", url)}
+                    onOldFileDelete={(oldUrl) => deleteOldImage({ url: oldUrl })}
+                    category="meta"
+                    label={t("admin.metaTags.ogImage")}
                     placeholder={t("admin.metaTags.ogImagePlaceholder")}
                   />
                 </div>

@@ -14,6 +14,7 @@ import { DataTable, type Column } from "@/components/admin/data-table";
 import { SkillForm } from "@/components/admin/skill-form";
 import { SkillCategoryForm } from "@/components/admin/skill-category-form";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import FileUpload from "@/components/admin/file-upload";
 
 type TranslatedField = {
   pl: string;
@@ -94,6 +95,15 @@ export default function AdminPanelSkills() {
   };
 
   const handleMetaSubmit = () => {
+    // Sprawdź czy ogImage zostało usunięte
+    const originalOgImage = skillsPageMeta.data?.ogImage || "";
+    const newOgImage = metaFormData.ogImage || "";
+    
+    if (originalOgImage && !newOgImage) {
+      // Zdjęcie zostało usunięte - usuń plik
+      deleteOldImage({ url: originalOgImage });
+    }
+    
     updateSkillsPageMeta(metaFormData);
   };
 
@@ -224,6 +234,14 @@ export default function AdminPanelSkills() {
       toast.dismiss();
     }
   }));
+
+  const { mutate: deleteOldImage } = useMutation(
+    trpc.upload.deleteImageByUrl.mutationOptions({
+      onError: (error: any) => {
+        console.warn("Failed to delete old image:", error);
+      }
+    })
+  );
 
   const handleCreateSkill = (data: any) => {
     const maxOrder = skills.data?.reduce((max, skill) => Math.max(max, skill.order), 0) || 0;
@@ -460,12 +478,12 @@ export default function AdminPanelSkills() {
             </div>
 
             <div className="space-y-4">
-              <Label>{t("admin.metaTags.ogImage")}</Label>
-              <Input
+              <FileUpload
                 value={metaFormData.ogImage || ""}
-                onChange={(e) =>
-                  handleMetaSimpleFieldChange("ogImage", e.target.value)
-                }
+                onChange={(url) => handleMetaSimpleFieldChange("ogImage", url)}
+                onOldFileDelete={(oldUrl) => deleteOldImage({ url: oldUrl })}
+                category="meta"
+                label={t("admin.metaTags.ogImage")}
                 placeholder={t("admin.metaTags.ogImagePlaceholder")}
               />
             </div>

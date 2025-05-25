@@ -4,6 +4,9 @@ import { db } from "../db";
 import { contact, homepage, navigation, projects, skills, skillCategories, topBar, projectsPageMeta, skillsPageMeta, contactPageMeta, blogPageMeta } from "../db/schema/content";
 import { eq, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
+import { uploads } from "../db/schema/uploads";
+import fs from "fs/promises";
+import path from "path";
 
 const translationSchema = z.object({
   pl: z.string(),
@@ -206,6 +209,7 @@ export const contentRouter = router({
     }))
     .mutation(async ({ input }) => {
       const existing = await db.select().from(homepage).limit(1);
+      
       if (existing.length === 0) {
         return db.insert(homepage).values({
           id: nanoid(),
@@ -581,6 +585,7 @@ export const contentRouter = router({
     .input(metaTagsSchema)
     .mutation(async ({ input }) => {
       const existing = await db.select().from(projectsPageMeta).limit(1);
+      
       if (existing.length === 0) {
         return db.insert(projectsPageMeta).values({
           id: nanoid(),
@@ -608,6 +613,7 @@ export const contentRouter = router({
     .input(metaTagsSchema)
     .mutation(async ({ input }) => {
       const existing = await db.select().from(skillsPageMeta).limit(1);
+      
       if (existing.length === 0) {
         return db.insert(skillsPageMeta).values({
           id: nanoid(),
@@ -635,6 +641,7 @@ export const contentRouter = router({
     .input(metaTagsSchema)
     .mutation(async ({ input }) => {
       const existing = await db.select().from(contactPageMeta).limit(1);
+      
       if (existing.length === 0) {
         return db.insert(contactPageMeta).values({
           id: nanoid(),

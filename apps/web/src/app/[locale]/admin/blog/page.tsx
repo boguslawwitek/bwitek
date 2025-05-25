@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { BlogCategoryForm } from "@/components/admin/blog-category-form";
 import DeleteConfirmationModal from "@/components/admin/delete-confirmation-modal";
+import FileUpload from "@/components/admin/file-upload";
 
 type TranslatedField = {
   pl: string;
@@ -560,12 +561,11 @@ export default function AdminBlogPage() {
                     </div>
 
                     <div className="space-y-4">
-                      <Label>{t("admin.metaTags.ogImage")}</Label>
-                      <Input
+                      <FileUpload
                         value={metaFormData.ogImage || ""}
-                        onChange={(e) =>
-                          handleMetaSimpleFieldChange("ogImage", e.target.value)
-                        }
+                        onChange={(url) => handleMetaSimpleFieldChange("ogImage", url)}
+                        category="meta"
+                        label={t("admin.metaTags.ogImage")}
                         placeholder={t("admin.metaTags.ogImagePlaceholder")}
                       />
                     </div>

@@ -11,6 +11,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import FileUpload from "@/components/admin/file-upload";
 
 type TranslatedField = {
   pl: string;
@@ -49,6 +50,14 @@ export default function AdminPanel() {
       toast.dismiss();
     }
   }));
+
+  const { mutate: deleteOldImage } = useMutation(
+    trpc.upload.deleteImageByUrl.mutationOptions({
+      onError: (error: any) => {
+        console.warn("Failed to delete old image:", error);
+      }
+    })
+  );
 
   const [formData, setFormData] = useState<HomepageFormData>({
     welcomeText: { pl: "", en: "" },
@@ -97,6 +106,13 @@ export default function AdminPanel() {
   };
 
   const handleSubmit = () => {
+    const originalOgImage = homepage.data?.ogImage || "";
+    const newOgImage = formData.ogImage || "";
+    
+    if (originalOgImage && !newOgImage) {
+      deleteOldImage({ url: originalOgImage });
+    }
+    
     updateHomepage(formData);
   };
 
@@ -287,12 +303,12 @@ export default function AdminPanel() {
               </div>
 
               <div className="space-y-4">
-                <Label>{t("admin.metaTags.ogImage")}</Label>
-                <Input
+                <FileUpload
                   value={formData.ogImage || ""}
-                  onChange={(e) =>
-                    handleSimpleFieldChange("ogImage", e.target.value)
-                  }
+                  onChange={(url) => handleSimpleFieldChange("ogImage", url)}
+                  onOldFileDelete={(oldUrl) => deleteOldImage({ url: oldUrl })}
+                  category="meta"
+                  label={t("admin.metaTags.ogImage")}
                   placeholder={t("admin.metaTags.ogImagePlaceholder")}
                 />
               </div>

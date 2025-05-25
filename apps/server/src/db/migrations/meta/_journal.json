@@ -43,6 +43,13 @@
       "when": 1748033507050,
       "tag": "0005_true_gunslinger",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1748180875284,
+      "tag": "0006_flimsy_blackheart",
+      "breakpoints": true
     }
   ]
 }

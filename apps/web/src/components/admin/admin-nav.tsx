@@ -14,20 +14,20 @@ const navItems = [
     labelKey: "dashboard.nav.blog",
   },
   {
-    path: "/admin/skills",
-    labelKey: "dashboard.nav.skills",
-  },
-  {
     path: "/admin/projects",
     labelKey: "dashboard.nav.projects",
   },
   {
-    path: "/admin/navigation",
-    labelKey: "dashboard.nav.navigation",
+    path: "/admin/skills",
+    labelKey: "dashboard.nav.skills",
   },
   {
     path: "/admin/contact",
     labelKey: "dashboard.nav.contact",
+  },
+  {
+    path: "/admin/navigation",
+    labelKey: "dashboard.nav.navigation",
   },
 ];
 
