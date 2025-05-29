@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { TurnstileWrapper, type TurnstileRef } from "@/components/turnstile";
 import * as LucideIcons from 'lucide-react';
 import * as SimpleIcons from '@icons-pack/react-simple-icons';
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { toast } from "sonner";
 
 interface Props {
@@ -21,16 +22,19 @@ interface FormData {
   name: string;
   email: string;
   message: string;
+  turnstileToken: string;
 }
 
 export default function ContactClientWrapper({ locale }: Props) {
     const t = useTranslations();
     const { data: contactItems, isLoading } = useQuery(trpc.content.getContact.queryOptions());
+    const turnstileRef = useRef<TurnstileRef>(null);
     
     const [formData, setFormData] = useState<FormData>({
       name: '',
       email: '',
-      message: ''
+      message: '',
+      turnstileToken: ''
     });
 
     const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -41,8 +45,9 @@ export default function ContactClientWrapper({ locale }: Props) {
       trpc.mail.sendContactForm.mutationOptions({
         onSuccess: () => {
           toast.success(t('contact.form.success'));
-          setFormData({ name: '', email: '', message: '' });
+          setFormData({ name: '', email: '', message: '', turnstileToken: '' });
           setErrors({});
+          turnstileRef.current?.reset();
         },
         onError: (error) => {
           toast.error(t('contact.form.error'));
@@ -70,6 +75,10 @@ export default function ContactClientWrapper({ locale }: Props) {
         newErrors.message = t('validation.minLength', { min: 10 });
       }
 
+      if (!formData.turnstileToken) {
+        newErrors.turnstileToken = t('validation.turnstileRequired');
+      }
+
       setErrors(newErrors);
       return Object.keys(newErrors).length === 0;
     };
@@ -90,6 +99,14 @@ export default function ContactClientWrapper({ locale }: Props) {
       if (errors[field]) {
         setErrors(prev => ({ ...prev, [field]: undefined }));
       }
+    };
+
+    const handleTurnstileVerify = (token: string) => {
+      handleInputChange('turnstileToken', token);
+    };
+
+    const handleTurnstileError = () => {
+      handleInputChange('turnstileToken', '');
     };
   
     return (
@@ -206,6 +223,18 @@ export default function ContactClientWrapper({ locale }: Props) {
                       />
                       {errors.message && (
                         <p className="text-sm text-red-500">{errors.message}</p>
+                      )}
+                    </div>
+                    
+                    <div className="grid w-full items-center gap-1.5">
+                      <TurnstileWrapper
+                        ref={turnstileRef}
+                        onVerify={handleTurnstileVerify}
+                        onError={handleTurnstileError}
+                        onExpire={handleTurnstileError}
+                      />
+                      {errors.turnstileToken && (
+                        <p className="text-sm text-red-500">{errors.turnstileToken}</p>
                       )}
                     </div>
                     

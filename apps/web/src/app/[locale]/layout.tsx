@@ -34,6 +34,9 @@ const Hack = localFont({
 
 export const metadata: Metadata = {
   title: "BWitek.dev",
+  appleWebApp: {
+    title: 'BWitek.dev',
+  },
   metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'),
 };
 

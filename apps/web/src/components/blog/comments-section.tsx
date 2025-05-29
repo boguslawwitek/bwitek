@@ -36,7 +36,8 @@ export default function CommentsSection({ postId }: CommentsSectionProps) {
     authorName: '',
     authorEmail: '',
     authorWebsite: '',
-    content: ''
+    content: '',
+    turnstileToken: ''
   });
   
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
@@ -50,7 +51,7 @@ export default function CommentsSection({ postId }: CommentsSectionProps) {
     trpc.comments.createComment.mutationOptions({
       onSuccess: () => {
         toast.success(t('comments.form.success'));
-        setFormData({ authorName: '', authorEmail: '', authorWebsite: '', content: '' });
+        setFormData({ authorName: '', authorEmail: '', authorWebsite: '', content: '', turnstileToken: '' });
         setReplyingTo(null);
         setErrors({});
         queryClient.invalidateQueries({ queryKey: ['comments', 'getApprovedComments'] });
@@ -85,6 +86,10 @@ export default function CommentsSection({ postId }: CommentsSectionProps) {
       newErrors.content = t('validation.minLength', { min: 10 });
     }
 
+    if (!formData.turnstileToken) {
+      newErrors.turnstileToken = t('validation.turnstileRequired');
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }, [formData, t]);
@@ -103,6 +108,7 @@ export default function CommentsSection({ postId }: CommentsSectionProps) {
       authorEmail: formData.authorEmail,
       authorWebsite: formData.authorWebsite || undefined,
       content: formData.content,
+      turnstileToken: formData.turnstileToken,
     });
   }, [validateForm, addCommentMutation, postId, replyingTo, formData]);
 

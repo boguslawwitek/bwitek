@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { MessageCircle } from "lucide-react";
+import { TurnstileWrapper, type TurnstileRef } from "@/components/turnstile";
+import { useRef } from "react";
 import type { CommentFormData } from "./types";
 
 interface CommentFormProps {
@@ -29,6 +31,15 @@ export default function CommentForm({
   isSubmitting, 
   t 
 }: CommentFormProps) {
+  const turnstileRef = useRef<TurnstileRef>(null);
+
+  const handleTurnstileVerify = (token: string) => {
+    onInputChange('turnstileToken', token);
+  };
+
+  const handleTurnstileError = () => {
+    onInputChange('turnstileToken', '');
+  };
   return (
     <Card className={`${isReply ? 'border border-red-200 dark:border-red-800 py-0' : 'border border-gray-200 dark:border-gray-800 py-0'}`}>
       <CardContent className="p-6">
@@ -96,6 +107,18 @@ export default function CommentForm({
             />
             {errors.content && (
               <p className="text-sm text-red-500">{errors.content}</p>
+            )}
+          </div>
+          
+          <div className="grid w-full items-center gap-1.5">
+            <TurnstileWrapper
+              ref={turnstileRef}
+              onVerify={handleTurnstileVerify}
+              onError={handleTurnstileError}
+              onExpire={handleTurnstileError}
+            />
+            {errors.turnstileToken && (
+              <p className="text-sm text-red-500">{errors.turnstileToken}</p>
             )}
           </div>
           

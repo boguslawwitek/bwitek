@@ -5,8 +5,9 @@ import { blogComments, blogPosts } from "../db/schema/blog";
 import { eq, and, isNull, desc, asc, inArray } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 import { emailService } from "../services/email";
+import { verifyTurnstileToken } from "../lib/turnstile";
+import { TRPCError } from "@trpc/server";
 
-// Schema walidacji dla nowego komentarza
 const createCommentSchema = z.object({
   postId: z.string().min(1, "Post ID is required"),
   parentId: z.string().min(1).optional(),
@@ -14,16 +15,15 @@ const createCommentSchema = z.object({
   authorEmail: z.string().email("Valid email is required").max(255),
   authorWebsite: z.string().url().optional().or(z.literal("")),
   content: z.string().min(1, "Content is required").max(2000),
+  turnstileToken: z.string().min(1, "Turnstile verification is required"),
 });
 
-// Schema walidacji dla aktualizacji statusu komentarza
 const updateCommentStatusSchema = z.object({
   commentId: z.string().min(1, "Comment ID is required"),
   isApproved: z.boolean(),
 });
 
 export const commentsRouter = router({
-  // Pobierz zatwierdzone komentarze dla artykułu (publiczne)
   getApprovedComments: publicProcedure
     .input(z.object({ postId: z.string().min(1, "Post ID is required") }))
     .query(async ({ input }) => {
@@ -38,7 +38,6 @@ export const commentsRouter = router({
         )
         .orderBy(asc(blogComments.createdAt));
 
-      // Organizuj komentarze w strukturę drzewa (parent -> children)
       const commentMap = new Map();
       const rootComments: any[] = [];
 
@@ -60,11 +59,18 @@ export const commentsRouter = router({
       return rootComments;
     }),
 
-  // Dodaj nowy komentarz (publiczne)
   createComment: publicProcedure
     .input(createCommentSchema)
     .mutation(async ({ input }) => {
-      // Sprawdź czy artykuł istnieje
+      // Verify Turnstile token
+      const isValidToken = await verifyTurnstileToken(input.turnstileToken);
+      if (!isValidToken) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Invalid Turnstile verification",
+        });
+      }
+
       const post = await db
         .select({
           id: blogPosts.id,
@@ -79,7 +85,6 @@ export const commentsRouter = router({
         throw new Error("Post not found");
       }
 
-      // Utwórz komentarz
       const commentId = uuidv4();
       const newComment = {
         id: commentId,
@@ -89,18 +94,16 @@ export const commentsRouter = router({
         authorEmail: input.authorEmail,
         authorWebsite: input.authorWebsite || null,
         content: input.content,
-        isApproved: false, // Domyślnie niezatwierdzony
-        ipAddress: 'unknown', // Można dodać później jeśli potrzebne
-        userAgent: 'unknown', // Można dodać później jeśli potrzebne
+        isApproved: false,
+        ipAddress: 'unknown',
+        userAgent: 'unknown',
       };
 
       await db.insert(blogComments).values(newComment);
 
-      // Wyślij powiadomienie email
       try {
         let postTitle = 'Bez tytułu';
         
-        // Parsuj JSON postTitle jeśli jest stringiem
         let titleObj: any = post[0].title;
         if (typeof post[0].title === 'string') {
           try {
@@ -111,12 +114,9 @@ export const commentsRouter = router({
           }
         }
         
-        // Sprawdź czy title jest obiektem
         if (typeof titleObj === 'object' && titleObj !== null) {
-          // Jeśli to obiekt, spróbuj pobrać polską wersję
           postTitle = titleObj.pl || titleObj.en || 'Bez tytułu';
         } else if (typeof titleObj === 'string') {
-          // Jeśli to string, użyj go bezpośrednio
           postTitle = titleObj;
         }
         
@@ -135,7 +135,6 @@ export const commentsRouter = router({
         });
       } catch (emailError) {
         console.error('Failed to send comment notification email:', emailError);
-        // Nie przerywamy procesu - komentarz został dodany
       }
 
       return {
@@ -145,7 +144,6 @@ export const commentsRouter = router({
       };
     }),
 
-  // Pobierz wszystkie komentarze do moderacji (admin)
   getAllComments: protectedProcedure
     .input(z.object({
       page: z.number().min(1).default(1),
@@ -184,7 +182,6 @@ export const commentsRouter = router({
         .limit(input.limit)
         .offset(offset);
 
-      // Pobierz informacje o komentarzach nadrzędnych dla odpowiedzi
       const parentCommentIds = comments
         .filter(comment => comment.parentId)
         .map(comment => comment.parentId!);
@@ -205,7 +202,6 @@ export const commentsRouter = router({
           .where(inArray(blogComments.id, parentCommentIds));
       }
 
-      // Parsuj JSON postTitle i dodaj informacje o parent comment
       const processedComments = comments.map(comment => {
         const parentComment = comment.parentId 
           ? parentComments.find(p => p.id === comment.parentId)
@@ -224,7 +220,6 @@ export const commentsRouter = router({
         };
       });
 
-      // Policz całkowitą liczbę komentarzy
       const totalResult = await db
         .select({ count: blogComments.id })
         .from(blogComments)
@@ -240,7 +235,6 @@ export const commentsRouter = router({
       };
     }),
 
-  // Zatwierdź/odrzuć komentarz (admin)
   updateCommentStatus: protectedProcedure
     .input(updateCommentStatusSchema)
     .mutation(async ({ input }) => {
@@ -258,7 +252,6 @@ export const commentsRouter = router({
       };
     }),
 
-  // Usuń komentarz (admin)
   deleteComment: protectedProcedure
     .input(z.object({ commentId: z.string().min(1, "Comment ID is required") }))
     .mutation(async ({ input }) => {
@@ -272,7 +265,6 @@ export const commentsRouter = router({
       };
     }),
 
-  // Pobierz statystyki komentarzy (admin)
   getCommentsStats: protectedProcedure
     .query(async () => {
       const [pending, approved, total] = await Promise.all([

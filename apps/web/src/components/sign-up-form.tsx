@@ -6,8 +6,10 @@ import Loader from "./loader";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { TurnstileWrapper, type TurnstileRef } from "@/components/turnstile";
 import {useRouter} from '@/i18n/navigation';
 import { useTranslations } from "next-intl";
+import { useState, useRef } from "react";
 
 export default function SignUpForm({
   onSwitchToSignIn,
@@ -17,6 +19,9 @@ export default function SignUpForm({
   const t = useTranslations();
   const router = useRouter();
   const { isPending } = authClient.useSession();
+  const turnstileRef = useRef<TurnstileRef>(null);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileError, setTurnstileError] = useState("");
 
   const form = useForm({
     defaultValues: {
@@ -25,6 +30,11 @@ export default function SignUpForm({
       name: "",
     },
     onSubmit: async ({ value }) => {
+      if (!turnstileToken) {
+        setTurnstileError(t('validation.turnstileRequired'));
+        return;
+      }
+
       await authClient.signUp.email(
         {
           email: value.email,
@@ -38,6 +48,8 @@ export default function SignUpForm({
           },
           onError: (error) => {
             toast.error(error.error.message);
+            turnstileRef.current?.reset();
+            setTurnstileToken("");
           },
         },
       );
@@ -50,6 +62,16 @@ export default function SignUpForm({
       }),
     },
   });
+
+  const handleTurnstileVerify = (token: string) => {
+    setTurnstileToken(token);
+    setTurnstileError("");
+  };
+
+  const handleTurnstileError = () => {
+    setTurnstileToken("");
+    setTurnstileError(t('validation.turnstileRequired'));
+  };
 
   if (isPending) {
     return <Loader />;
@@ -133,6 +155,18 @@ export default function SignUpForm({
               </div>
             )}
           </form.Field>
+        </div>
+
+        <div className="space-y-2">
+          <TurnstileWrapper
+            ref={turnstileRef}
+            onVerify={handleTurnstileVerify}
+            onError={handleTurnstileError}
+            onExpire={handleTurnstileError}
+          />
+          {turnstileError && (
+            <p className="text-sm text-red-500">{turnstileError}</p>
+          )}
         </div>
 
         <form.Subscribe>

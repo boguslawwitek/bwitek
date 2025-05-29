@@ -12,4 +12,5 @@ export interface CommentFormData {
   authorEmail: string;
   authorWebsite: string;
   content: string;
+  turnstileToken: string;
 } 

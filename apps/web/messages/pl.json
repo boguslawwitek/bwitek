@@ -356,7 +356,8 @@
     "minValue": "To pole musi mieć co najmniej {min} wartość",
     "maxValue": "To pole musi mieć co najwyżej {max} wartość",
     "invalid": "To pole jest nieprawidłowe",
-    "invalidUrl": "Wprowadź prawidłowy adres URL (http:// lub https://)"
+    "invalidUrl": "Wprowadź prawidłowy adres URL (http:// lub https://)",
+    "turnstileRequired": "Proszę ukończyć weryfikację bezpieczeństwa"
   },
   "blog": {
     "title": "Blog",

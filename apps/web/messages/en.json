@@ -351,7 +351,8 @@
     "minValue": "This field must be at least {min} value",
     "maxValue": "This field must be at most {max} value",
     "invalid": "This field is invalid",
-    "invalidUrl": "Enter a valid URL (http:// or https://)"
+    "invalidUrl": "Enter a valid URL (http:// or https://)",
+    "turnstileRequired": "Please complete the security verification"
   },
   "comments": {
     "title": "Comments",
