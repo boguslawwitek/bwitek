@@ -6,6 +6,7 @@ import "../../index.css";
 import Providers from "@/components/providers";
 import {cn} from "@/lib/utils";
 import localFont from 'next/font/local';
+import Script from 'next/script';
 
 const Hack = localFont({
   src: [
@@ -60,6 +61,14 @@ export default async function RootLayout({
           Hack.className
         )}
       >
+        {process.env.NEXT_PUBLIC_UMAMI_SRC && process.env.NEXT_PUBLIC_UMAMI_ID && (
+          <Script
+            defer
+            src={process.env.NEXT_PUBLIC_UMAMI_SRC}
+            data-website-id={process.env.NEXT_PUBLIC_UMAMI_ID}
+            strategy="afterInteractive"
+          />
+        )}
         <Providers>
             <NextIntlClientProvider>
                 {children}

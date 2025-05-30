@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { protectedProcedure, publicProcedure, router } from "../lib/trpc";
 import { db } from "../db";
-import { contact, homepage, navigation, projects, skills, skillCategories, topBar, projectsPageMeta, skillsPageMeta, contactPageMeta, blogPageMeta } from "../db/schema/content";
+import { contact, homepage, navigation, projects, skills, skillCategories, topBar, projectsPageMeta, skillsPageMeta, contactPageMeta, blogPageMeta, privacyPolicy, privacyPolicyPageMeta } from "../db/schema/content";
 import { eq, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
 import { uploads } from "../db/schema/uploads";
@@ -653,5 +653,61 @@ export const contentRouter = router({
         .where(eq(contactPageMeta.id, existing[0].id));
     }),
 
+  // Privacy Policy
+  getPrivacyPolicy: publicProcedure.query(async () => {
+    const result = await db.select().from(privacyPolicy).limit(1);
+    if (!result[0]) return null;
+    
+    const data = result[0];
+    return {
+      ...data,
+      content: typeof data.content === 'string' ? JSON.parse(data.content) : data.content,
+    };
+  }),
+  updatePrivacyPolicy: protectedProcedure
+    .input(z.object({
+      content: translationSchema,
+    }))
+    .mutation(async ({ input }) => {
+      const existing = await db.select().from(privacyPolicy).limit(1);
+      
+      if (existing.length === 0) {
+        return db.insert(privacyPolicy).values({
+          id: nanoid(),
+          ...input,
+        });
+      }
+      return db.update(privacyPolicy)
+        .set(input)
+        .where(eq(privacyPolicy.id, existing[0].id));
+    }),
+
+  getPrivacyPolicyPageMeta: publicProcedure.query(async () => {
+    const result = await db.select().from(privacyPolicyPageMeta).limit(1);
+    if (!result[0]) return null;
+    
+    const data = result[0];
+    return {
+      ...data,
+      metaTitle: typeof data.metaTitle === 'string' ? JSON.parse(data.metaTitle) : data.metaTitle,
+      metaDescription: typeof data.metaDescription === 'string' ? JSON.parse(data.metaDescription) : data.metaDescription,
+      metaKeywords: typeof data.metaKeywords === 'string' ? JSON.parse(data.metaKeywords) : data.metaKeywords,
+    };
+  }),
+  updatePrivacyPolicyPageMeta: protectedProcedure
+    .input(metaTagsSchema)
+    .mutation(async ({ input }) => {
+      const existing = await db.select().from(privacyPolicyPageMeta).limit(1);
+      
+      if (existing.length === 0) {
+        return db.insert(privacyPolicyPageMeta).values({
+          id: nanoid(),
+          ...input,
+        });
+      }
+      return db.update(privacyPolicyPageMeta)
+        .set(input)
+        .where(eq(privacyPolicyPageMeta.id, existing[0].id));
+    }),
 
 });

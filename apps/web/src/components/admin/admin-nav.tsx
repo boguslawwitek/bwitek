@@ -30,6 +30,10 @@ const navItems = [
     labelKey: "dashboard.nav.contact",
   },
   {
+    path: "/admin/privacy-policy",
+    labelKey: "dashboard.nav.privacyPolicy",
+  },
+  {
     path: "/admin/navigation",
     labelKey: "dashboard.nav.navigation",
   },

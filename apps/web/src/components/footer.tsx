@@ -82,7 +82,19 @@ export default function Footer() {
           </div>
 
           <div className="text-sm text-gray-500 dark:text-gray-400 text-center md:text-right">
-            &copy; {currentYear} {t('footer.copyright')}
+            <div className="space-y-1">
+              <div>
+                <Link 
+                  href="/privacy-policy"
+                  className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+                >
+                  {locale === 'pl' ? 'Polityka Prywatności' : 'Privacy Policy'}
+                </Link>
+              </div>
+              <div>
+                &copy; {currentYear} {t('footer.copyright')}
+              </div>
+            </div>
           </div>
         </div>
       </div>

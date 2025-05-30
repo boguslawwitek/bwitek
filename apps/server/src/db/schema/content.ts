@@ -115,3 +115,17 @@ export const blogPageMeta = mysqlTable("blog_page_meta", {
   metaKeywords: json("meta_keywords").$type<Translation>(),
   ogImage: text("og_image"),
 });
+
+export const privacyPolicy = mysqlTable("privacy_policy", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  content: json("content").$type<Translation>().notNull(),
+  lastUpdated: timestamp("last_updated").notNull().defaultNow().onUpdateNow(),
+});
+
+export const privacyPolicyPageMeta = mysqlTable("privacy_policy_page_meta", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  metaTitle: json("meta_title").$type<Translation>(),
+  metaDescription: json("meta_description").$type<Translation>(),
+  metaKeywords: json("meta_keywords").$type<Translation>(),
+  ogImage: text("og_image"),
+});

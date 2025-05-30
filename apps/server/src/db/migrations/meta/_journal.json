@@ -57,6 +57,13 @@
       "when": 1748193783579,
       "tag": "0007_overconfident_rictor",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1748590350190,
+      "tag": "0008_unknown_scrambler",
+      "breakpoints": true
     }
   ]
 }
