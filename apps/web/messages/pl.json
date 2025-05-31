@@ -191,7 +191,8 @@
       "relatedArticles": "Powiązane artykuły",
       "backToBlog": "Powrót do bloga",
       "articleNotFound": "Artykuł nie znaleziony",
-      "readMore": "Czytaj więcej"
+      "readMore": "Czytaj więcej",
+      "rssFeed": "Kanał RSS"
     },
     "comments": {
       "title": "Komentarze",
@@ -377,7 +378,17 @@
     "readMore": "Czytaj więcej",
     "featured": "Wyróżniony",
     "views": "wyświetleń",
-    "rssFeed": "Kanał RSS"
+    "rssFeed": "Kanał RSS",
+    "share": {
+        "title": "Udostępnij artykuł",
+        "facebook": "Udostępnij na Facebook",
+        "twitter": "Udostępnij na Twitter", 
+        "linkedin": "Udostępnij na LinkedIn",
+        "whatsapp": "Udostępnij przez WhatsApp",
+        "email": "Udostępnij przez e-mail",
+        "copyLink": "Skopiuj link",
+        "linkCopied": "Link skopiowany do schowka!"
+      }
   },
   "notFound": {
     "title": "Strona nie znaleziona",

@@ -14,6 +14,7 @@ import * as SimpleIcons from '@icons-pack/react-simple-icons';
 import ArticleContent from "@/components/admin/article-content";
 import CommentsSection from "@/components/blog/comments-section";
 import NewsletterSignup from '@/components/newsletter-signup';
+import SocialShare from '@/components/blog/social-share';
 
 interface Translation {
   pl: string;
@@ -182,15 +183,22 @@ export default function BlogPostClient({
             </p>
           )}
 
-          <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400 mb-8">
-            <div className="flex items-center gap-1">
-              <Calendar className="h-4 w-4" />
-              {formatDate(postData.publishedAt)}
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+              <div className="flex items-center gap-1">
+                <Calendar className="h-4 w-4" />
+                {formatDate(postData.publishedAt)}
+              </div>
+              <div className="flex items-center gap-1">
+                <Eye className="h-4 w-4" />
+                {postData.viewCount} {t('blog.views')}
+              </div>
             </div>
-            <div className="flex items-center gap-1">
-              <Eye className="h-4 w-4" />
-              {postData.viewCount} {t('blog.views')}
-            </div>
+            <SocialShare 
+              url={`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001'}/${locale}/blog/${postData.slug}`}
+              title={postData.title[locale as 'pl' | 'en']}
+              description={postData.excerpt ? stripHtml(postData.excerpt[locale as 'pl' | 'en']) : undefined}
+            />
           </div>
 
           {postData.ogImage && (

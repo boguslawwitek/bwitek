@@ -191,7 +191,8 @@
       "relatedArticles": "Related Articles",
       "backToBlog": "Back to blog",
       "articleNotFound": "Article not found",
-      "readMore": "Read more"
+      "readMore": "Read more",
+      "rssFeed": "RSS Feed"
     },
     "comments": {
       "title": "Comments",
@@ -395,7 +396,17 @@
     "readMore": "Read more",
     "featured": "Featured",
     "views": "views",
-    "rssFeed": "RSS Feed"
+    "rssFeed": "RSS Feed",
+    "share": {
+      "title": "Share article",
+      "facebook": "Share on Facebook",
+      "twitter": "Share on Twitter",
+      "linkedin": "Share on LinkedIn", 
+      "whatsapp": "Share via WhatsApp",
+      "email": "Share via email",
+      "copyLink": "Copy link",
+      "linkCopied": "Link copied to clipboard!"
+    }
   },
   "notFound": {
     "title": "Page not found",
