@@ -7,6 +7,7 @@ import { blogRouter } from "./blog";
 import { uploadRouter } from "./upload";
 import { mailRouter } from "./mail";
 import { commentsRouter } from "./comments";
+import { newsletterRouter } from "./newsletter";
 
 export const appRouter = router({
   getRegistrationStatus: publicProcedure.query(() => {
@@ -26,5 +27,6 @@ export const appRouter = router({
   upload: uploadRouter,
   mail: mailRouter,
   comments: commentsRouter,
+  newsletter: newsletterRouter,
 });
 export type AppRouter = typeof appRouter;

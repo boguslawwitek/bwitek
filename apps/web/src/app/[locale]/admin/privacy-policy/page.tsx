@@ -287,7 +287,7 @@ export default function AdminPanelPrivacyPolicy() {
               <RichTextEditor
                 content={privacyPolicyFormData.content.pl}
                 onChange={(content) => handlePrivacyPolicyFieldChange("pl", content)}
-                placeholder="Enter privacy policy content in Polish..."
+                placeholder={t("newsletter.contentPlaceholders.privacyPolicyPl")}
               />
             </div>
 
@@ -296,7 +296,7 @@ export default function AdminPanelPrivacyPolicy() {
               <RichTextEditor
                 content={privacyPolicyFormData.content.en}
                 onChange={(content) => handlePrivacyPolicyFieldChange("en", content)}
-                placeholder="Enter privacy policy content in English..."
+                placeholder={t("newsletter.contentPlaceholders.privacyPolicyEn")}
               />
             </div>
 

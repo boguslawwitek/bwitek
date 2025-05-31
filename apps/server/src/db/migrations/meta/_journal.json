@@ -64,6 +64,13 @@
       "when": 1748590350190,
       "tag": "0008_unknown_scrambler",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1748632404253,
+      "tag": "0009_illegal_tinkerer",
+      "breakpoints": true
     }
   ]
 }

@@ -252,7 +252,9 @@
     "select": "Wybierz",
     "search": "Szukaj",
     "changeOrder": "Tryb zmiany kolejności",
-    "back": "Wstecz"
+    "back": "Wstecz",
+    "untitled": "Bez tytułu",
+    "draft": "Szkic"
   },
   "fileUpload": {
     "uploading": "Przesyłanie...",
@@ -294,7 +296,8 @@
       "topbar": "Górny pasek",
       "contact": "Kontakt",
       "blog": "Blog",
-      "privacyPolicy": "Polityka Prywatności"
+      "privacyPolicy": "Polityka Prywatności",
+      "newsletter": "Newsletter"
     }
   },
   "navigation": {
@@ -373,12 +376,110 @@
     "articleNotFound": "Artykuł nie znaleziony",
     "readMore": "Czytaj więcej",
     "featured": "Wyróżniony",
-    "views": "wyświetleń"
+    "views": "wyświetleń",
+    "rssFeed": "Kanał RSS"
   },
   "notFound": {
     "title": "Strona nie znaleziona",
     "description": "Szukana strona nie została znaleziona. Możliwe, że została przeniesiona lub usunięta.",
     "homepage": "Strona główna"
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "description": "Otrzymuj powiadomienia o nowych artykułach",
+    "email": "Adres e-mail",
+    "emailPlaceholder": "twoj@email.com",
+    "language": "Język newslettera",
+    "gdprConsent": "Wyrażam zgodę na przetwarzanie danych w celu otrzymywania newslettera zgodnie z",
+    "gdprConsentCompact": "Wyrażam zgodę na przetwarzanie moich danych osobowych w celu otrzymywania newslettera.",
+    "gdprConsentError": "Musisz wyrazić zgodę na przetwarzanie danych",
+    "privacyPolicy": "polityką prywatności",
+    "subscribe": "Zapisz się do newslettera",
+    "subscribeShort": "Zapisz się",
+    "subscribing": "Zapisywanie...",
+    "successMessage": "Pomyślnie zapisano do newslettera!",
+    "errorMessage": "Wystąpił błąd podczas zapisywania",
+    "blogSectionTitle": "Zapisz się do newslettera",
+    "blogSectionDescription": "Otrzymuj powiadomienia o nowych artykułach bezpośrednio na swoją skrzynkę e-mail",
+    "articleSectionTitle": "Podobał Ci się artykuł?",
+    "articleSectionDescription": "Zapisz się do newslettera, aby nie przegapić kolejnych!",
+    "contentPlaceholders": {
+      "privacyPolicyPl": "Wprowadź treść polityki prywatności w języku polskim...",
+      "privacyPolicyEn": "Wprowadź treść polityki prywatności w języku angielskim..."
+    },
+    "languages": {
+      "polish": "Polski",
+      "english": "Angielski"
+    },
+    "admin": {
+      "title": "Zarządzanie Newsletterem",
+      "description": "Zarządzaj subskrypcjami newslettera i wysyłaj powiadomienia do subskrybentów",
+      "stats": {
+        "title": "Statystyki Newslettera",
+        "description": "Aktualna liczba subskrybentów według języka",
+        "polish": "Subskrybenci Polscy",
+        "english": "Subskrybenci Angielscy",
+        "total": "Wszyscy Subskrybenci",
+        "loading": "Ładowanie statystyk..."
+      },
+      "send": {
+        "title": "Wyślij Newsletter",
+        "description": "Wyślij newsletter do subskrybentów o opublikowanym artykule",
+        "selectArticle": "Wybierz Artykuł",
+        "articlePlaceholder": "Wybierz artykuł do wyróżnienia...",
+        "preview": "Podgląd Wybranego Artykułu:",
+        "polishTitle": "Tytuł Polski:",
+        "englishTitle": "Tytuł Angielski:",
+        "slug": "Slug:",
+        "status": "Status:",
+        "published": "Opublikowany",
+        "draft": "Szkic",
+        "notAvailable": "Niedostępne",
+        "sendToPolish": "Wyślij do Polskich Subskrybentów",
+        "sendToEnglish": "Wyślij do Angielskich Subskrybentów",
+        "confirmTitle": "Potwierdź Wysyłanie Newslettera",
+        "confirmDescription": "Ta akcja jest nieodwracalna. Newsletter zostanie wysłany natychmiast do wszystkich subskrybentów.",
+        "confirmDetails": {
+          "article": "Artykuł:",
+          "language": "Język:",
+          "recipients": "Odbiorcy:",
+          "subscribers": "subskrybentów"
+        },
+        "cancel": "Anuluj",
+        "sending": "Wysyłanie...",
+        "confirm": "Tak, Wyślij Newsletter",
+        "selectArticleFirst": "Najpierw wybierz artykuł",
+        "successMessage": "Newsletter wysłany do {count} {language} subskrybentów",
+        "polish": "polskich",
+        "english": "angielskich",
+        "unsubscribe": {
+          "title": "Wypisz się z newslettera",
+          "subtitle": "Przykro nam, że odchodzisz. Twoja opinia pomoże nam się poprawić.",
+          "emailAddress": "Adres email",
+          "emailPlaceholder": "twoj@email.com",
+          "reason": "Powód wypisania się (opcjonalnie)",
+          "reasons": {
+            "too_frequent": "Zbyt częste wiadomości",
+            "not_relevant": "Treści nie są dla mnie odpowiednie",
+            "never_subscribed": "Nigdy się nie zapisałem/am",
+            "poor_content": "Niska jakość treści",
+            "technical_issues": "Problemy techniczne",
+            "other": "Inny powód"
+          },
+          "feedback": "Dodatkowe uwagi",
+          "feedbackPlaceholder": "Powiedz nam więcej o swoich uwagach...",
+          "cancel": "Anuluj",
+          "unsubscribeAction": "Wypisz się",
+          "unsubscribing": "Wypisywanie...",
+          "emailRequired": "Adres email jest wymagany",
+          "successTitle": "Wypisano z newslettera",
+          "successMessage": "Zostałeś pomyślnie wypisany z newslettera BWitek.dev. Dziękujemy za opinię!",
+          "feedbackNote": "Twoja opinia pomaga nam lepiej dostosować nasze treści do potrzeb czytelników.",
+          "home": "Strona główna",
+          "blog": "Blog"
+        }
+      }
+    }
   },
   "comments": {
     "title": "Komentarze",

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Bogusław Witek",
   "devDependencies": {
-    "turbo": "^2.4.2"
+    "turbo": "^2.5.4"
   },
   "license": "GPL-3.0-only",
   "packageManager": "bun@1.2.13",

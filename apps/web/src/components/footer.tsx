@@ -83,7 +83,7 @@ export default function Footer() {
 
           <div className="text-sm text-gray-500 dark:text-gray-400 text-center md:text-right">
             <div className="space-y-1">
-              <div>
+              <div className="flex flex-col gap-1">
                 <Link 
                   href="/privacy-policy"
                   className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors"

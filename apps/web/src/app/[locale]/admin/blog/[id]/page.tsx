@@ -56,7 +56,7 @@ export default function ViewBlogPostPage() {
               {t("common.back")}
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold">{post.title?.pl || post.title?.en || "Untitled"}</h1>
+          <h1 className="text-3xl font-bold">{post.title?.pl || post.title?.en || t('common.untitled')}</h1>
         </div>
         <Link href={`/admin/blog/${postId}/edit`}>
           <Button>

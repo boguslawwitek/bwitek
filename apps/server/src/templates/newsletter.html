@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{SUBJECT}}</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: 'Hack', 'Courier New', monospace, Arial, sans-serif; background-color: #f8f9fa; }
+    .container { background: white; border-radius: 0.625rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border: 1px solid #e5e7eb; }
+    .header { background: #000000; color: #d1d5db; padding: 32px 24px; text-align: center; border-bottom: 1px solid #374151; }
+    .content { padding: 32px 24px; background: white; }
+    .article-image { width: 100%; max-width: 500px; height: auto; border-radius: 0.5rem; margin: 16px 0; border: 1px solid #e5e7eb; }
+    .article-title { font-size: 24px; font-weight: 600; margin: 24px 0 16px 0; color: #111827; line-height: 1.3; font-family: 'Hack', 'Courier New', monospace; }
+    .article-excerpt { font-size: 14px; line-height: 1.6; color: #374151; margin: 16px 0; background: #f9fafb; padding: 16px; border-radius: 0.5rem; border-left: 3px solid #dc2626; }
+    .cta-button { display: inline-block; background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 0.375rem; margin: 24px 0; font-weight: 600; font-size: 14px; font-family: 'Hack', 'Courier New', monospace; transition: background-color 0.2s; }
+    .cta-button:hover { background: #b91c1c; }
+    .footer { background: #f9fafb; padding: 24px; text-align: center; font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; }
+    .unsubscribe { font-size: 11px; color: #9ca3af; margin-top: 16px; }
+    .brand { font-size: 24px; font-weight: bold; margin: 0; color: #d1d5db; font-family: 'Hack', 'Courier New', monospace; }
+    .tagline { font-size: 14px; margin: 8px 0 0 0; color: #9ca3af; font-family: 'Hack', 'Courier New', monospace; }
+    .terminal-icon { display: inline-block; margin-right: 8px; color: #dc2626; font-weight: bold; }
+    .greeting { font-size: 16px; margin-bottom: 8px; color: #111827; font-family: 'Hack', 'Courier New', monospace; }
+    .intro { font-size: 14px; margin-bottom: 24px; color: #374151; line-height: 1.5; }
+    .preview-text { display: none !important; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0; }
+  </style>
+</head>
+<body>
+  <!-- Preview Text -->
+  <div class="preview-text">{{PREVIEW_TEXT}}</div>
+  
+  <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="background-color: #f8f9fa;">
+    <tr>
+      <td align="center" valign="top" style="padding: 20px;">
+        <table border="0" cellpadding="0" cellspacing="0" width="600" class="container" style="background: white; border-radius: 0.625rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border: 1px solid #e5e7eb;">
+          <!-- Header -->
+          <tr>
+            <td align="center" class="header" style="background: #000000; color: #d1d5db; padding: 32px 24px; border-bottom: 1px solid #374151;">
+              <h1 class="brand" style="font-size: 24px; font-weight: bold; margin: 0; color: #d1d5db; font-family: 'Hack', 'Courier New', monospace;">
+                <img src="{{TERMINAL_ICON_URL}}" alt="Terminal" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" /> BWitek.dev
+              </h1>
+              <p class="tagline" style="font-size: 14px; margin: 8px 0 0 0; color: #9ca3af; font-family: 'Hack', 'Courier New', monospace;">{{TAGLINE}}</p>
+            </td>
+          </tr>
+          <!-- Content -->
+          <tr>
+            <td class="content" style="padding: 32px 24px; background: white;">
+              <p class="greeting" style="font-size: 16px; margin-bottom: 8px; color: #111827; font-family: 'Hack', 'Courier New', monospace;">{{GREETING}}</p>
+              <p class="intro" style="font-size: 14px; margin-bottom: 24px; color: #374151; line-height: 1.5;">{{INTRO}}</p>
+              
+              {{ARTICLE_IMAGE}}
+              
+              <h2 class="article-title" style="font-size: 24px; font-weight: 600; margin: 24px 0 16px 0; color: #111827; line-height: 1.3; font-family: 'Hack', 'Courier New', monospace;">{{ARTICLE_TITLE}}</h2>
+              
+              {{ARTICLE_EXCERPT}}
+              
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td align="center" style="padding: 32px 0;">
+                    <a href="{{ARTICLE_URL}}" class="cta-button" style="display: inline-block; background: #dc2626; color: white; padding: 12px 24px; text-decoration: none; border-radius: 0.375rem; font-weight: 600; font-size: 14px; font-family: 'Hack', 'Courier New', monospace;">{{READ_MORE}} →</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td class="footer" style="background: #f9fafb; padding: 24px; text-align: center; font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb;">
+              <p style="margin: 8px 0 0 0; color: #6b7280;">{{FOOTER}}</p>
+              <div class="unsubscribe" style="font-size: 11px; color: #9ca3af; margin-top: 16px;">
+                <p style="margin: 4px 0;">{{UNSUBSCRIBE}}: <a href="{{UNSUBSCRIBE_URL}}" style="color: #dc2626; text-decoration: none;">{{UNSUBSCRIBE_LINK_TEXT}}</a></p>
+                <p style="margin: 4px 0; color: #9ca3af;">BWitek.dev | {{COMPANY_ADDRESS}}</p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html> 

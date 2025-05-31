@@ -37,6 +37,10 @@ const navItems = [
     path: "/admin/navigation",
     labelKey: "dashboard.nav.navigation",
   },
+  {
+    path: "/admin/newsletter",
+    labelKey: "dashboard.nav.newsletter",
+  },
 ];
 
 export default function AdminNav() {

@@ -6,6 +6,7 @@ export interface EmailTemplate<T = any> {
 
 export { contactFormTemplate } from './contact-form';
 export { newCommentTemplate } from './new-comment';
+export { buildConfirmationEmailContent, type ConfirmationEmailData } from './confirmation-email';
 
 export interface ContactFormData {
   name: string;

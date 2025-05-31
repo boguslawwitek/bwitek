@@ -6,10 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Calendar, Eye, Search, Tag, ArrowRight } from "lucide-react";
+import { Calendar, Eye, Search, Tag, ArrowRight, Rss } from "lucide-react";
 import { Link } from '@/i18n/navigation';
 import * as LucideIcons from 'lucide-react';
 import * as SimpleIcons from '@icons-pack/react-simple-icons';
+import NewsletterSignup from '@/components/newsletter-signup';
 
 interface Translation {
   pl: string;
@@ -125,12 +126,30 @@ export default function BlogPageClient({
   return (
     <div className="max-w-screen-xl mx-auto px-6 md:px-24 py-12">
       <section className="mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
           {t('blog.title')}
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400">
           {t('blog.subtitle')}
         </p>
+          </div>
+          <div className="flex items-center">
+            <Button asChild variant="secondary" size="sm">
+              <a 
+                href={`${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/rss/${locale}.xml`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={locale === 'pl' ? 'RSS Feed Bloga' : 'Blog RSS Feed'}
+                className="flex items-center gap-2"
+              >
+                <Rss className="h-4 w-4" />
+                {t('blog.rssFeed')}
+              </a>
+            </Button>
+          </div>
+        </div>
       </section>
 
       <section className="mb-8">
@@ -245,6 +264,25 @@ export default function BlogPageClient({
             ))}
           </div>
         )}
+      </section>
+
+      {/* Newsletter Signup */}
+      <section className="mt-16 py-12 bg-muted/30 rounded-lg">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold mb-2">
+            {t('newsletter.blogSectionTitle')}
+          </h2>
+          <p className="text-muted-foreground">
+            {t('newsletter.blogSectionDescription')}
+          </p>
+        </div>
+        <div className="max-w-md mx-auto">
+          <NewsletterSignup 
+            source="blog" 
+            minimal={true}
+            showLanguageSelector={true}
+          />
+        </div>
       </section>
     </div>
   );

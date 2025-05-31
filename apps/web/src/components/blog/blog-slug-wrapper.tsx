@@ -13,6 +13,7 @@ import * as LucideIcons from 'lucide-react';
 import * as SimpleIcons from '@icons-pack/react-simple-icons';
 import ArticleContent from "@/components/admin/article-content";
 import CommentsSection from "@/components/blog/comments-section";
+import NewsletterSignup from '@/components/newsletter-signup';
 
 interface Translation {
   pl: string;
@@ -275,6 +276,25 @@ export default function BlogPostClient({
           </div>
         </section>
       )}
+
+      {/* Newsletter Signup */}
+      <section className="border-t pt-12">
+        <div className="text-center mb-6">
+          <h3 className="text-xl font-semibold mb-2">
+            {t('newsletter.articleSectionTitle')}
+          </h3>
+          <p className="text-muted-foreground text-sm">
+            {t('newsletter.articleSectionDescription')}
+          </p>
+        </div>
+        <div className="max-w-sm mx-auto">
+          <NewsletterSignup 
+            source="article" 
+            compact={true}
+            showLanguageSelector={true}
+          />
+        </div>
+      </section>
 
       {postData && postData.id && (
         <CommentsSection postId={postData.id} />

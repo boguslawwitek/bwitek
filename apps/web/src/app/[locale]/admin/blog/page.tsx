@@ -279,7 +279,7 @@ export default function AdminBlogPage() {
             <TableRow key={post.id}>
               <TableCell>
                 <div>
-                  <div className="font-medium">{post.title?.pl || post.title?.en || "Untitled"}</div>
+                  <div className="font-medium">{post.title?.pl || post.title?.en || t('common.untitled')}</div>
                   <div className="text-sm text-muted-foreground">Slug: {post.slug}</div>
                 </div>
               </TableCell>
@@ -312,7 +312,7 @@ export default function AdminBlogPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleDeletePost(post.id, post.title?.pl || post.title?.en || "Untitled")}
+                    onClick={() => handleDeletePost(post.id, post.title?.pl || post.title?.en || t('common.untitled'))}
                     className="text-red-600 hover:text-red-700"
                   >
                     <Trash2 className="w-4 h-4 mr-1" />

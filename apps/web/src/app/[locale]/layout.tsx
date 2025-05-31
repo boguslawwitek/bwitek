@@ -55,6 +55,20 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="BWitek.dev - Blog (Polski)"
+          href={`${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/rss/pl.xml`}
+        />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="BWitek.dev - Blog (English)"
+          href={`${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/rss/en.xml`}
+        />
+      </head>
       <body
         className={cn(
           "antialiased",
