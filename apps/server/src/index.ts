@@ -24,7 +24,10 @@ import { rssService } from "./services/rss";
 
 const app = new Hono();
 
-app.use(logger());
+if (process.env.NODE_ENV !== 'production') {
+  app.use(logger());
+}
+
 app.use(
   "/*",
   cors({
@@ -124,4 +127,7 @@ app.get("/rss.xml", async (c) => {
   }
 });
 
-export default app;
+export default { 
+  port: process.env.SERVER_PORT || 3000,
+  fetch: app.fetch, 
+}

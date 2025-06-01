@@ -22,9 +22,11 @@ interface BlogPost {
 
 export class RSSService {
   private baseUrl: string;
+  private baseImageUrl: string;
 
   constructor() {
     this.baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001';
+    this.baseImageUrl = process.env.BETTER_AUTH_URL || 'http://localhost:3000';
   }
 
   private escapeXml(text: string): string {
@@ -159,7 +161,7 @@ export class RSSService {
       if (post.ogImage) {
         const imageUrl = post.ogImage.startsWith('http') 
           ? post.ogImage 
-          : `${this.baseUrl}${post.ogImage.startsWith('/') ? '' : '/'}${post.ogImage}`;
+          : `${this.baseImageUrl}${post.ogImage.startsWith('/') ? '' : '/'}${post.ogImage}`;
         
         rssXml += `
       <enclosure url="${imageUrl}" type="image/jpeg"/>`;

@@ -632,7 +632,7 @@ export class BrevoService {
       if (!imageUrl) return '';
       if (imageUrl.startsWith('http')) return imageUrl;
       
-      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001';
+      const baseUrl = process.env.BETTER_AUTH_URL || 'http://localhost:3001';
       
       if (imageUrl.startsWith('/api/uploads/')) {
         return `${baseUrl}${imageUrl}`;

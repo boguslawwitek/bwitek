@@ -3,3 +3,6 @@ node_modules
 CLAUDE.md
 .claude
 .env.production
+logs/
+server.config.js
+web.config.js
