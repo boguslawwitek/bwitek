@@ -1,68 +1,109 @@
-# bwitek
+# BWitek.dev
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines Next.js, Hono, TRPC, and more.
+Modern full-stack portfolio and blog website built with cutting-edge web technologies. Features a complete content management system, newsletter integration, social sharing, and multilingual support.
 
-## Features
+🌐 **[Visit the website](https://bwitek.dev)**
 
-- **TypeScript** - For type safety and improved developer experience
-- **Next.js** - Full-stack React framework
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **shadcn/ui** - Reusable UI components
-- **Hono** - Lightweight, performant server framework
-- **tRPC** - End-to-end type-safe APIs
-- **Bun** - Runtime environment
-- **Drizzle** - TypeScript-first ORM
-- **MySQL** - Database engine
-- **Authentication** - Email & password authentication with Better Auth
-- **Turborepo** - Optimized monorepo build system
+## Tech Stack
 
-## Getting Started
+### Runtime & Build
+[![Bun](https://img.shields.io/badge/Bun-1.2-000000?style=for-the-badge&logo=bun&logoColor=white)](https://bun.sh)
+[![Turborepo](https://img.shields.io/badge/Turborepo-2.5-EF4444?style=for-the-badge&logo=turborepo&logoColor=white)](https://turbo.build)
 
-First, install the dependencies:
+### Frontend
+[![Next.js](https://img.shields.io/badge/Next.js-15.3-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19.1-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![shadcn/ui](https://img.shields.io/badge/shadcn/ui-0.7-000000?style=for-the-badge&logo=shadcnui&logoColor=white)](https://ui.shadcn.com)
 
-```bash
-bun install
-```
-## Database Setup
+### Backend
+[![Hono](https://img.shields.io/badge/Hono-4.7-E36002?style=for-the-badge&logo=hono&logoColor=white)](https://hono.dev)
+[![tRPC](https://img.shields.io/badge/tRPC-11.1-398CCB?style=for-the-badge&logo=trpc&logoColor=white)](https://trpc.io)
+[![Drizzle](https://img.shields.io/badge/Drizzle-0.43-C5F74F?style=for-the-badge&logo=drizzle&logoColor=black)](https://orm.drizzle.team)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com)
 
-This project uses MySQL with Drizzle ORM.
+### Features & Integrations
+[![Better Auth](https://img.shields.io/badge/Better_Auth-1.2-FF6B6B?style=for-the-badge)](https://better-auth.com)
+[![Brevo](https://img.shields.io/badge/Brevo-Newsletter-0052CC?style=for-the-badge)](https://www.brevo.com)
+[![TipTap](https://img.shields.io/badge/TipTap-2.12-1A1A1A?style=for-the-badge)](https://tiptap.dev)
+[![next-intl](https://img.shields.io/badge/next--intl-4.1-4CAF50?style=for-the-badge)](https://next-intl-docs.vercel.app)
 
-1. Make sure you have a MySQL database set up.
-2. Update your `apps/server/.env` file with your MySQL connection details.
+## Prerequisites
 
-3. Apply the schema to your database:
-```bash
-bun db:push
-```
+- **Bun** 1.2+ (Runtime & Package Manager)
+- **MySQL** 8.0+ (Database)
 
-
-Then, run the development server:
+## Development
 
 ```bash
+# Start all applications (web on :3001, server on :3000)
 bun dev
+
+# Start only the frontend
+bun dev:web
+
+# Start only the backend API
+bun dev:server
+
+# Open database studio
+bun db:studio
 ```
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
+## Production Build
 
-The API is running at [http://localhost:3000](http://localhost:3000).
+```bash
+# Build all applications
+bun build
 
-
+# Start production server
+bun start
+```
 
 ## Project Structure
 
 ```
 bwitek/
 ├── apps/
-│   ├── web/         # Frontend application (Next.js)
-│   └── server/      # Backend API (Hono, TRPC)
+│   ├── web/                 # Next.js Frontend (Port 3001)
+│   │   ├── src/
+│   │   │   ├── app/         # App Router pages
+│   │   │   │   ├── components/  # React components
+│   │   │   │   └── utils/       # Utilities & tRPC client
+│   │   │   └── messages/        # Internationalization files
+│   │   └── messages/        # Internationalization files
+│   └── server/              # Hono Backend API (Port 3000)
+│       ├── src/
+│       │   ├── db/          # Database schema & migrations
+│       │   ├── routers/     # tRPC API routes
+│       │   ├── services/    # Business logic (Brevo, email)
+│       │   └── templates/   # Email templates
+│       └── uploads/         # File storage
+├── turbo.json               # Turborepo configuration
+└── package.json             # Root workspace configuration
 ```
 
-## Available Scripts
+## Scripts Reference
 
-- `bun dev`: Start all applications in development mode
-- `bun build`: Build all applications
-- `bun dev:web`: Start only the web application
-- `bun dev:server`: Start only the server
-- `bun check-types`: Check TypeScript types across all apps
-- `bun db:push`: Push schema changes to database
-- `bun db:studio`: Open database studio UI
+| Command | Description |
+|---------|-------------|
+| `bun dev` | Start development servers |
+| `bun build` | Build all applications |
+| `bun db:push` | Apply schema changes to database |
+| `bun db:studio` | Open Drizzle Studio |
+| `bun db:generate` | Generate database migrations |
+| `bun db:migrate` | Run database migrations |
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+**Bogusław Witek**
+
+---
+
+<p align="center">
+    <i>Built with modern web technologies and AI assistance</i>
+</p>

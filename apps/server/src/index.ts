@@ -1,4 +1,17 @@
-import "dotenv/config";
+if (process.env.NODE_ENV === 'production') {
+  // In production, try to load .env.production but don't fail if it doesn't exist
+  // Docker-compose environment variables will take precedence anyway
+  try {
+    const { config } = await import('dotenv');
+    config({ path: '.env.production' });
+  } catch (error) {
+    // .env.production file doesn't exist, rely on system environment variables
+    console.log('No .env.production file found, using system environment variables');
+  }
+} else {
+  await import('dotenv/config');
+}
+
 import { trpcServer } from "@hono/trpc-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -38,6 +51,10 @@ app.use("/trpc/*", trpcServer({
 
 app.get("/", (c) => {
   return c.text("OK");
+});
+
+app.get("/health", (c) => {
+  return c.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
 // RSS endpoints

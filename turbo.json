@@ -5,6 +5,12 @@
 		"build": {
 			"dependsOn": ["^build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
+			"outputs": [".next/**", "!.next/cache/**", "dist/**"]
+		},
+		"web#build": {
+			"outputs": [".next/**", "!.next/cache/**"]
+		},
+		"server#build": {
 			"outputs": ["dist/**"]
 		},
 		"lint": {
@@ -33,6 +39,5 @@
 			"cache": false,
 			"persistent": true
 		}
-		
 	}
 }
