@@ -36,11 +36,13 @@ export default function AdminLayout({
             </div>
     
             <div className="flex flex-col lg:flex-row gap-8">
-                <div className="w-full lg:w-64">
+                <div className="w-full lg:w-64 flex-shrink-0">
                 <AdminNav />
                 </div>
-                <main className="flex-1">
+                <main className="flex-1 min-w-0 max-w-full overflow-hidden">
+                <div className="max-w-6xl">
                 {children}
+                </div>
                 </main>
             </div>
             </div>

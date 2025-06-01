@@ -121,7 +121,7 @@ export default function AdminPanel() {
   }
 
   return (
-    <Card className="max-w-4xl">
+    <Card>
       <CardHeader>
         <CardTitle>{t("admin.homepage.title")}</CardTitle>
       </CardHeader>

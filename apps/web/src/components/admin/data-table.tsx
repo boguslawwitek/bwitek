@@ -224,131 +224,151 @@ export const DataTable = ({
         />
       </div>
       <CardContent>
-        <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableHead 
-                    key={column.key}
-                    className={column.sortable && !orderingMode ? "cursor-pointer hover:bg-muted" : ""}
-                    onClick={() => column.sortable && !orderingMode && handleSort(column.key)}
-                  >
-                    <div className="flex items-center select-none">
-                      {column.header}
-                      {sortConfig && sortConfig.key === column.key && (
-                        <span className="ml-1">
-                          {sortConfig.direction === 'asc' ? '▲' : '▼'}
-                        </span>
-                      )}
-                    </div>
-                  </TableHead>
-                ))}
-                {(onEdit || onDelete || (onChangeOrder && orderingMode)) && (
-                  <TableHead className="select-none">{t("common.actions")}</TableHead>
-                )}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredAndSortedData.map((item, index) => (
-                <TableRow key={item[idField]}>
-                  {columns.map((column) => (
-                    <TableCell key={`${item[idField]}-${column.key}`}>
-                      {column.render
-                        ? column.render(item)
-                        : item[column.key] || "-"}
-                    </TableCell>
-                  ))}
-                  {(onEdit || onDelete || onChangeOrder) && (
-                    <TableCell>
-                      <div className="flex gap-2">
-                        {onEdit && (
-                          <Dialog
-                            open={editingItem?.[idField] === item[idField]}
-                            onOpenChange={(open) =>
-                              setEditingItem(open ? item : null)
-                            }
-                          >
-                            <DialogTrigger asChild>
-                              <Button variant="outline" size="sm">
-                                {t("common.edit")}
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className="max-h-[80vh] overflow-y-auto">
-                              <DialogHeader>
-                                <DialogTitle>{editDialogTitle}</DialogTitle>
-                              </DialogHeader>
-                              <FormComponent
-                                initialData={item}
-                                onSubmit={handleEdit}
-                                onCancel={() => setEditingItem(null)}
-                              />
-                            </DialogContent>
-                          </Dialog>
-                        )}
-                        {showOrderButtons && onChangeOrder && orderingMode && (
-                          <>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => onChangeOrder(item[idField], "up")}
-                              disabled={item.order === 1}
-                            >
-                              <ArrowUp />
-                            </Button>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => onChangeOrder(item[idField], "down")}
-                              disabled={item.order === Math.max(...data.map(i => i.order))}
-                            >
-                              <ArrowDown />
-                            </Button>
-                          </>
-                        )}
-                        {onDelete && (
-                          <Dialog
-                            open={itemToDelete === item[idField]}
-                            onOpenChange={(open) =>
-                              setItemToDelete(open ? item[idField] : null)
-                            }
-                          >
-                            <DialogTrigger asChild>
-                              <Button variant="destructive" size="sm">
-                                {t("common.delete")}
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className="max-h-[80vh] overflow-y-auto">
-                              <DialogHeader>
-                                <DialogTitle>{deleteDialogTitle}</DialogTitle>
-                              </DialogHeader>
-                              <div className="py-4">
-                                <p>{deleteDialogConfirmText}</p>
-                              </div>
-                              <div className="flex justify-end gap-2">
-                                <Button
-                                  variant="outline"
-                                  onClick={() => setItemToDelete(null)}
-                                >
-                                  {t("common.cancel")}
-                                </Button>
-                                <Button
-                                  variant="destructive"
-                                  onClick={handleDelete}
-                                >
-                                  {t("common.delete")}
-                                </Button>
-                              </div>
-                            </DialogContent>
-                          </Dialog>
-                        )}
-                      </div>
-                    </TableCell>
+        <div className="overflow-x-auto max-w-full">
+          <div className="rounded-md border">
+            <Table className="min-w-max">
+              <TableHeader>
+                <TableRow>
+                  {columns.map((column) => {
+                    const isTextColumn = column.key.includes('title') || column.key === 'url';
+                    return (
+                      <TableHead 
+                        key={column.key}
+                        className={`${isTextColumn ? "min-w-[200px] max-w-[300px]" : "whitespace-nowrap"} ${column.sortable && !orderingMode ? "cursor-pointer hover:bg-muted" : ""}`}
+                        onClick={() => column.sortable && !orderingMode && handleSort(column.key)}
+                      >
+                        <div className="flex items-center select-none">
+                          {column.header}
+                          {sortConfig && sortConfig.key === column.key && (
+                            <span className="ml-1">
+                              {sortConfig.direction === 'asc' ? '▲' : '▼'}
+                            </span>
+                          )}
+                        </div>
+                      </TableHead>
+                    );
+                  })}
+                  {(onEdit || onDelete || (onChangeOrder && orderingMode)) && (
+                    <TableHead className="select-none whitespace-nowrap">{t("common.actions")}</TableHead>
                   )}
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {filteredAndSortedData.map((item, index) => (
+                  <TableRow key={item[idField]}>
+                    {columns.map((column) => {
+                      const content = column.render
+                        ? column.render(item)
+                        : item[column.key] || "-";
+                      
+                      const isTextColumn = column.key.includes('title') || column.key === 'url';
+                      
+                      return (
+                        <TableCell key={`${item[idField]}-${column.key}`} className={isTextColumn ? "min-w-[200px] max-w-[300px]" : "whitespace-nowrap"}>
+                          {isTextColumn ? (
+                            <div 
+                              className="truncate" 
+                              title={typeof content === 'string' ? content : String(content)}
+                            >
+                              {content}
+                            </div>
+                          ) : (
+                            content
+                          )}
+                        </TableCell>
+                      );
+                    })}
+                    {(onEdit || onDelete || onChangeOrder) && (
+                      <TableCell className="whitespace-nowrap">
+                        <div className="flex gap-2">
+                          {onEdit && (
+                            <Dialog
+                              open={editingItem?.[idField] === item[idField]}
+                              onOpenChange={(open) =>
+                                setEditingItem(open ? item : null)
+                              }
+                            >
+                              <DialogTrigger asChild>
+                                <Button variant="outline" size="sm">
+                                  {t("common.edit")}
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="max-h-[80vh] overflow-y-auto">
+                                <DialogHeader>
+                                  <DialogTitle>{editDialogTitle}</DialogTitle>
+                                </DialogHeader>
+                                <FormComponent
+                                  initialData={item}
+                                  onSubmit={handleEdit}
+                                  onCancel={() => setEditingItem(null)}
+                                />
+                              </DialogContent>
+                            </Dialog>
+                          )}
+                          {showOrderButtons && onChangeOrder && orderingMode && (
+                            <>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => onChangeOrder(item[idField], "up")}
+                                disabled={item.order === 1}
+                              >
+                                <ArrowUp />
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => onChangeOrder(item[idField], "down")}
+                                disabled={item.order === Math.max(...data.map(i => i.order))}
+                              >
+                                <ArrowDown />
+                              </Button>
+                            </>
+                          )}
+                          {onDelete && (
+                            <Dialog
+                              open={itemToDelete === item[idField]}
+                              onOpenChange={(open) =>
+                                setItemToDelete(open ? item[idField] : null)
+                              }
+                            >
+                              <DialogTrigger asChild>
+                                <Button variant="destructive" size="sm">
+                                  {t("common.delete")}
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="max-h-[80vh] overflow-y-auto">
+                                <DialogHeader>
+                                  <DialogTitle>{deleteDialogTitle}</DialogTitle>
+                                </DialogHeader>
+                                <div className="py-4">
+                                  <p>{deleteDialogConfirmText}</p>
+                                </div>
+                                <div className="flex justify-end gap-2">
+                                  <Button
+                                    variant="outline"
+                                    onClick={() => setItemToDelete(null)}
+                                  >
+                                    {t("common.cancel")}
+                                  </Button>
+                                  <Button
+                                    variant="destructive"
+                                    onClick={handleDelete}
+                                  >
+                                    {t("common.delete")}
+                                  </Button>
+                                </div>
+                              </DialogContent>
+                            </Dialog>
+                          )}
+                        </div>
+                      </TableCell>
+                    )}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       </CardContent>
     </Card>
