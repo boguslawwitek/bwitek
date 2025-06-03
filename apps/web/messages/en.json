@@ -181,6 +181,7 @@
       "categoryActive": "Active",
       "iconName": "Icon Name",
       "iconProvider": "Icon Provider",
+      "order": "Order",
       "noCategories": "No categories found",
       "subtitle": "Articles about programming, technology and software development",
       "searchPlaceholder": "Search articles...",
@@ -507,6 +508,68 @@
           "home": "Home",
           "blog": "Blog"
         }
+      }
+    }
+  },
+  "richEditor": {
+    "toolbar": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "strikethrough": "Strikethrough",
+      "code": "Inline Code",
+      "heading1": "Heading 1",
+      "heading2": "Heading 2", 
+      "heading3": "Heading 3",
+      "bulletList": "Bullet List",
+      "orderedList": "Ordered List",
+      "quote": "Quote",
+      "addLink": "Add Link",
+      "addImage": "Add Image",
+      "addYoutube": "Add YouTube Video",
+      "addCodeBlock": "Add Code Block",
+      "undo": "Undo",
+      "redo": "Redo"
+    },
+    "modals": {
+      "link": {
+        "title": "Add Link",
+        "description": "Enter the URL of the page you want to link to. Leave empty to remove link.",
+        "urlLabel": "URL",
+        "urlPlaceholder": "https://example.com",
+        "cancel": "Cancel",
+        "addLink": "Add Link",
+        "removeLink": "Remove Link"
+      },
+      "youtube": {
+        "title": "Add YouTube Video",
+        "description": "Enter a YouTube video link in one of the supported formats.",
+        "urlLabel": "YouTube URL",
+        "urlPlaceholder": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "supportedFormats": "Supported formats:",
+        "formats": [
+          "https://www.youtube.com/watch?v=VIDEO_ID",
+          "https://youtu.be/VIDEO_ID", 
+          "https://www.youtube.com/embed/VIDEO_ID"
+        ],
+        "invalidUrl": "Invalid YouTube URL format",
+        "cancel": "Cancel",
+        "addVideo": "Add Video"
+      },
+      "codeBlock": {
+        "title": "Add Code Block",
+        "description": "Enter a programming language for syntax highlighting (optional).",
+        "languageLabel": "Programming Language",
+        "languagePlaceholder": "javascript, python, css...",
+        "popularLanguages": "Popular languages:",
+        "languagesList": "javascript, typescript, python, css, html, json, sql, bash, php, java, cpp",
+        "noHighlighting": "Leave empty for plain text without highlighting.",
+        "cancel": "Cancel",
+        "addCodeBlock": "Add Code Block"
+      },
+      "image": {
+        "title": "Add Image",
+        "description": "Select or upload a new image for the article.",
+        "cancel": "Cancel"
       }
     }
   }

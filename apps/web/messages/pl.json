@@ -181,6 +181,7 @@
       "categoryActive": "Aktywna",
       "iconName": "Nazwa Ikony",
       "iconProvider": "Dostawca Ikony",
+      "order": "Kolejność",
       "noCategories": "Nie znaleziono kategorii",
       "subtitle": "Artykuły o programowaniu, technologii i rozwoju oprogramowania",
       "searchPlaceholder": "Szukaj artykułów...",
@@ -513,6 +514,68 @@
       "submit": "Dodaj komentarz",
       "success": "Komentarz został dodany i oczekuje na zatwierdzenie!",
       "error": "Wystąpił błąd podczas dodawania komentarza. Spróbuj ponownie."
+    }
+  },
+  "richEditor": {
+    "toolbar": {
+      "bold": "Pogrubienie",
+      "italic": "Kursywa",
+      "strikethrough": "Przekreślenie",
+      "code": "Kod wbudowany",
+      "heading1": "Nagłówek 1",
+      "heading2": "Nagłówek 2", 
+      "heading3": "Nagłówek 3",
+      "bulletList": "Lista punktowana",
+      "orderedList": "Lista numerowana",
+      "quote": "Cytat",
+      "addLink": "Dodaj link",
+      "addImage": "Dodaj obraz",
+      "addYoutube": "Dodaj wideo YouTube",
+      "addCodeBlock": "Dodaj blok kodu",
+      "undo": "Cofnij",
+      "redo": "Ponów"
+    },
+    "modals": {
+      "link": {
+        "title": "Dodaj Link",
+        "description": "Wprowadź URL strony do której chcesz linkować. Pozostaw puste aby usunąć link.",
+        "urlLabel": "URL",
+        "urlPlaceholder": "https://example.com",
+        "cancel": "Anuluj",
+        "addLink": "Dodaj Link",
+        "removeLink": "Usuń Link"
+      },
+      "youtube": {
+        "title": "Dodaj Video YouTube",
+        "description": "Wprowadź link do filmu YouTube w jednym z obsługiwanych formatów.",
+        "urlLabel": "URL YouTube",
+        "urlPlaceholder": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "supportedFormats": "Obsługiwane formaty:",
+        "formats": [
+          "https://www.youtube.com/watch?v=VIDEO_ID",
+          "https://youtu.be/VIDEO_ID", 
+          "https://www.youtube.com/embed/VIDEO_ID"
+        ],
+        "invalidUrl": "Nieprawidłowy format URL YouTube",
+        "cancel": "Anuluj",
+        "addVideo": "Dodaj Video"
+      },
+      "codeBlock": {
+        "title": "Dodaj Blok Kodu",
+        "description": "Wprowadź język programowania dla podświetlania składni (opcjonalnie).",
+        "languageLabel": "Język programowania",
+        "languagePlaceholder": "javascript, python, css...",
+        "popularLanguages": "Popularne języki:",
+        "languagesList": "javascript, typescript, python, css, html, json, sql, bash, php, java, cpp",
+        "noHighlighting": "Pozostaw puste dla zwykłego tekstu bez podświetlania.",
+        "cancel": "Anuluj",
+        "addCodeBlock": "Dodaj Blok Kodu"
+      },
+      "image": {
+        "title": "Dodaj Obraz",
+        "description": "Wybierz lub wgraj nowy obraz do artykułu.",
+        "cancel": "Anuluj"
+      }
     }
   }
 }

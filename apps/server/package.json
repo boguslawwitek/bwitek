@@ -17,8 +17,8 @@
   "dependencies": {
     "@hono/node-server": "^1.14.3",
     "@hono/trpc-server": "^0.3.4",
-    "@trpc/client": "^11.1.4",
-    "@trpc/server": "^11.1.4",
+    "@trpc/client": "^11.2.0",
+    "@trpc/server": "^11.2.0",
     "@types/nodemailer": "^6.4.17",
     "better-auth": "^1.2.8",
     "dotenv": "^16.5.0",
@@ -28,7 +28,7 @@
     "nanoid": "^5.1.5",
     "nodemailer": "^7.0.3",
     "uuid": "^11.1.0",
-    "zod": "^3.25.46"
+    "zod": "^3.25.49"
   },
   "devDependencies": {
     "@types/bun": "^1.2.15",

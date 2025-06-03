@@ -15,8 +15,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { BlogCategoryForm } from "@/components/admin/blog-category-form";
-import DeleteConfirmationModal from "@/components/admin/delete-confirmation-modal";
 import FileUpload from "@/components/admin/file-upload";
+import { DataTable, type Column } from "@/components/admin/data-table";
+import DeleteConfirmationModal from "@/components/admin/delete-confirmation-modal";
 
 type TranslatedField = {
   pl: string;
@@ -38,25 +39,21 @@ export default function AdminBlogPage() {
   const blogPageMeta = useQuery(trpc.blog.getBlogPageMeta.queryOptions());
   
   const [isMetaExpanded, setIsMetaExpanded] = useState(false);
-  const [showCategoryForm, setShowCategoryForm] = useState(false);
-  const [editingCategory, setEditingCategory] = useState<any>(null);
-  const [deleteModal, setDeleteModal] = useState<{
-    isOpen: boolean;
-    type: 'post' | 'category';
-    id: string;
-    title: string;
-  }>({
-    isOpen: false,
-    type: 'post',
-    id: '',
-    title: ''
-  });
-  const [isDeleting, setIsDeleting] = useState(false);
   const [metaFormData, setMetaFormData] = useState<BlogMetaFormData>({
     metaTitle: { pl: "", en: "" },
     metaDescription: { pl: "", en: "" },
     metaKeywords: { pl: "", en: "" },
     ogImage: "",
+  });
+
+  const [deletePostModal, setDeletePostModal] = useState<{
+    isOpen: boolean;
+    postId: string | null;
+    postTitle: string;
+  }>({
+    isOpen: false,
+    postId: null,
+    postTitle: ""
   });
 
   const { mutate: updateBlogPageMeta } = useMutation(trpc.blog.updateBlogPageMeta.mutationOptions({
@@ -75,7 +72,7 @@ export default function AdminBlogPage() {
     }
   }));
 
-  const { mutate: deleteBlogPost } = useMutation(trpc.blog.deleteBlogPost.mutationOptions({
+  const deleteBlogPostMutation = useMutation(trpc.blog.deleteBlogPost.mutationOptions({
     onMutate: () => {
       toast.loading(t("common.deleting"));
     },
@@ -98,8 +95,6 @@ export default function AdminBlogPage() {
     onSuccess: () => {
       toast.success(t("common.saved"));
       blogCategories.refetch();
-      setShowCategoryForm(false);
-      setEditingCategory(null);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -116,8 +111,6 @@ export default function AdminBlogPage() {
     onSuccess: () => {
       toast.success(t("common.updated"));
       blogCategories.refetch();
-      setShowCategoryForm(false);
-      setEditingCategory(null);
     },
     onError: (error) => {
       toast.error(error.message);
@@ -133,6 +126,22 @@ export default function AdminBlogPage() {
     },
     onSuccess: () => {
       toast.success(t("common.deleted"));
+      blogCategories.refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+    onSettled: () => {
+      toast.dismiss();
+    }
+  }));
+
+  const { mutate: changeBlogCategoryOrder } = useMutation(trpc.blog.changeBlogCategoryOrder.mutationOptions({
+    onMutate: () => {
+      toast.loading(t("common.updating"));
+    },
+    onSuccess: () => {
+      toast.success(t("common.updated"));
       blogCategories.refetch();
     },
     onError: (error) => {
@@ -181,11 +190,29 @@ export default function AdminBlogPage() {
   };
 
   const handleDeletePost = (id: string, title: string) => {
-    setDeleteModal({
+    setDeletePostModal({
       isOpen: true,
-      type: 'post',
-      id,
-      title
+      postId: id,
+      postTitle: title
+    });
+  };
+
+  const handleDeletePostConfirm = () => {
+    if (deletePostModal.postId) {
+      deleteBlogPostMutation.mutate(deletePostModal.postId);
+      setDeletePostModal({
+        isOpen: false,
+        postId: null,
+        postTitle: ""
+      });
+    }
+  };
+
+  const handleDeletePostCancel = () => {
+    setDeletePostModal({
+      isOpen: false,
+      postId: null,
+      postTitle: ""
     });
   };
 
@@ -194,43 +221,65 @@ export default function AdminBlogPage() {
   };
 
   const handleUpdateCategory = (id: string, data: any) => {
+    const originalCategory = blogCategories.data?.find((cat: any) => cat.id === id);
+    if (!originalCategory) {
+      toast.error("Category not found");
+      return;
+    }
+    
     updateBlogCategory({
       id,
       ...data,
+      order: originalCategory.order,
+      isActive: data.isActive !== undefined ? data.isActive : originalCategory.isActive,
     });
   };
 
-  const handleDeleteCategory = (id: string, name: string) => {
-    setDeleteModal({
-      isOpen: true,
-      type: 'category',
-      id,
-      title: name
-    });
+  const handleDeleteCategory = (id: string) => {
+    deleteBlogCategory(id);
   };
 
-  const confirmDelete = async () => {
-    setIsDeleting(true);
-    try {
-      if (deleteModal.type === 'post') {
-        await deleteBlogPost(deleteModal.id);
-      } else {
-        await deleteBlogCategory(deleteModal.id);
-      }
-    } finally {
-      setIsDeleting(false);
-      setDeleteModal({ isOpen: false, type: 'post', id: '', title: '' });
+  const handleChangeOrder = (categoryId: string, direction: "up" | "down") => {
+    changeBlogCategoryOrder({ id: categoryId, direction });
+  };
+
+  const categoryColumns: Column[] = [
+    {
+      key: "name.pl",
+      header: t("admin.blog.categoryNamePl"),
+      render: (item) => item.name?.pl || "Unnamed",
+      sortable: true,
+      searchable: true
+    },
+    {
+      key: "name.en", 
+      header: t("admin.blog.categoryNameEn"),
+      render: (item) => item.name?.en || "Unnamed",
+      sortable: true,
+      searchable: true
+    },
+    {
+      key: "iconName",
+      header: t("admin.blog.iconName"),
+      render: (item) => item.iconName ? `${item.iconName} (${item.iconProvider})` : "-",
+      sortable: true,
+      searchable: false
+    },
+    {
+      key: "isActive",
+      header: t("admin.blog.categoryActive"),
+      render: (item) => item.isActive ? t("common.yes") : t("common.no"),
+      sortable: true,
+      searchable: false
+    },
+    {
+      key: "order",
+      header: t("admin.blog.order"),
+      render: (item) => item.order,
+      sortable: true,
+      searchable: false
     }
-  };
-
-  const cancelDelete = () => {
-    setDeleteModal({ isOpen: false, type: 'post', id: '', title: '' });
-  };
-
-  const handleEditCategory = (category: any) => {
-    setEditingCategory(category);
-    setShowCategoryForm(true);
-  };
+  ];
 
   const getStatusBadge = (isPublished: boolean) => {
     return isPublished ? (
@@ -327,86 +376,6 @@ export default function AdminBlogPage() {
     );
   };
 
-  const renderCategoriesTable = () => {
-    if (!blogCategories.data || blogCategories.data.length === 0) {
-      return (
-        <div className="text-center py-8 text-muted-foreground">
-          {t("admin.blog.noCategories")}
-        </div>
-      );
-    }
-
-    return (
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Slug</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Icon</TableHead>
-            <TableHead>Active</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {blogCategories.data.map((category: any) => (
-            <TableRow key={category.id}>
-              <TableCell>
-                <div>
-                  <div className="font-medium">{category.name?.pl || "Unnamed"}</div>
-                  <div className="text-sm text-muted-foreground">{category.name?.en || "Unnamed"}</div>
-                </div>
-              </TableCell>
-              <TableCell>{category.slug}</TableCell>
-              <TableCell>
-                <div className="max-w-xs truncate">
-                  {category.description?.pl || category.description?.en || "No description"}
-                </div>
-              </TableCell>
-              <TableCell>
-                {category.iconName && (
-                  <div className="text-sm">
-                    {category.iconName} ({category.iconProvider})
-                  </div>
-                )}
-              </TableCell>
-              <TableCell>
-                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                  category.isActive 
-                    ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
-                    : "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                }`}>
-                  {category.isActive ? "Active" : "Inactive"}
-                </span>
-              </TableCell>
-              <TableCell>
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleEditCategory(category)}
-                  >
-                    <Edit className="w-4 h-4 mr-1" />
-                    {t("admin.blog.editCategory")}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleDeleteCategory(category.id, category.name?.pl || category.name?.en || "Unnamed")}
-                    className="text-red-600 hover:text-red-700"
-                  >
-                    <Trash2 className="w-4 h-4 mr-1" />
-                    {t("admin.blog.deleteCategory")}
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    );
-  };
-
   if (blogPosts.isLoading || blogPageMeta.isLoading) {
     return <div>{t("common.loading")}</div>;
   }
@@ -443,17 +412,23 @@ export default function AdminBlogPage() {
 
         <TabsContent value="categories">
           <Card>
-            <CardHeader>
-              <div className="flex justify-between items-center">
-                <CardTitle>{t("admin.blog.categoriesManagement")}</CardTitle>
-                <Button onClick={() => setShowCategoryForm(true)}>
-                  <Plus className="w-4 h-4 mr-2" />
-                  {t("admin.blog.addCategory")}
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              {renderCategoriesTable()}
+            <CardContent className="p-6">
+              <DataTable
+                title={t("admin.blog.categoriesManagement")}
+                addButtonText={t("admin.blog.addCategory")}
+                columns={categoryColumns}
+                data={blogCategories.data || []}
+                FormComponent={BlogCategoryForm}
+                onAdd={handleCreateCategory}
+                onEdit={handleUpdateCategory}
+                onDelete={handleDeleteCategory}
+                onChangeOrder={handleChangeOrder}
+                addDialogTitle={t("admin.blog.addCategory")}
+                editDialogTitle={t("admin.blog.editCategory")}
+                deleteDialogTitle={t("admin.blog.deleteCategory")}
+                deleteDialogConfirmText={t("admin.blog.deleteCategoryConfirm")}
+                showOrderButtons={true}
+              />
             </CardContent>
           </Card>
         </TabsContent>
@@ -581,45 +556,13 @@ export default function AdminBlogPage() {
         </TabsContent>
       </Tabs>
 
-      {showCategoryForm && (
-        <div className="fixed inset-0 z-[9998] flex items-center justify-center">
-          <div 
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={() => {
-              setShowCategoryForm(false);
-              setEditingCategory(null);
-            }}
-          />
-          
-          <div 
-            className="relative bg-background border border-border shadow-xl p-6 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto mx-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 className="text-xl font-bold mb-4">
-              {editingCategory ? t("admin.blog.editCategory") : t("admin.blog.addCategory")}
-            </h2>
-            <BlogCategoryForm
-              initialData={editingCategory}
-              onSubmit={editingCategory ? 
-                (data) => handleUpdateCategory(editingCategory.id, data) : 
-                handleCreateCategory
-              }
-              onCancel={() => {
-                setShowCategoryForm(false);
-                setEditingCategory(null);
-              }}
-            />
-          </div>
-        </div>
-      )}
-
       <DeleteConfirmationModal
-        isOpen={deleteModal.isOpen}
-        title={deleteModal.type === 'post' ? t("admin.blog.delete") : t("admin.blog.deleteCategory")}
-        message={deleteModal.type === 'post' ? t("admin.blog.deleteConfirm") : t("admin.blog.deleteCategoryConfirm")}
-        onConfirm={confirmDelete}
-        onCancel={cancelDelete}
-        isLoading={isDeleting}
+        isOpen={deletePostModal.isOpen}
+        title={t("admin.blog.delete")}
+        message={`${t("admin.blog.deleteConfirm")}\n\n"${deletePostModal.postTitle}"`}
+        onConfirm={handleDeletePostConfirm}
+        onCancel={handleDeletePostCancel}
+        isLoading={deleteBlogPostMutation.isPending}
       />
     </div>
   );
