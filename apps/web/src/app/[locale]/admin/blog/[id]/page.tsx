@@ -60,7 +60,7 @@ export default function ViewBlogPostPage() {
         </div>
         <Link href={`/admin/blog/${postId}/edit`}>
           <Button>
-            <Icon name="Edit" provider="lu" className="w-4 h-4 mr-2" />
+            <Icon name="Pencil" provider="lu" className="w-4 h-4 mr-2" />
             {t("admin.blog.edit")}
           </Button>
         </Link>

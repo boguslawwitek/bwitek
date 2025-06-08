@@ -120,16 +120,16 @@ export default function BlogPageClient({
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto px-6 md:px-24 py-12">
-      <section className="mb-12">
+    <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-24 py-8 sm:py-12">
+      <section className="mb-8 sm:mb-12">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-          {t('blog.title')}
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400">
-          {t('blog.subtitle')}
-        </p>
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+              {t('blog.title')}
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400">
+              {t('blog.subtitle')}
+            </p>
           </div>
           <div className="flex items-center">
             <Button asChild variant="secondary" size="sm">
@@ -149,8 +149,8 @@ export default function BlogPageClient({
       </section>
 
       <section className="mb-8">
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="relative flex-1">
+        <div className="flex flex-col gap-4 mb-6">
+          <div className="relative">
             <Icon name="Search" provider="lu" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
             <Input
               placeholder={t('blog.searchPlaceholder')}
@@ -167,6 +167,7 @@ export default function BlogPageClient({
               variant={selectedCategory === null ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedCategory(null)}
+              className="w-full sm:w-auto"
             >
               {t('blog.allCategories')}
             </Button>
@@ -179,7 +180,7 @@ export default function BlogPageClient({
                   variant={selectedCategory === category.id ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedCategory(category.id)}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 w-full sm:w-auto"
                 >
                   {getIcon(category.iconName, category.iconProvider, 14)}
                   {category.name[locale as 'pl' | 'en']}
@@ -239,7 +240,7 @@ export default function BlogPageClient({
                     </p>
                   )}
                   <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-wrap items-center gap-2">
                       <div className="flex items-center gap-1">
                         <Icon name="Calendar" provider="lu" className="h-4 w-4" />
                         {formatDate(post.publishedAt)}
@@ -250,7 +251,7 @@ export default function BlogPageClient({
                       </div>
                     </div>
                     <Link href={`/blog/${post.slug}`}>
-                      <Button variant="ghost" size="sm" className="p-0 h-auto">
+                      <Button variant="ghost" size="sm" className="p-0 h-auto shrink-0">
                         <Icon name="ArrowRight" provider="lu" className="h-4 w-4" />
                       </Button>
                     </Link>

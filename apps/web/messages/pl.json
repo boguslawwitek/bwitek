@@ -306,7 +306,8 @@
     "home": "Powrót do strony",
     "dashboard": "Panel",
     "settings": "Ustawienia",
-    "keyboardHint": "Możesz użyć klawiszy strzałkowych do nawigacji"
+    "keyboardHint": "Możesz użyć klawiszy strzałkowych do nawigacji",
+    "menu": "Menu"
   },
   "theme": {
     "toggle": "Przełącz motyw",

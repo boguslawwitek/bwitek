@@ -87,7 +87,8 @@
       "active": "Active",
       "order": "Order",
       "deleteTitle": "Delete navigation item",
-      "deleteConfirm": "Are you sure you want to delete this navigation item?"
+      "deleteConfirm": "Are you sure you want to delete this navigation item?",
+      "menu": "Menu"
     },
     "topBar": {
       "title": "Top Bar",
@@ -301,7 +302,8 @@
     "home": "Return to website",
     "dashboard": "Dashboard",
     "settings": "Settings",
-    "keyboardHint": "You can use arrow keys for navigation"
+    "keyboardHint": "You can use arrow keys for navigation",
+    "menu": "Menu"
   },
   "theme": {
     "toggle": "Toggle theme",

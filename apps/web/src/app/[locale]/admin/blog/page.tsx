@@ -354,7 +354,7 @@ export default function AdminBlogPage() {
                   </Link>
                   <Link href={`/admin/blog/${post.id}/edit`}>
                     <Button variant="outline" size="sm">
-                      <Icon name="Edit" provider="lu" className="w-4 h-4 mr-1" />
+                      <Icon name="Pencil" provider="lu" className="w-4 h-4 mr-1" />
                       {t("admin.blog.edit")}
                     </Button>
                   </Link>
@@ -386,7 +386,7 @@ export default function AdminBlogPage() {
         <h1 className="text-3xl font-bold">{t("admin.blog.title")}</h1>
         <Link href="/admin/blog/new">
           <Button>
-            {/* <Plus className="w-4 h-4 mr-2" /> */}
+            <Icon name="Plus" provider="lu" className="w-4 h-4 mr-2" />
             {t("admin.blog.newPost")}
           </Button>
         </Link>
