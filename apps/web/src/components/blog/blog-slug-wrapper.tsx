@@ -5,12 +5,10 @@ import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Eye, ArrowLeft, ArrowRight, Tag } from "lucide-react";
+import { Icon } from '@/components/icon';
 import { Link } from '@/i18n/navigation';
 import { trpc } from "@/utils/trpc";
 import { useMutation } from "@tanstack/react-query";
-import * as LucideIcons from 'lucide-react';
-import * as SimpleIcons from '@icons-pack/react-simple-icons';
 import ArticleContent from "@/components/admin/article-content";
 import CommentsSection from "@/components/blog/comments-section";
 import NewsletterSignup from '@/components/newsletter-signup';
@@ -68,11 +66,9 @@ const getIcon = (iconName: string | null | undefined, iconProvider: string | nul
   if (!iconName) return null;
   
   if (iconProvider === 'lucide') {
-    const LucideIcon = (LucideIcons as any)[iconName];
-    if (LucideIcon) return <LucideIcon size={size} className="text-current" />;
+    return <Icon name={iconName} provider="lu" className="text-current" />;
   } else if (iconProvider === 'simple-icons') {
-    const SimpleIcon = (SimpleIcons as any)[iconName];
-    if (SimpleIcon) return <SimpleIcon size={size} className="text-current" />;
+    return <Icon name={iconName} provider="si" className="text-current" />;
   }
   
   return null;
@@ -137,7 +133,7 @@ export default function BlogPostClient({
           </h1>
           <Link href="/blog">
             <Button>
-              <ArrowLeft className="w-4 h-4 mr-2" />
+              <Icon name="ArrowLeft" provider="lu" className="w-4 h-4 mr-2" />
               {t('blog.backToBlog')}
             </Button>
           </Link>
@@ -151,7 +147,7 @@ export default function BlogPostClient({
       <div className="mb-8">
         <Link href="/blog">
           <Button variant="ghost" className="mb-4">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <Icon name="ArrowLeft" provider="lu" className="w-4 h-4 mr-2" />
             {t('blog.backToBlog')}
           </Button>
         </Link>
@@ -186,11 +182,11 @@ export default function BlogPostClient({
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
               <div className="flex items-center gap-1">
-                <Calendar className="h-4 w-4" />
+                <Icon name="Calendar" provider="lu" className="h-4 w-4" />
                 {formatDate(postData.publishedAt)}
               </div>
               <div className="flex items-center gap-1">
-                <Eye className="h-4 w-4" />
+                <Icon name="Eye" provider="lu" className="h-4 w-4" />
                 {postData.viewCount} {t('blog.views')}
               </div>
             </div>
@@ -264,17 +260,17 @@ export default function BlogPostClient({
                   <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
+                        <Icon name="Calendar" provider="lu" className="h-3 w-3" />
                         {formatDate(post.publishedAt)}
                       </div>
                       <div className="flex items-center gap-1">
-                        <Eye className="h-3 w-3" />
+                        <Icon name="Eye" provider="lu" className="h-3 w-3" />
                         {post.viewCount}
                       </div>
                     </div>
                     <Link href={`/blog/${post.slug}`}>
                       <Button variant="ghost" size="sm" className="p-0 h-auto">
-                        <ArrowRight className="h-3 w-3" />
+                        <Icon name="ArrowRight" provider="lu" className="h-3 w-3" />
                       </Button>
                     </Link>
                   </div>

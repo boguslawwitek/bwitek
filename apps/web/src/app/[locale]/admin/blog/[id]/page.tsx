@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Edit, Calendar, Eye, User, Tag } from "lucide-react";
+import { Icon } from '@/components/icon';
 import Link from "next/link";
 import { trpc } from "@/utils/trpc";
 import { useQuery } from "@tanstack/react-query";
@@ -29,7 +29,7 @@ export default function ViewBlogPostPage() {
         <h2 className="text-2xl font-bold">{t("admin.blog.postNotFound")}</h2>
         <Link href="/admin/blog">
           <Button className="mt-4">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <Icon name="ArrowLeft" provider="lu" className="w-4 h-4 mr-2" />
             {t("common.back")}
           </Button>
         </Link>
@@ -52,7 +52,7 @@ export default function ViewBlogPostPage() {
         <div className="flex items-center gap-4">
           <Link href="/admin/blog">
             <Button variant="outline" size="sm">
-              <ArrowLeft className="w-4 h-4 mr-2" />
+              <Icon name="ArrowLeft" provider="lu" className="w-4 h-4 mr-2" />
               {t("common.back")}
             </Button>
           </Link>
@@ -60,7 +60,7 @@ export default function ViewBlogPostPage() {
         </div>
         <Link href={`/admin/blog/${postId}/edit`}>
           <Button>
-            <Edit className="w-4 h-4 mr-2" />
+            <Icon name="Edit" provider="lu" className="w-4 h-4 mr-2" />
             {t("admin.blog.edit")}
           </Button>
         </Link>
@@ -84,18 +84,18 @@ export default function ViewBlogPostPage() {
             </div>
             
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Calendar className="w-4 h-4" />
+              <Icon name="Calendar" provider="lu" className="w-4 h-4" />
               {formatDate(post.publishedAt)}
             </div>
             
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Eye className="w-4 h-4" />
+              <Icon name="Eye" provider="lu" className="w-4 h-4" />
               {post.viewCount || 0} {t("admin.blog.views")}
             </div>
             
             {post.category && (
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Tag className="w-4 h-4" />
+                <Icon name="Tag" provider="lu" className="w-4 h-4" />
                 {post.category.name?.pl || post.category.name?.en}
               </div>
             )}

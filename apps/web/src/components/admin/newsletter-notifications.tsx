@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { trpc } from "@/utils/trpc";
 import { toast } from "sonner";
-import { Mail, Send, Users, Loader2, AlertTriangle } from "lucide-react";
+import { Icon } from '@/components/icon';
 
 export default function NewsletterNotifications() {
   const t = useTranslations();
@@ -89,7 +89,7 @@ export default function NewsletterNotifications() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Users className="h-5 w-5" />
+            <Icon name="Users" provider="lu" className="h-5 w-5" />
             {t('newsletter.admin.stats.title')}
           </CardTitle>
           <CardDescription>
@@ -120,7 +120,7 @@ export default function NewsletterNotifications() {
             </div>
           ) : (
             <div className="text-center py-8">
-              <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2" />
+              <Icon name="Loader" provider="lu" className="h-6 w-6 animate-spin mx-auto mb-2" />
               <p className="text-muted-foreground">{t('newsletter.admin.stats.loading')}</p>
             </div>
           )}
@@ -131,7 +131,7 @@ export default function NewsletterNotifications() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Send className="h-5 w-5" />
+            <Icon name="Send" provider="lu" className="h-5 w-5" />
             {t('newsletter.admin.send.title')}
           </CardTitle>
           <CardDescription>
@@ -151,7 +151,7 @@ export default function NewsletterNotifications() {
               <SelectContent>
                 {articlesLoading ? (
                   <div className="p-2 text-center">
-                    <Loader2 className="h-4 w-4 animate-spin mx-auto" />
+                    <Icon name="Loader" provider="lu" className="h-4 w-4 animate-spin mx-auto" />
                   </div>
                 ) : (
                   articles?.map((post) => {
@@ -205,7 +205,7 @@ export default function NewsletterNotifications() {
               className="flex-1"
               variant="default"
             >
-              <Mail className="mr-2 h-4 w-4" />
+              <Icon name="Mail" provider="lu" className="mr-2 h-4 w-4" />
               {t('newsletter.admin.send.sendToPolish')} ({getSubscriberCount('pl')})
             </Button>
             <Button
@@ -214,7 +214,7 @@ export default function NewsletterNotifications() {
               className="flex-1"
               variant="default"
             >
-              <Mail className="mr-2 h-4 w-4" />
+              <Icon name="Mail" provider="lu" className="mr-2 h-4 w-4" />
               {t('newsletter.admin.send.sendToEnglish')} ({getSubscriberCount('en')})
             </Button>
           </div>
@@ -226,7 +226,7 @@ export default function NewsletterNotifications() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-yellow-500" />
+              <Icon name="AlertTriangle" provider="lu" className="h-5 w-5 text-yellow-500" />
               {t('newsletter.admin.send.confirmTitle')}
             </DialogTitle>
             <DialogDescription>
@@ -274,12 +274,12 @@ export default function NewsletterNotifications() {
             >
               {isProcessing ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Icon name="Loader" provider="lu" className="mr-2 h-4 w-4 animate-spin" />
                   {t('newsletter.admin.send.sending')}
                 </>
               ) : (
                 <>
-                  <Send className="mr-2 h-4 w-4" />
+                  <Icon name="Send" provider="lu" className="mr-2 h-4 w-4" />
                   {t('newsletter.admin.send.confirm')}
                 </>
               )}

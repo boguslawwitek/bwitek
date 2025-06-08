@@ -9,21 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  MessageCircle, 
-  Check, 
-  X, 
-  Trash2, 
-  Eye, 
-  Calendar, 
-  User, 
-  Mail, 
-  Globe,
-  ChevronLeft,
-  ChevronRight,
-  Filter,
-  Reply
-} from "lucide-react";
+import { Icon } from '@/components/icon';
 import { toast } from "sonner";
 import Link from "next/link";
 import DeleteConfirmationModal from "@/components/admin/delete-confirmation-modal";
@@ -165,7 +151,7 @@ export default function CommentsAdminPage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-3">
-                <MessageCircle size={32} className="text-red-600 dark:text-red-400" />
+                <Icon name="MessageCircle" provider="lu" className="text-red-600 dark:text-red-400" />
                 {t('admin.comments.title')}
               </h1>
               <p className="text-gray-600 dark:text-gray-400 mt-2">
@@ -185,7 +171,7 @@ export default function CommentsAdminPage() {
                     <p className="text-2xl font-bold text-orange-600">{stats.pending}</p>
                   </div>
                   <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/20 rounded-full flex items-center justify-center">
-                    <MessageCircle size={24} className="text-orange-600" />
+                    <Icon name="MessageCircle" provider="lu" className="text-orange-600" />
                   </div>
                 </div>
               </CardContent>
@@ -199,7 +185,7 @@ export default function CommentsAdminPage() {
                     <p className="text-2xl font-bold text-green-600">{stats.approved}</p>
                   </div>
                   <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center">
-                    <Check size={24} className="text-green-600" />
+                    <Icon name="Check" provider="lu" className="text-green-600" />
                   </div>
                 </div>
               </CardContent>
@@ -213,7 +199,7 @@ export default function CommentsAdminPage() {
                     <p className="text-2xl font-bold text-blue-600">{stats.total}</p>
                   </div>
                   <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center">
-                    <MessageCircle size={24} className="text-blue-600" />
+                    <Icon name="MessageCircle" provider="lu" className="text-blue-600" />
                   </div>
                 </div>
               </CardContent>
@@ -235,7 +221,7 @@ export default function CommentsAdminPage() {
               <div className="flex gap-2">
                 <Select value={statusFilter} onValueChange={(value: 'all' | 'pending' | 'approved') => setStatusFilter(value)}>
                   <SelectTrigger className="w-48">
-                    <Filter size={16} className="mr-2" />
+                    <Icon name="Filter" provider="lu" className="mr-2" />
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -262,7 +248,7 @@ export default function CommentsAdminPage() {
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center">
-                        <User size={20} className="text-red-600 dark:text-red-400" />
+                        <Icon name="User" provider="lu" className="text-red-600 dark:text-red-400" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
@@ -275,19 +261,19 @@ export default function CommentsAdminPage() {
                         </div>
                         <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mt-1">
                           <div className="flex items-center gap-1">
-                            <Mail size={12} />
+                            <Icon name="Mail" provider="lu" className="text-red-600 dark:text-red-400" />
                             {comment.authorEmail}
                           </div>
                           {comment.authorWebsite && (
                             <div className="flex items-center gap-1">
-                              <Globe size={12} />
+                              <Icon name="Globe" provider="lu" className="text-red-600 dark:text-red-400" />
                               <a href={comment.authorWebsite} target="_blank" rel="noopener noreferrer" className="hover:underline">
                                 {comment.authorWebsite}
                               </a>
                             </div>
                           )}
                           <div className="flex items-center gap-1">
-                            <Calendar size={12} />
+                            <Icon name="Calendar" provider="lu" className="text-red-600 dark:text-red-400" />
                             {formatDate(comment.createdAt)}
                           </div>
                         </div>
@@ -302,7 +288,7 @@ export default function CommentsAdminPage() {
                           disabled={updateStatusMutation.isPending}
                           className="bg-green-600 hover:bg-green-700 text-white"
                         >
-                          <Check size={16} className="mr-1" />
+                          <Icon name="Check" provider="lu" className="mr-1" />
                           {t('admin.comments.approve')}
                         </Button>
                       )}
@@ -314,7 +300,7 @@ export default function CommentsAdminPage() {
                           onClick={() => handleStatusUpdate(comment.id, false)}
                           disabled={updateStatusMutation.isPending}
                         >
-                          <X size={16} className="mr-1" />
+                          <Icon name="X" provider="lu" className="mr-1" />
                           {t('admin.comments.reject')}
                         </Button>
                       )}
@@ -325,7 +311,7 @@ export default function CommentsAdminPage() {
                         onClick={() => handleDeleteClick(comment.id, comment.authorName)}
                         disabled={deleteCommentMutation.isPending}
                       >
-                        <Trash2 size={16} className="mr-1" />
+                        <Icon name="Trash" provider="lu" className="mr-1" />
                         {t('admin.comments.delete')}
                       </Button>
                     </div>
@@ -341,7 +327,7 @@ export default function CommentsAdminPage() {
                           href={`/${locale}/blog/${comment.postSlug}`}
                           className="text-sm text-red-600 dark:text-red-400 hover:underline flex items-center gap-1"
                         >
-                          <Eye size={12} />
+                          <Icon name="Eye" provider="lu" className="text-red-600 dark:text-red-400" />
                           {getPostTitle(comment)}
                         </Link>
                       ) : (
@@ -352,7 +338,7 @@ export default function CommentsAdminPage() {
                     {comment.parentComment && (
                       <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-700">
                         <div className="flex items-center gap-2 mb-2">
-                          <Reply size={14} className="text-blue-600 dark:text-blue-400" />
+                          <Icon name="Reply" provider="lu" className="text-blue-600 dark:text-blue-400" />
                           <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
                             {t('admin.comments.replyTo')} {comment.parentComment.authorName}
                           </span>
@@ -389,7 +375,7 @@ export default function CommentsAdminPage() {
         ) : (
           <Card>
             <CardContent className="text-center py-12">
-              <MessageCircle size={48} className="mx-auto mb-4 text-gray-400" />
+              <Icon name="MessageCircle" provider="lu" className="mx-auto mb-4 text-gray-400" />
               <p className="text-gray-500 dark:text-gray-400">
                 {searchTerm ? t('admin.comments.noCommentsFound') : t('admin.comments.noComments')}
               </p>
@@ -405,7 +391,7 @@ export default function CommentsAdminPage() {
               onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
             >
-              <ChevronLeft size={16} className="mr-1" />
+              <Icon name="ChevronLeft" provider="lu" className="mr-1" />
               {t('admin.comments.previous')}
             </Button>
             
@@ -430,7 +416,7 @@ export default function CommentsAdminPage() {
               disabled={currentPage === commentsData.totalPages}
             >
               {t('admin.comments.next')}
-              <ChevronRight size={16} className="ml-1" />
+              <Icon name="ChevronRight" provider="lu" className="ml-1" />
             </Button>
           </div>
         )}

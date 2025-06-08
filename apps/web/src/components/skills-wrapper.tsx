@@ -5,8 +5,7 @@ import {useTranslations} from 'next-intl';
 import MainLayout from "@/components/main-layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import * as LucideIcons from 'lucide-react';
-import * as SimpleIcons from '@icons-pack/react-simple-icons';
+import { Icon } from '@/components/icon';
 
 interface Props {
   locale: string;
@@ -57,11 +56,9 @@ export default function SkillsClientWrapper({ locale }: Props) {
                                     if (!iconName) return null;
                                     
                                     if (iconProvider === 'lucide') {
-                                      const LucideIcon = (LucideIcons as any)[iconName];
-                                      if (LucideIcon) return <LucideIcon size={size} className="text-red-600 dark:text-red-400" />;
+                                      return <Icon name={iconName} provider="lu" size={size} className="text-red-600 dark:text-red-400" />;
                                     } else if (iconProvider === 'simple-icons') {
-                                      const SimpleIcon = (SimpleIcons as any)[iconName];
-                                      if (SimpleIcon) return <SimpleIcon size={size} className="text-red-600 dark:text-red-400" />;
+                                      return <Icon name={iconName} provider="si" size={size} className="text-red-600 dark:text-red-400" />;
                                     }
                                     
                                     return null;

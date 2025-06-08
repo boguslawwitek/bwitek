@@ -1,0 +1,29 @@
+# WARNING: I am including the .env.production file in this Docker image ONLY because I am using a private Docker registry.
+# Do NOT use this approach for public registries or production environments, as it may expose sensitive information.
+
+version: '3.8'
+services:
+  bwitek-dev:
+    image: gitea.bwitek.dev/bwitek/bwitek
+    # mem_limit: 2g
+    # memswap_limit: 8g
+    # cpus: 1.0
+    container_name: bwitek-dev
+    ports:
+      - "7770:7770"
+      - "7771:7771"
+    volumes:
+      - /home/she1lob/dockers/bwitek/uploads:/bwitek/apps/server/uploads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "https://www.bwitek.dev"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - mariadb_mariadb_network
+
+networks:
+  mariadb_mariadb_network:
+    external: true

@@ -11,6 +11,8 @@
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
+    "build:server": "turbo build -F server",
+    "build:web": "turbo build -F web",
     "check-types": "turbo check-types",
     "dev:native": "turbo -F native dev",
     "dev:web": "turbo -F web dev",
@@ -23,9 +25,5 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "dependencies": {
-    "@emnapi/core": "^1.4.3",
-    "@tybys/wasm-util": "^0.9.0"
-  }
+  ]
 }

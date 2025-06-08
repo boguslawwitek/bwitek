@@ -12,6 +12,13 @@ if (process.env.NODE_ENV === 'production') {
   await import('dotenv/config');
 }
 
+const args = process.argv.slice(2);
+const portIndex = args.indexOf('--port');
+const cliPort = portIndex !== -1 ? parseInt(args[portIndex + 1]) : null;
+const serverPort = cliPort || process.env.SERVER_PORT || 3000;
+
+console.log('\x1b[32m%s\x1b[0m', `🚀 Server running at ${process.env.BETTER_AUTH_URL || `http://localhost${serverPort}`}`);
+
 import { trpcServer } from "@hono/trpc-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -128,6 +135,6 @@ app.get("/rss.xml", async (c) => {
 });
 
 export default { 
-  port: process.env.SERVER_PORT || 3000,
+  port: serverPort,
   fetch: app.fetch, 
 }

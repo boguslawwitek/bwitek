@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { AlertTriangle } from "lucide-react";
+import { Icon } from '@/components/icon';
 
 interface DeleteConfirmationModalProps {
   isOpen: boolean;
@@ -38,7 +38,7 @@ export default function DeleteConfirmationModal({
       >
         <div className="flex items-center gap-3 mb-4">
           <div className="flex-shrink-0">
-            <AlertTriangle className="w-6 h-6 text-red-500" />
+            <Icon name="AlertTriangle" provider="lu" className="w-6 h-6 text-red-500" />
           </div>
           <div>
             <h2 className="text-lg font-semibold">{title}</h2>

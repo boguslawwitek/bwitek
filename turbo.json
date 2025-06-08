@@ -8,10 +8,12 @@
 			"outputs": [".next/**", "!.next/cache/**", "dist/**"]
 		},
 		"web#build": {
-			"outputs": [".next/**", "!.next/cache/**"]
+			"outputs": [".next/**", "!.next/cache/**"],
+			"cache": false
 		},
 		"server#build": {
-			"outputs": ["dist/**"]
+			"outputs": ["dist/**"],
+			"cache": false
 		},
 		"lint": {
 			"dependsOn": ["^lint"]

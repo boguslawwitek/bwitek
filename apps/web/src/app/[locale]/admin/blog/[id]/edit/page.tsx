@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Save, ChevronDown, ChevronUp } from "lucide-react";
+import { Icon } from '@/components/icon';
 import Link from "next/link";
 import { toast } from "sonner";
 import { trpc } from "@/utils/trpc";
@@ -180,7 +180,7 @@ export default function EditBlogPostPage() {
         <h2 className="text-2xl font-bold">{t("admin.blog.postNotFound")}</h2>
         <Link href="/admin/blog">
           <Button className="mt-4">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <Icon name="ArrowLeft" provider="lu" className="w-4 h-4 mr-2" />
             {t("common.back")}
           </Button>
         </Link>
@@ -193,7 +193,7 @@ export default function EditBlogPostPage() {
       <div className="flex items-center gap-4">
         <Link href="/admin/blog">
           <Button variant="outline" size="sm">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <Icon name="ArrowLeft" provider="lu" className="w-4 h-4 mr-2" />
             {t("common.back")}
           </Button>
         </Link>
@@ -300,9 +300,9 @@ export default function EditBlogPostPage() {
               >
                 <CardTitle>{t("admin.metaTags.title")}</CardTitle>
                 {isMetaExpanded ? (
-                  <ChevronUp className="h-5 w-5 text-muted-foreground" />
+                  <Icon name="ChevronUp" provider="lu" className="h-5 w-5 text-muted-foreground" />
                 ) : (
-                  <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                  <Icon name="ChevronDown" provider="lu" className="h-5 w-5 text-muted-foreground" />
                 )}
               </div>
             </CardHeader>
@@ -453,7 +453,7 @@ export default function EditBlogPostPage() {
                 className="w-full" 
                 disabled={isPending}
               >
-                <Save className="w-4 h-4 mr-2" />
+                <Icon name="Save" provider="lu" className="w-4 h-4 mr-2" />
                 {t("admin.blog.updatePost")}
               </Button>
               

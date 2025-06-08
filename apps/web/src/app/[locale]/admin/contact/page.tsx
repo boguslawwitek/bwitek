@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
 import { DataTable, type Column } from "@/components/admin/data-table";
 import { ContactForm } from "@/components/admin/contact-form";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { Icon } from '@/components/icon';
 import FileUpload from "@/components/admin/file-upload";
 
 type TranslatedField = {
@@ -256,9 +256,9 @@ export default function AdminPanelContact() {
               <p className="text-sm text-muted-foreground mt-1">{t("admin.metaTags.contactPageDescription")}</p>
             </div>
             {isMetaExpanded ? (
-              <ChevronUp className="h-4 w-4" />
+              <Icon name="ChevronUp" provider="lu" className="h-4 w-4" />
             ) : (
-              <ChevronDown className="h-4 w-4" />
+              <Icon name="ChevronDown" provider="lu" className="h-4 w-4" />
             )}
           </div>
         </div>

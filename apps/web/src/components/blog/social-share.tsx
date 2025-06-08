@@ -5,12 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { toast } from 'sonner';
-import { Share2, Copy, Linkedin, Mail } from 'lucide-react';
-import { 
-  SiFacebook, 
-  SiX, 
-  SiWhatsapp,
-} from '@icons-pack/react-simple-icons';
+import { Icon } from '@/components/icon';
 
 interface SocialShareProps {
   url: string;
@@ -109,7 +104,7 @@ export default function SocialShare({ url, title, description }: SocialShareProp
         onClick={handleNativeShare}
         className="flex items-center gap-2 w-50"
       >
-        <Share2 className="h-4 w-4" />
+        <Icon name="Share2" provider="lu" className="h-4 w-4" />
         {t('title')}
       </Button>
 
@@ -123,7 +118,7 @@ export default function SocialShare({ url, title, description }: SocialShareProp
                 onClick={shareOnFacebook}
                 className="w-full justify-start gap-3 h-10 hover:bg-blue-50 dark:hover:bg-blue-950/20"
               >
-                <SiFacebook className="h-4 w-4 text-[#1877F2]" />
+                <Icon name="Facebook" provider="si" className="h-4 w-4 text-[#1877F2]" />
                 <span className="text-sm">Facebook</span>
               </Button>
               
@@ -133,7 +128,7 @@ export default function SocialShare({ url, title, description }: SocialShareProp
                 onClick={shareOnTwitter}
                 className="w-full justify-start gap-3 h-10 hover:bg-gray-50 dark:hover:bg-gray-800"
               >
-                <SiX className="h-4 w-4 text-foreground" />
+                <Icon name="X" provider="si" className="h-4 w-4 text-foreground" />
                 <span className="text-sm">X (Twitter)</span>
               </Button>
               
@@ -143,7 +138,7 @@ export default function SocialShare({ url, title, description }: SocialShareProp
                 onClick={shareOnLinkedIn}
                 className="w-full justify-start gap-3 h-10 hover:bg-blue-50 dark:hover:bg-blue-950/20"
               >
-                <Linkedin className="h-4 w-4 text-[#0A66C2]" />
+                <Icon name="Linkedin" provider="si" className="h-4 w-4 text-[#0A66C2]" />
                 <span className="text-sm">LinkedIn</span>
               </Button>
               
@@ -153,7 +148,7 @@ export default function SocialShare({ url, title, description }: SocialShareProp
                 onClick={shareOnWhatsApp}
                 className="w-full justify-start gap-3 h-10 hover:bg-green-50 dark:hover:bg-green-950/20"
               >
-                <SiWhatsapp className="h-4 w-4 text-[#25D366]" />
+                <Icon name="Whatsapp" provider="si" className="h-4 w-4 text-[#25D366]" />
                 <span className="text-sm">WhatsApp</span>
               </Button>
               
@@ -163,7 +158,7 @@ export default function SocialShare({ url, title, description }: SocialShareProp
                 onClick={shareViaEmail}
                 className="w-full justify-start gap-3 h-10 hover:bg-red-50 dark:hover:bg-red-950/20"
               >
-                <Mail className="h-4 w-4" />
+                <Icon name="Mail" provider="lu" className="h-4 w-4" />
                 <span className="text-sm">E-mail</span>
               </Button>
               
@@ -172,9 +167,9 @@ export default function SocialShare({ url, title, description }: SocialShareProp
                   variant="ghost"
                   size="sm"
                   onClick={copyToClipboard}
-                  className="w-full justify-start gap-3 h-10 hover:bg-muted"
+                  className="w-full justify-start gap-3 h-10 hover:bg-rose-50 dark:hover:bg-rose-950/20"
                 >
-                  <Copy className="h-4 w-4 text-muted-foreground" />
+                  <Icon name="Copy" provider="lu" className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm">{t('copyLink')}</span>
                 </Button>
               </div>

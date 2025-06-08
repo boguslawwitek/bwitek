@@ -9,8 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { TurnstileWrapper, type TurnstileRef } from "@/components/turnstile";
-import * as LucideIcons from 'lucide-react';
-import * as SimpleIcons from '@icons-pack/react-simple-icons';
+import { Icon } from '@/components/icon';
 import { useState, useRef } from "react";
 import { toast } from "sonner";
 
@@ -132,24 +131,22 @@ export default function ContactClientWrapper({ locale }: Props) {
                   <div className="space-y-2">
                     {activeContacts.map((contact) => {
                       const getIcon = (iconName: string | null | undefined, iconProvider: string | null | undefined, size = 22) => {
-                        if (!iconName) return <LucideIcons.AtSign size={size} className="text-red-600 dark:text-red-400" />;
+                        if (!iconName) return <Icon name="AtSign" provider="lu" className="text-rose-600 dark:text-rose-400" />;
                         
                         if (iconProvider === 'lucide') {
-                          const LucideIcon = (LucideIcons as any)[iconName];
-                          if (LucideIcon) return <LucideIcon size={size} className="text-red-600 dark:text-red-400" />;
+                          return <Icon name={iconName} provider="lu" className="text-rose-600 dark:text-rose-400" />;
                         } else if (iconProvider === 'simple-icons') {
-                          const SimpleIcon = (SimpleIcons as any)[iconName];
-                          if (SimpleIcon) return <SimpleIcon size={size} className="text-red-600 dark:text-red-400" />;
+                          return <Icon name={iconName} provider="si" className="text-rose-600 dark:text-rose-400" />;
                         }
                         
-                        return <LucideIcons.AtSign size={size} className="text-red-600 dark:text-red-400" />;
+                        return <Icon name="AtSign" provider="lu" className="text-rose-600 dark:text-rose-400" />;
                       };
                       
                       const contactIcon = getIcon(contact.iconName, contact.iconProvider);
                       
                       return (
                         <div key={contact.id} className="flex items-center justify-start gap-3">
-                          <div className="mt-1 p-2 bg-red-50 dark:bg-red-900/20 rounded-full">
+                          <div className="mt-1 p-2 bg-rose-50 dark:bg-rose-900/20 rounded-full">
                             {contactIcon}
                           </div>
                           <div>
@@ -159,7 +156,7 @@ export default function ContactClientWrapper({ locale }: Props) {
                                   href={contact.url} 
                                   target={contact.newTab ? "_blank" : undefined} 
                                   rel={contact.external ? "noopener noreferrer" : undefined} 
-                                  className="hover:text-red-600 dark:hover:text-red-400 hover:underline cursor-pointer"
+                                  className="hover:text-rose-600 dark:hover:text-rose-400 hover:underline cursor-pointer"
                                 >
                                   {contact.name?.[locale as 'pl' | 'en']}
                                 </a>
@@ -190,10 +187,10 @@ export default function ContactClientWrapper({ locale }: Props) {
                         placeholder={t('contact.form.name')}
                         value={formData.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
-                        className={errors.name ? 'border-red-500' : ''}
+                        className={errors.name ? 'border-rose-500' : ''}
                       />
                       {errors.name && (
-                        <p className="text-sm text-red-500">{errors.name}</p>
+                        <p className="text-sm text-rose-500">{errors.name}</p>
                       )}
                     </div>
                     
@@ -205,10 +202,10 @@ export default function ContactClientWrapper({ locale }: Props) {
                         placeholder={t('contact.form.email')}
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
-                        className={errors.email ? 'border-red-500' : ''}
+                        className={errors.email ? 'border-rose-500' : ''}
                       />
                       {errors.email && (
-                        <p className="text-sm text-red-500">{errors.email}</p>
+                        <p className="text-sm text-rose-500">{errors.email}</p>
                       )}
                     </div>
                     
@@ -217,12 +214,12 @@ export default function ContactClientWrapper({ locale }: Props) {
                       <Textarea
                         id="message"
                         placeholder={t('contact.form.message')}
-                        className={`min-h-[120px] ${errors.message ? 'border-red-500' : ''}`}
+                        className={`min-h-[120px] ${errors.message ? 'border-rose-500' : ''}`}
                         value={formData.message}
                         onChange={(e) => handleInputChange('message', e.target.value)}
                       />
                       {errors.message && (
-                        <p className="text-sm text-red-500">{errors.message}</p>
+                        <p className="text-sm text-rose-500">{errors.message}</p>
                       )}
                     </div>
                     
@@ -234,13 +231,13 @@ export default function ContactClientWrapper({ locale }: Props) {
                         onExpire={handleTurnstileError}
                       />
                       {errors.turnstileToken && (
-                        <p className="text-sm text-red-500">{errors.turnstileToken}</p>
+                        <p className="text-sm text-rose-500">{errors.turnstileToken}</p>
                       )}
                     </div>
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white"
+                      className="w-full bg-rose-600 hover:bg-rose-700 text-white"
                       disabled={sendEmailMutation.isPending}
                     >
                       {sendEmailMutation.isPending ? t('common.saving') : t('contact.form.send')}

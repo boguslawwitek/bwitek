@@ -21,7 +21,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useTranslations } from "next-intl";
 import { useState, useEffect, useMemo } from "react";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { Icon } from '@/components/icon';
 
 export type Column = {
   key: string;
@@ -313,7 +313,7 @@ export const DataTable = ({
                                 onClick={() => onChangeOrder(item[idField], "up")}
                                 disabled={item.order === 1}
                               >
-                                <ArrowUp />
+                                <Icon name="ArrowUp" provider="lu" />
                               </Button>
                               <Button
                                 variant="outline"
@@ -321,7 +321,7 @@ export const DataTable = ({
                                 onClick={() => onChangeOrder(item[idField], "down")}
                                 disabled={item.order === Math.max(...data.map(i => i.order))}
                               >
-                                <ArrowDown />
+                                <Icon name="ArrowDown" provider="lu" />
                               </Button>
                             </>
                           )}

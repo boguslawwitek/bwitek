@@ -6,8 +6,7 @@ import MainLayout from "@/components/main-layout";
 import ReactMarkdown from "react-markdown";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
-import { SiGithub, SiGitea } from '@icons-pack/react-simple-icons';
+import { Icon } from '@/components/icon';
 import { useEffect } from "react";
 
 interface Props {
@@ -217,10 +216,10 @@ export default function ProjectsClientWrapper({ locale }: Props) {
                     <Button 
                       variant="outline" 
                       size="lg" 
-                      className="bg-gray-100 dark:bg-gray-800 font-mono text-md hover:bg-red-50 dark:hover:bg-red-900/20"
+                      className="bg-gray-100 dark:bg-gray-800 font-mono text-md hover:bg-rose-50 dark:hover:bg-rose-900/20"
                       onClick={() => project.repoUrl && window.open(project.repoUrl, '_blank', 'noopener,noreferrer')}
                     >
-                      <SiGithub className="w-3.5 h-3.5 mr-1.5 text-red-600 dark:text-red-400" />
+                      <Icon name="github" provider="si" className="text-rose-600 dark:text-rose-400" />
                       {t('projects.github')}
                     </Button>
                   )}
@@ -228,10 +227,10 @@ export default function ProjectsClientWrapper({ locale }: Props) {
                     <Button 
                       variant="outline" 
                       size="lg" 
-                      className="bg-gray-100 dark:bg-gray-800 font-mono text-md hover:bg-red-50 dark:hover:bg-red-900/20"
+                      className="bg-gray-100 dark:bg-gray-800 font-mono text-md hover:bg-rose-50 dark:hover:bg-rose-900/20"
                       onClick={() => project.repoUrl2 && window.open(project.repoUrl2, '_blank', 'noopener,noreferrer')}
                     >
-                      <SiGitea className="w-3.5 h-3.5 mr-1.5 text-red-600 dark:text-red-400" />
+                      <Icon name="gitea" provider="si" className="text-rose-600 dark:text-rose-400" />
                       {t('projects.gitea')}
                     </Button>
                   )}
@@ -239,10 +238,10 @@ export default function ProjectsClientWrapper({ locale }: Props) {
                     <Button 
                       variant="outline" 
                       size="lg" 
-                      className="bg-gray-100 dark:bg-gray-800 font-mono text-md hover:bg-red-50 dark:hover:bg-red-900/20"
+                      className="bg-gray-100 dark:bg-gray-800 font-mono text-md hover:bg-rose-50 dark:hover:bg-rose-900/20"
                       onClick={() => project.url && window.open(project.url, '_blank', 'noopener,noreferrer')}
                     >
-                      <ExternalLink className="w-3.5 h-3.5 mr-1.5 text-red-600 dark:text-red-400" />
+                      <Icon name="ExternalLink" provider="lu" className="text-rose-600 dark:text-rose-400" />
                       {t('projects.demo')}
                     </Button>
                   )}

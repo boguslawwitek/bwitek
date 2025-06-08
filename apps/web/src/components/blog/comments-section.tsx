@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { trpc } from "@/utils/trpc";
 import { useTranslations } from "next-intl";
-import { MessageCircle } from "lucide-react";
+import { Icon } from '@/components/icon';
 import { toast } from "sonner";
 import CommentForm from "./comment-form";
 import CommentItem from "./comment-item";
@@ -22,7 +22,7 @@ export default function CommentsSection({ postId }: CommentsSectionProps) {
     return (
       <div className="mt-12">
         <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100 flex items-center gap-2">
-          <MessageCircle size={24} className="text-red-600 dark:text-red-400" />
+          <Icon name="MessageCircle" provider="lu" className="text-red-600 dark:text-red-400" />
           {t('comments.title')}
         </h2>
         <div className="text-center py-8 text-gray-500 dark:text-gray-400">
@@ -131,7 +131,7 @@ export default function CommentsSection({ postId }: CommentsSectionProps) {
   return (
     <div className="mt-8">
       <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100 flex items-center gap-2">
-        <MessageCircle size={20} className="text-red-600 dark:text-red-400" />
+        <Icon name="MessageCircle" provider="lu" className="text-red-600 dark:text-red-400" />
         {t('comments.title')} ({comments.length})
       </h2>
       
@@ -160,7 +160,7 @@ export default function CommentsSection({ postId }: CommentsSectionProps) {
         </div>
       ) : (
         <div className="text-center py-6 text-gray-500 dark:text-gray-400">
-          <MessageCircle size={40} className="mx-auto mb-3 opacity-50" />
+          <Icon name="MessageCircle" provider="lu" className="mx-auto mb-3 opacity-50" />
           <p className="text-sm">{t('comments.noComments')}</p>
         </div>
       )}

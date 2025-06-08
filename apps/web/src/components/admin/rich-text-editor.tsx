@@ -7,24 +7,7 @@ import Youtube from '@tiptap/extension-youtube'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import { createLowlight, common } from 'lowlight'
 import { Button } from "@/components/ui/button"
-import { 
-  Bold, 
-  Italic, 
-  Strikethrough, 
-  Code, 
-  Heading1, 
-  Heading2, 
-  Heading3,
-  List, 
-  ListOrdered, 
-  Quote, 
-  Undo, 
-  Redo,
-  Link as LinkIcon,
-  ImageIcon,
-  Youtube as YoutubeIcon,
-  Code2 as CodeBlockIcon
-} from "lucide-react"
+import { Icon } from '@/components/icon'
 import { useCallback, useEffect, useState } from "react"
 import FileUpload from "./file-upload"
 import { useMutation } from "@tanstack/react-query"
@@ -320,7 +303,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('bold')}
           title={t('richEditor.toolbar.bold')}
         >
-          <Bold className="h-4 w-4" />
+          <Icon name="Bold" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
         
         <ToolbarButton
@@ -328,7 +311,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('italic')}
           title={t('richEditor.toolbar.italic')}
         >
-          <Italic className="h-4 w-4" />
+          <Icon name="Italic" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
         
         <ToolbarButton
@@ -336,7 +319,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('strike')}
           title={t('richEditor.toolbar.strikethrough')}
         >
-          <Strikethrough className="h-4 w-4" />
+          <Icon name="Strikethrough" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
         
         <ToolbarButton
@@ -344,7 +327,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('code')}
           title={t('richEditor.toolbar.code')}
         >
-          <Code className="h-4 w-4" />
+          <Icon name="Code" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <div className="w-px bg-border mx-1" />
@@ -354,7 +337,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('heading', { level: 1 })}
           title={t('richEditor.toolbar.heading1')}
         >
-          <Heading1 className="h-4 w-4" />
+          <Icon name="Heading1" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
         
         <ToolbarButton
@@ -362,7 +345,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('heading', { level: 2 })}
           title={t('richEditor.toolbar.heading2')}
         >
-          <Heading2 className="h-4 w-4" />
+          <Icon name="Heading2" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
         
         <ToolbarButton
@@ -370,7 +353,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('heading', { level: 3 })}
           title={t('richEditor.toolbar.heading3')}
         >
-          <Heading3 className="h-4 w-4" />
+          <Icon name="Heading3" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <div className="w-px bg-border mx-1" />
@@ -380,7 +363,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('bulletList')}
           title={t('richEditor.toolbar.bulletList')}
         >
-          <List className="h-4 w-4" />
+          <Icon name="List" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
         
         <ToolbarButton
@@ -388,7 +371,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('orderedList')}
           title={t('richEditor.toolbar.orderedList')}
         >
-          <ListOrdered className="h-4 w-4" />
+          <Icon name="ListOrdered" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <ToolbarButton
@@ -396,7 +379,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('blockquote')}
           title={t('richEditor.toolbar.quote')}
         >
-          <Quote className="h-4 w-4" />
+          <Icon name="Quote" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <div className="w-px bg-border mx-1" />
@@ -406,21 +389,21 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           isActive={editor.isActive('link')}
           title={t('richEditor.toolbar.addLink')}
         >
-          <LinkIcon className="h-4 w-4" />
+          <Icon name="Link" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <ToolbarButton
           onClick={addImage}
           title={t('richEditor.toolbar.addImage')}
         >
-          <ImageIcon className="h-4 w-4" />
+          <Icon name="Image" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <ToolbarButton
           onClick={addYouTube}
           title={t('richEditor.toolbar.addYoutube')}
         >
-          <YoutubeIcon className="h-4 w-4" />
+          <Icon name="Youtube" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <div className="w-px bg-border mx-1" />
@@ -429,21 +412,21 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           onClick={addCodeBlock}
           title={t('richEditor.toolbar.addCodeBlock')}
         >
-          <CodeBlockIcon className="h-4 w-4" />
+          <Icon name="CodeBlock" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <ToolbarButton
           onClick={() => editor.chain().focus().undo().run()}
           title={t('richEditor.toolbar.undo')}
         >
-          <Undo className="h-4 w-4" />
+          <Icon name="Undo" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
         
         <ToolbarButton
           onClick={() => editor.chain().focus().redo().run()}
           title={t('richEditor.toolbar.redo')}
         >
-          <Redo className="h-4 w-4" />
+          <Icon name="Redo" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
       </div>
 

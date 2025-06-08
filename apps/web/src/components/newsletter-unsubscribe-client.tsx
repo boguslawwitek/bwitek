@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import { Icon } from '@/components/icon';
 import { trpc } from '@/utils/trpc';
 import { toast } from 'sonner';
 
@@ -83,7 +83,7 @@ export default function NewsletterUnsubscribeClient() {
             <img src="/apple-icon.png" alt="BWitek.dev" className="w-12 h-12 mx-auto" />
           </div>
           <CardTitle className="flex items-center justify-center gap-2">
-            <CheckCircle className="h-5 w-5 text-green-500" />
+            <Icon name="CheckCircle" provider="lu" className="h-5 w-5 text-green-500" />
             {t('successTitle')}
           </CardTitle>
         </CardHeader>
@@ -199,7 +199,7 @@ export default function NewsletterUnsubscribeClient() {
             >
               {unsubscribeMutation.isPending ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Icon name="Loader" provider="lu" className="mr-2 h-4 w-4 animate-spin" />
                   {t('unsubscribing')}
                 </>
               ) : (

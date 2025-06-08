@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { trpc } from '@/utils/trpc';
-import { MoveLeft, MoveRight } from 'lucide-react';
+import { Icon } from '@/components/icon';
 import {useTranslations, useLocale} from 'next-intl';
 import {Link, useRouter, usePathname} from '@/i18n/navigation';
 
@@ -44,10 +44,10 @@ export default function NavigationBar() {
   }, [activeItems, currentIndex, router]);
 
   return (
-    <nav className="bg-gray-100 dark:bg-gray-900 py-3 w-full select-none border-b border-gray-200 dark:border-gray-800">
+    <nav className="bg-gray-50/80 dark:bg-gray-900/50 backdrop-blur-sm py-3 w-full select-none border-b border-gray-200 dark:border-gray-800">
       <div className="max-w-screen-lg mx-auto px-2 md:px-24">
         {isLoading ? (
-          <div className="text-sm text-gray-600 dark:text-gray-400">{t('common.loading')}</div>
+          <div className="text-sm text-gray-700 dark:text-gray-200">{t('common.loading')}</div>
         ) : (
           <div className="flex flex-col items-center justify-center">
             <ul className="flex flex-wrap gap-4 md:gap-0 md:space-x-8 items-center justify-center px-2">
@@ -55,18 +55,19 @@ export default function NavigationBar() {
                 const isCurrent = item.url === currentPath;
                 const linkClasses = `py-2 px-3 font-medium transition-colors ${
                   isCurrent 
-                    ? 'text-red-600 dark:text-red-400 border-b-2 border-red-500 dark:border-red-400' 
-                    : 'text-gray-800 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400'
-                } focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50`;
+                    ? 'text-rose-700 dark:text-rose-300 border-b-2 border-rose-600 dark:border-rose-300' 
+                    : 'text-gray-900 dark:text-gray-100 hover:text-rose-700 dark:hover:text-rose-300'
+                } focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-opacity-50`;
                 
                 return (
                   <li key={item.id}>
                     {item.external ? (
                       <a
                         href={item.url || '#'}
-                        className={`relative px-2 md:px-3 py-1 rounded-md text-sm font-medium transition-colors ${item.url === currentPath ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400'} focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50`}
-                        tabIndex={index}
+                        className={`relative px-2 md:px-3 py-1 rounded-md text-sm font-medium transition-colors ${item.url === currentPath ? 'text-rose-700 dark:text-rose-300' : 'text-gray-900 dark:text-gray-100 hover:text-rose-700 dark:hover:text-rose-300'} focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-opacity-50`}
                         rel="noopener noreferrer"
+                        target="_blank"
+                        aria-label={`${item.label[locale]} ${t('common.opensInNewTab')}`}
                       >
                         {item.label[locale]}
                       </a>
@@ -74,7 +75,7 @@ export default function NavigationBar() {
                       <Link
                         href={item.url || '#'}
                         className={linkClasses}
-                        tabIndex={index}
+                        aria-current={isCurrent ? 'page' : undefined}
                       >
                         {item.label[locale]}
                       </Link>
@@ -83,8 +84,8 @@ export default function NavigationBar() {
                 );
               })}
             </ul>
-            <div className="hidden md:flex text-xs text-gray-500 dark:text-gray-400 mt-4 text-center items-center justify-center">
-              <MoveLeft className="inline mr-1" />{t('navigation.keyboardHint')}<MoveRight className="inline ml-1" />
+            <div className="hidden md:flex text-sm text-gray-900 dark:text-gray-100 mt-4 text-center items-center justify-center">
+              <Icon name="MoveLeft" provider="lu" className="inline mr-1" />{t('navigation.keyboardHint')}<Icon name="MoveRight" provider="lu" className="inline ml-1" />
             </div>
           </div>
         )}

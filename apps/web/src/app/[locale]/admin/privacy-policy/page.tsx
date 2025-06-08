@@ -10,7 +10,7 @@ import {useTranslations} from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { Icon } from '@/components/icon';
 import FileUpload from "@/components/admin/file-upload";
 import RichTextEditor from "@/components/admin/rich-text-editor";
 
@@ -173,9 +173,9 @@ export default function AdminPanelPrivacyPolicy() {
                 <p className="text-sm text-muted-foreground mt-1">SEO settings for privacy policy page</p>
               </div>
               {isMetaExpanded ? (
-                <ChevronUp className="h-4 w-4" />
+                <Icon name="ChevronUp" provider="lu" className="h-4 w-4" />
               ) : (
-                <ChevronDown className="h-4 w-4" />
+                <Icon name="ChevronDown" provider="lu" className="h-4 w-4" />
               )}
             </div>
           </div>

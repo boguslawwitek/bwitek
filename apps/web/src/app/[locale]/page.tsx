@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import MainLayout from "@/components/main-layout";
-import { unstable_noStore as noStore } from 'next/cache';
+import HomeContent from "@/components/home-content";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -10,15 +10,15 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   
-  noStore();
-  
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/trpc/content.getHomepage`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'no-store',
+      next: {
+        revalidate: 300
+      }
     });
     
     if (response.ok) {
@@ -57,8 +57,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   
-  noStore();
-  
   let data;
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/trpc/content.getHomepage`, {
@@ -66,7 +64,9 @@ export default async function HomePage({ params }: Props) {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'no-store',
+      next: {
+        revalidate: 300
+      }
     });
     
     if (response.ok) {
@@ -79,22 +79,11 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <MainLayout>
-      <div className="max-w-screen-lg mx-auto px-6 md:px-24 py-12">
-        <section className="mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-            {data?.welcomeText?.[locale as 'pl' | 'en']}
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            {data?.specializationText?.[locale as 'pl' | 'en']}
-          </p>
-        </section>
-
-        <section className="mb-16">
-          <div className="prose dark:prose-invert max-w-none">
-            {data?.aboutMeText?.[locale as 'pl' | 'en']}
-          </div>
-        </section>
-      </div>
+      <HomeContent 
+        welcomeText={data?.welcomeText?.[locale as 'pl' | 'en'] || ''}
+        specializationText={data?.specializationText?.[locale as 'pl' | 'en'] || ''}
+        aboutMeText={data?.aboutMeText?.[locale as 'pl' | 'en'] || ''}
+      />
     </MainLayout>
   );
 }

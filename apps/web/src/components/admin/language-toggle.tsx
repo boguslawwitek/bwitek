@@ -5,7 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Languages } from 'lucide-react';
+import { Icon } from '@/components/icon';
 import {useTranslations, useLocale} from 'next-intl';
 import {useRouter, usePathname} from '@/i18n/navigation';
 import {useParams} from 'next/navigation';
@@ -26,7 +26,7 @@ export function LanguageToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="flex gap-2 w-auto px-2">
-          <Languages className="h-[1.2rem] w-[1.2rem]" />
+          <Icon name="Languages" provider="lu" className="h-[1.2rem] w-[1.2rem]" />
           <span className="hidden sm:inline-block">{LANGUAGES[locale as keyof typeof LANGUAGES]}</span>
         </Button>
       </DropdownMenuTrigger>

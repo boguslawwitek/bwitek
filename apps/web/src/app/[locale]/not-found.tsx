@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Home } from "lucide-react";
+import { Icon } from '@/components/icon';
 import { Link } from '@/i18n/navigation';
 import MainLayout from "@/components/main-layout";
 
@@ -26,13 +26,13 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/blog">
               <Button variant="default" className="flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" />
+                <Icon name="ArrowLeft" provider="lu" className="w-4 h-4" />
                 {t('blog.backToBlog')}
               </Button>
             </Link>
             <Link href="/">
               <Button variant="outline" className="flex items-center gap-2">
-                <Home className="w-4 h-4" />
+                <Icon name="Home" provider="lu" className="w-4 h-4" />
                 {t('notFound.homepage')}
               </Button>
             </Link>

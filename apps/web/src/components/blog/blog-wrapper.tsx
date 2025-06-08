@@ -6,10 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Calendar, Eye, Search, Tag, ArrowRight, Rss } from "lucide-react";
+import { Icon } from '@/components/icon';
 import { Link } from '@/i18n/navigation';
-import * as LucideIcons from 'lucide-react';
-import * as SimpleIcons from '@icons-pack/react-simple-icons';
 import NewsletterSignup from '@/components/newsletter-signup';
 
 interface Translation {
@@ -65,11 +63,9 @@ const getIcon = (iconName: string | null | undefined, iconProvider: string | nul
   if (!iconName) return null;
   
   if (iconProvider === 'lucide') {
-    const LucideIcon = (LucideIcons as any)[iconName];
-    if (LucideIcon) return <LucideIcon size={size} className="text-current" />;
+    return <Icon name={iconName} provider="lu" className="text-current" />;
   } else if (iconProvider === 'simple-icons') {
-    const SimpleIcon = (SimpleIcons as any)[iconName];
-    if (SimpleIcon) return <SimpleIcon size={size} className="text-current" />;
+    return <Icon name={iconName} provider="si" className="text-current" />;
   }
   
   return null;
@@ -144,7 +140,7 @@ export default function BlogPageClient({
                 title={locale === 'pl' ? 'RSS Feed Bloga' : 'Blog RSS Feed'}
                 className="flex items-center gap-2"
               >
-                <Rss className="h-4 w-4" />
+                <Icon name="Rss" provider="lu" className="h-4 w-4" />
                 {t('blog.rssFeed')}
               </a>
             </Button>
@@ -155,7 +151,7 @@ export default function BlogPageClient({
       <section className="mb-8">
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Icon name="Search" provider="lu" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
             <Input
               placeholder={t('blog.searchPlaceholder')}
               value={searchTerm}
@@ -245,17 +241,17 @@ export default function BlogPageClient({
                   <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
+                        <Icon name="Calendar" provider="lu" className="h-4 w-4" />
                         {formatDate(post.publishedAt)}
                       </div>
                       <div className="flex items-center gap-1">
-                        <Eye className="h-4 w-4" />
+                        <Icon name="Eye" provider="lu" className="h-4 w-4" />
                         {post.viewCount}
                       </div>
                     </div>
                     <Link href={`/blog/${post.slug}`}>
                       <Button variant="ghost" size="sm" className="p-0 h-auto">
-                        <ArrowRight className="h-4 w-4" />
+                        <Icon name="ArrowRight" provider="lu" className="h-4 w-4" />
                       </Button>
                     </Link>
                   </div>

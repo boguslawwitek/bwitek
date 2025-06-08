@@ -1,0 +1,64 @@
+# WARNING: I am including the .env.production file in this Docker image ONLY because I am using a private Docker registry.
+# Do NOT use this approach for public registries or production environments, as it may expose sensitive information.
+
+# Dependencies
+node_modules/
+apps/server/node_modules
+apps/web/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun-debug.log*
+
+# Dev env
+.env
+apps/web/.env
+apps/server/.env
+
+# Build outputs
+apps/server/dist/
+apps/web/.next/
+
+# Runtime and cache
+.cache/
+.tmp/
+tmp/
+
+# Development tools
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+compose*.yml
+
+# Logs
+logs/
+*.log
+
+# Uploads (will be handled via volumes in production)
+apps/server/uploads/
+
+# Misc
+.turbo/
+.vercel/
+.next/

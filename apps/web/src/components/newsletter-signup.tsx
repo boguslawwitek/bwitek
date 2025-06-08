@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { trpc } from "@/utils/trpc";
 import { toast } from "sonner";
-import { Mail, Loader2 } from "lucide-react";
+import { Icon } from '@/components/icon';
 
 interface NewsletterSignupProps {
   source?: 'blog' | 'article' | 'manual';
@@ -104,7 +104,7 @@ export default function NewsletterSignup({
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Icon name="Loader" provider="lu" className="animate-spin" />
                 {t('newsletter.subscribing')}
               </>
             ) : (
@@ -137,7 +137,7 @@ export default function NewsletterSignup({
     return (
       <div className="bg-muted/50 p-4 rounded-lg border">
         <div className="flex items-center gap-2 mb-3">
-          <Mail className="h-4 w-4 text-primary" />
+          <Icon name="Mail" provider="lu" className="text-primary" />
           <span className="font-medium text-sm">
             {t('newsletter.title')}
           </span>
@@ -187,7 +187,7 @@ export default function NewsletterSignup({
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-2 h-3 w-3 animate-spin" />
+                <Icon name="Loader" provider="lu" className="animate-spin" />
                 {t('newsletter.subscribing')}
               </>
             ) : (
@@ -203,7 +203,7 @@ export default function NewsletterSignup({
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
         <div className="flex items-center gap-2">
-          <Mail className="h-5 w-5 text-primary" />
+          <Icon name="Mail" provider="lu" size={24} className="text-primary" />
           <CardTitle className="text-lg">
             {t('newsletter.title')}
           </CardTitle>
@@ -270,7 +270,7 @@ export default function NewsletterSignup({
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Icon name="Loader" provider="lu" className="animate-spin" />
                 {t('newsletter.subscribing')}
               </>
             ) : (

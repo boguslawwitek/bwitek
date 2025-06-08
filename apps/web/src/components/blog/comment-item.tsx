@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Reply, User, Globe, Calendar } from "lucide-react";
+import { Icon } from '@/components/icon';
 import CommentForm from "./comment-form";
 import type { Comment, CommentFormData } from "./types";
 
@@ -46,16 +46,16 @@ export default function CommentItem({
   return (
     <div className={`${isReply ? 'ml-6 mt-3' : 'mb-6'}`}>
       <Card className={`${isReply 
-        ? 'border border-red-200 dark:border-red-700 py-0' 
+        ? 'border border-rose-200 dark:border-rose-700 py-0' 
         : 'border border-gray-200 dark:border-gray-700 py-0'
       }`}>
         <CardContent className={`${isReply ? 'p-3' : 'p-4'}`}>
           <div className="flex gap-2">
             <div className={`w-8 h-8 ${isReply 
-              ? 'bg-red-50 dark:bg-red-900/10' 
-              : 'bg-red-100 dark:bg-red-900/20'
+              ? 'bg-rose-50 dark:bg-rose-900/10' 
+              : 'bg-rose-100 dark:bg-rose-900/20'
             } rounded-full flex items-center justify-center flex-shrink-0 mt-1`}>
-              <User size={16} className="text-red-600 dark:text-red-400" />
+              <Icon name="User" provider="lu" className="text-rose-600 dark:text-rose-400" />
             </div>
             
             <div className="flex-1">
@@ -73,18 +73,18 @@ export default function CommentItem({
                         href={comment.authorWebsite} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors"
+                        className="text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 transition-colors"
                       >
-                        <Globe size={14} />
+                        <Icon name="Globe" provider="lu" className="text-rose-600 dark:text-rose-400" />
                       </a>
                     )}
                     {isReply && (
-                      <span className="text-xs bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-2 py-0.5 rounded-full">
+                      <span className="text-xs bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 px-2 py-0.5 rounded-full">
                         {t('comments.reply')}
                       </span>
                     )}
                     <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
-                      <Calendar size={10} />
+                      <Icon name="Calendar" provider="lu" className="text-rose-600 dark:text-rose-400" />
                       {formatDate(comment.createdAt)}
                     </div>
                   </div>
@@ -95,9 +95,9 @@ export default function CommentItem({
                     variant="ghost"
                     size="sm"
                     onClick={() => onReplyClick(comment.id)}
-                    className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-sm px-2 py-1 h-auto"
+                    className="text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors text-sm px-2 py-1 h-auto"
                   >
-                    <Reply size={14} className="mr-1" />
+                    <Icon name="Reply" provider="lu" className="mr-1" />
                     {t('comments.replyButton')}
                   </Button>
                 )}

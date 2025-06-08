@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Plus, Eye, Edit, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import { Icon } from '@/components/icon';
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Label } from "@/components/ui/label";
@@ -348,13 +348,13 @@ export default function AdminBlogPage() {
                 <div className="flex gap-2">
                   <Link href={`/admin/blog/${post.id}`}>
                     <Button variant="outline" size="sm">
-                      <Eye className="w-4 h-4 mr-1" />
+                      <Icon name="Eye" provider="lu" className="w-4 h-4 mr-1" />
                       {t("admin.blog.view")}
                     </Button>
                   </Link>
                   <Link href={`/admin/blog/${post.id}/edit`}>
                     <Button variant="outline" size="sm">
-                      <Edit className="w-4 h-4 mr-1" />
+                      <Icon name="Edit" provider="lu" className="w-4 h-4 mr-1" />
                       {t("admin.blog.edit")}
                     </Button>
                   </Link>
@@ -364,7 +364,7 @@ export default function AdminBlogPage() {
                     onClick={() => handleDeletePost(post.id, post.title?.pl || post.title?.en || t('common.untitled'))}
                     className="text-red-600 hover:text-red-700"
                   >
-                    <Trash2 className="w-4 h-4 mr-1" />
+                    <Icon name="Trash2" provider="lu" className="w-4 h-4 mr-1" />
                     {t("admin.blog.delete")}
                   </Button>
                 </div>
@@ -386,7 +386,7 @@ export default function AdminBlogPage() {
         <h1 className="text-3xl font-bold">{t("admin.blog.title")}</h1>
         <Link href="/admin/blog/new">
           <Button>
-            <Plus className="w-4 h-4 mr-2" />
+            {/* <Plus className="w-4 h-4 mr-2" /> */}
             {t("admin.blog.newPost")}
           </Button>
         </Link>
@@ -449,9 +449,9 @@ export default function AdminBlogPage() {
                     <p className="text-sm text-muted-foreground">{t("admin.metaTags.description")}</p>
                   </div>
                   {isMetaExpanded ? (
-                    <ChevronUp className="h-5 w-5 text-muted-foreground" />
+                    <Icon name="ChevronUp" provider="lu" className="h-5 w-5 text-muted-foreground" />
                   ) : (
-                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                    <Icon name="ChevronDown" provider="lu" className="h-5 w-5 text-muted-foreground" />
                   )}
                 </div>
 

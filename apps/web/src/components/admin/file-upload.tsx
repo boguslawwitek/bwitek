@@ -4,7 +4,7 @@ import { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { X, Upload, Image as ImageIcon, Loader2 } from "lucide-react";
+import { Icon } from '@/components/icon';
 import { cn } from "@/lib/utils";
 import { trpc } from "@/utils/trpc";
 import { useMutation } from "@tanstack/react-query";
@@ -175,7 +175,7 @@ export default function FileUpload({
             className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0"
             onClick={handleRemove}
           >
-            <X className="h-3 w-3" />
+            <Icon name="X" provider="lu" className="h-3 w-3" />
           </Button>
         </div>
       )}
@@ -200,12 +200,12 @@ export default function FileUpload({
 
         {isPending ? (
           <div className="flex flex-col items-center gap-2">
-            <Loader2 className="h-8 w-8 animate-spin" />
+            <Icon name="Loader" provider="lu" className="h-8 w-8 animate-spin" />
             <p className="text-sm text-muted-foreground">{t("fileUpload.uploading")}</p>
           </div>
         ) : (
           <div className="flex flex-col items-center gap-4">
-            <ImageIcon className="h-8 w-8 text-muted-foreground" />
+            <Icon name="Image" provider="lu" className="h-8 w-8 text-muted-foreground" />
             <div className="space-y-2">
               <p className="text-sm text-muted-foreground">
                 {t("fileUpload.dragAndDrop")}
@@ -215,7 +215,7 @@ export default function FileUpload({
                 variant="outline"
                 onClick={() => fileInputRef.current?.click()}
               >
-                <Upload className="h-4 w-4 mr-2" />
+                <Icon name="Upload" provider="lu" className="h-4 w-4 mr-2" />
                 {t("fileUpload.chooseFile")}
               </Button>
             </div>

@@ -6,7 +6,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useMutation } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, XCircle, Loader2, Mail } from 'lucide-react';
+import { Icon } from '@/components/icon';
 import { trpc } from '@/utils/trpc';
 import { toast } from 'sonner';
 
@@ -47,7 +47,6 @@ export default function NewsletterConfirmClient() {
       return;
     }
 
-    // Confirm subscription automatically
     confirmMutation.mutate({ token });
   }, [searchParams, locale]);
 
@@ -66,10 +65,9 @@ export default function NewsletterConfirmClient() {
           <img src="/apple-icon.png" alt="BWitek.dev" className="w-12 h-12 mx-auto" />
         </div>
         <CardTitle className="flex items-center justify-center gap-2">
-          {status === 'loading' && <Loader2 className="h-5 w-5 animate-spin" />}
-          {status === 'success' && <CheckCircle className="h-5 w-5 text-green-500" />}
-          {status === 'error' && <XCircle className="h-5 w-5 text-red-500" />}
-          
+          {status === 'loading' && <Icon name="Loader" provider="lu" className="animate-spin" />}
+          {status === 'success' && <Icon name="CheckCircle" provider="lu" className="text-green-500" />}
+          {status === 'error' && <Icon name="XCircle" provider="lu" className="text-red-500" />}
           {status === 'loading' && (
             locale === 'pl' ? 'Potwierdzanie subskrypcji...' : 'Confirming subscription...'
           )}
@@ -90,7 +88,7 @@ export default function NewsletterConfirmClient() {
         {status === 'success' && (
           <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
             <div className="flex items-center justify-center gap-2 mb-2">
-              <Mail className="h-4 w-4 text-green-600" />
+              <Icon name="Mail" provider="lu" className="text-green-600" />
               <span className="text-sm font-medium text-green-800 dark:text-green-200">
                 {locale === 'pl' ? 'Wszystko gotowe!' : 'All set!'}
               </span>

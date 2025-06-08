@@ -10,7 +10,7 @@ import {useTranslations, useLocale} from 'next-intl';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { Icon } from '@/components/icon';
 import FileUpload from "@/components/admin/file-upload";
 
 type TranslatedField = {
@@ -214,9 +214,9 @@ export default function AdminPanel() {
               <p className="text-sm text-muted-foreground">{t("admin.metaTags.description")}</p>
             </div>
             {isMetaExpanded ? (
-              <ChevronUp className="h-4 w-4" />
+              <Icon name="ChevronUp" provider="lu" className="h-4 w-4" />
             ) : (
-              <ChevronDown className="h-4 w-4" />
+              <Icon name="ChevronDown" provider="lu" className="h-4 w-4" />
             )}
           </div>
 
