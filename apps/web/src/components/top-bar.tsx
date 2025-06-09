@@ -53,7 +53,7 @@ export default function TopBar() {
                           >
                             <span className="sr-only">{item.name?.[locale]}</span>
                             {icon}
-                            <span className="absolute z-10 -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-gray-100 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                            <span className="hidden md:block absolute z-10 -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-gray-900 text-gray-100 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                               {item.name?.[locale]}
                             </span>
                           </a>
