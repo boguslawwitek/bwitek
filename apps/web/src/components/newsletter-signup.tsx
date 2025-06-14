@@ -54,7 +54,7 @@ export default function NewsletterSignup({
     e.preventDefault();
     
     if (!email.trim()) {
-      toast.error(t('validation.required'));
+      toast.error(t('components.validation.required'));
       return;
     }
     

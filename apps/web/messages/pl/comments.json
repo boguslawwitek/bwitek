@@ -1,0 +1,23 @@
+{
+  "title": "Komentarze",
+  "addComment": "Dodaj komentarz",
+  "reply": "Odpowiedź",
+  "replyButton": "Odpowiedz",
+  "replyForm": "Odpowiedz na komentarz",
+  "noComments": "Brak komentarzy. Bądź pierwszy!",
+  "moderationNotice": "Twój komentarz zostanie opublikowany po zatwierdzeniu przez moderatora.",
+  "loadError": "Nie można załadować komentarzy - nieprawidłowy identyfikator artykułu.",
+  "form": {
+    "name": "Imię i nazwisko",
+    "namePlaceholder": "Wprowadź swoje imię i nazwisko",
+    "email": "Adres e-mail",
+    "emailPlaceholder": "Wprowadź swój adres e-mail (nie będzie publiczny)",
+    "website": "Strona internetowa",
+    "websitePlaceholder": "https://twoja-strona.pl (opcjonalnie)",
+    "content": "Treść komentarza",
+    "contentPlaceholder": "Napisz swój komentarz...",
+    "submit": "Dodaj komentarz",
+    "success": "Komentarz został dodany i oczekuje na zatwierdzenie!",
+    "error": "Wystąpił błąd podczas dodawania komentarza. Spróbuj ponownie."
+  }
+}

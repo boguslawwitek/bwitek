@@ -70,12 +70,12 @@ export const ProjectForm = ({
 
   const schema = z.object({
     title: z.object({
-      pl: z.string().min(1, t("validation.required") as string),
-      en: z.string().min(1, t("validation.required") as string),
+      pl: z.string().min(1, t("components.validation.required") as string),
+      en: z.string().min(1, t("components.validation.required") as string),
     }),
     description: z.object({
-      pl: z.string().min(1, t("validation.required") as string),
-      en: z.string().min(1, t("validation.required") as string),
+      pl: z.string().min(1, t("components.validation.required") as string),
+      en: z.string().min(1, t("components.validation.required") as string),
     }),
     url: z.string().nullable().optional(),
     repoUrl: z.string().nullable().optional(),

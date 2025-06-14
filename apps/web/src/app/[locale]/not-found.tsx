@@ -16,10 +16,10 @@ export default function NotFound() {
               404
             </h1>
             <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
-              {t('notFound.title')}
+              {t('pages.notFound.title')}
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-8">
-              {t('notFound.description')}
+              {t('pages.notFound.description')}
             </p>
           </div>
           
@@ -33,7 +33,7 @@ export default function NotFound() {
             <Link href="/">
               <Button variant="outline" className="flex items-center gap-2">
                 <Icon name="Home" provider="lu" className="w-4 h-4" />
-                {t('notFound.homepage')}
+                {t('pages.notFound.homepage')}
               </Button>
             </Link>
           </div>

@@ -67,27 +67,27 @@ export default function CommentsSection({ postId }: CommentsSectionProps) {
     const newErrors: Partial<CommentFormData> = {};
 
     if (!formData.authorName.trim()) {
-      newErrors.authorName = t('validation.required');
+      newErrors.authorName = t('components.validation.required');
     }
 
     if (!formData.authorEmail.trim()) {
-      newErrors.authorEmail = t('validation.required');
+      newErrors.authorEmail = t('components.validation.required');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.authorEmail)) {
-      newErrors.authorEmail = t('validation.invalid');
+      newErrors.authorEmail = t('components.validation.invalid');
     }
 
     if (formData.authorWebsite && !/^https?:\/\/.+/.test(formData.authorWebsite)) {
-      newErrors.authorWebsite = t('validation.invalidUrl');
+      newErrors.authorWebsite = t('components.validation.invalidUrl');
     }
 
     if (!formData.content.trim()) {
-      newErrors.content = t('validation.required');
+      newErrors.content = t('components.validation.required');
     } else if (formData.content.trim().length < 10) {
-      newErrors.content = t('validation.minLength', { min: 10 });
+      newErrors.content = t('components.validation.minLength', { min: 10 });
     }
 
     if (!formData.turnstileToken) {
-      newErrors.turnstileToken = t('validation.turnstileRequired');
+      newErrors.turnstileToken = t('components.validation.turnstileRequired');
     }
 
     setErrors(newErrors);

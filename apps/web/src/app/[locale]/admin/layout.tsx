@@ -35,24 +35,24 @@ export default function AdminLayout({
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-8">
                     <div className="flex items-center justify-between gap-4">
-                        <h1 className="text-2xl font-bold">{t("dashboard.title")}</h1>
+                        <h1 className="text-2xl font-bold">{t("pages.dashboard.title")}</h1>
                         <Sheet open={isMobileNavOpen} onOpenChange={setIsMobileNavOpen}>
                             <SheetTrigger asChild>
                                 <Button variant="outline" size="icon" className="lg:hidden">
                                     <Icon name="Menu" provider="lu" className="h-5 w-5" />
-                                    <span className="sr-only">{t("navigation.menu")}</span>
+                                    <span className="sr-only">{t("components.navigation.menu")}</span>
                                 </Button>
                             </SheetTrigger>
                             <SheetContent side="left" className="w-[280px] p-0">
                                 <SheetTitle className="sr-only">
-                                    {t("navigation.menu")}
+                                    {t("components.navigation.menu")}
                                 </SheetTitle>
                                 <AdminNav onNavItemClick={() => setIsMobileNavOpen(false)} isMobile />
                             </SheetContent>
                         </Sheet>
                     </div>
                     <p className="text-muted-foreground">
-                        {t("dashboard.welcomeUser", { name: session?.user.name || "" })}
+                        {t("pages.dashboard.welcomeUser", { name: session?.user.name || "" })}
                     </p>
                 </div>
     
@@ -60,8 +60,8 @@ export default function AdminLayout({
                     <div className="hidden lg:block w-64 flex-shrink-0">
                         <AdminNav />
                     </div>
-                    <main className="flex-1 min-w-0 max-w-full overflow-x-auto">
-                        <div className="max-w-6xl">
+                    <main className="flex-1 min-w-0 overflow-hidden">
+                        <div className="w-full max-w-full">
                             {children}
                         </div>
                     </main>

@@ -1,0 +1,23 @@
+{
+  "title": "Comments",
+  "addComment": "Add Comment",
+  "reply": "Reply",
+  "replyButton": "Reply",
+  "replyForm": "Reply to Comment",
+  "noComments": "No comments yet. Be the first!",
+  "moderationNotice": "Your comment will be published after approval by a moderator.",
+  "loadError": "Cannot load comments - invalid article identifier.",
+  "form": {
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email address (will not be public)",
+    "website": "Website",
+    "websitePlaceholder": "https://your-website.com (optional)",
+    "content": "Comment Content",
+    "contentPlaceholder": "Write your comment...",
+    "submit": "Add Comment",
+    "success": "Comment added and awaiting approval!",
+    "error": "An error occurred while adding the comment. Please try again."
+  }
+}

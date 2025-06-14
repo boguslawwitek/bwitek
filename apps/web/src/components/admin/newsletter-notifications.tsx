@@ -84,38 +84,38 @@ export default function NewsletterNotifications() {
   const selectedArticleData = articles?.find(post => post.id === selectedArticle);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-full overflow-hidden w-full">
       {/* Newsletter Stats */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Icon name="Users" provider="lu" className="h-5 w-5" />
+      <Card className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto md:mx-0">
+        <CardHeader className="w-full">
+          <CardTitle className="flex items-center gap-2 text-base">
+            <Icon name="Users" provider="lu" className="h-4 w-4" />
             {t('newsletter.admin.stats.title')}
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-xs">
             {t('newsletter.admin.stats.description')}
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="w-full">
           {stats ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-blue-50 dark:bg-blue-950 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-1 w-full">
+              <div className="text-center p-2 bg-blue-50 dark:bg-blue-950 rounded-lg">
+                <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
                   {stats.polish.count}
                 </div>
-                <div className="text-sm text-muted-foreground">{t('newsletter.admin.stats.polish')}</div>
+                <div className="text-xs text-muted-foreground">{t('newsletter.admin.stats.polish')}</div>
               </div>
-              <div className="text-center p-4 bg-green-50 dark:bg-green-950 rounded-lg">
-                <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+              <div className="text-center p-2 bg-green-50 dark:bg-green-950 rounded-lg">
+                <div className="text-xl font-bold text-green-600 dark:text-green-400">
                   {stats.english.count}
                 </div>
-                <div className="text-sm text-muted-foreground">{t('newsletter.admin.stats.english')}</div>
+                <div className="text-xs text-muted-foreground">{t('newsletter.admin.stats.english')}</div>
               </div>
-              <div className="text-center p-4 bg-purple-50 dark:bg-purple-950 rounded-lg">
-                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+              <div className="text-center p-2 bg-purple-50 dark:bg-purple-950 rounded-lg">
+                <div className="text-xl font-bold text-purple-600 dark:text-purple-400">
                   {stats.total.count}
                 </div>
-                <div className="text-sm text-muted-foreground">{t('newsletter.admin.stats.total')}</div>
+                <div className="text-xs text-muted-foreground">{t('newsletter.admin.stats.total')}</div>
               </div>
             </div>
           ) : (
@@ -128,27 +128,28 @@ export default function NewsletterNotifications() {
       </Card>
 
       {/* Send Newsletter */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Icon name="Send" provider="lu" className="h-5 w-5" />
+      <Card className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto md:mx-0">
+        <CardHeader className="w-full">
+          <CardTitle className="flex items-center gap-2 text-base">
+            <Icon name="Send" provider="lu" className="h-4 w-4" />
             {t('newsletter.admin.send.title')}
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-xs">
             {t('newsletter.admin.send.description')}
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
+        <CardContent className="space-y-4 w-full">
+          <div className="space-y-4 w-full">
             <Label htmlFor="article-select">{t('newsletter.admin.send.selectArticle')}</Label>
             <Select
               value={selectedArticle || ""}
               onValueChange={(value) => setSelectedArticle(value)}
+              disabled={articlesLoading || isProcessing}
             >
-              <SelectTrigger>
+              <SelectTrigger className="max-w-full">
                 <SelectValue placeholder={t('newsletter.admin.send.articlePlaceholder')} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="max-w-full">
                 {articlesLoading ? (
                   <div className="p-2 text-center">
                     <Icon name="Loader" provider="lu" className="h-4 w-4 animate-spin mx-auto" />
@@ -157,12 +158,12 @@ export default function NewsletterNotifications() {
                   articles?.map((post) => {
                     const title = typeof post.title === 'string' ? JSON.parse(post.title) : post.title;
                     return (
-                    <SelectItem key={post.id} value={post.id}>
-                      <div className="flex flex-col items-start">
-                        <span className="font-medium">
+                    <SelectItem key={post.id} value={post.id} className="max-w-full">
+                      <div className="flex flex-col items-start w-full max-w-full overflow-hidden">
+                        <span className="font-medium truncate w-full" title={title?.pl || title?.en || t('common.untitled')}>
                             {title?.pl || title?.en || t('common.untitled')}
                         </span>
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-xs text-muted-foreground truncate w-full">
                           {post.publishedAt 
                             ? new Date(post.publishedAt).toLocaleDateString()
                               : t('common.draft')
@@ -178,7 +179,7 @@ export default function NewsletterNotifications() {
           </div>
 
           {selectedArticleData && (
-            <div className="p-4 bg-muted/50 rounded-lg">
+            <div className="p-4 bg-muted/50 rounded-lg overflow-hidden">
               <h4 className="font-medium mb-2">{t('newsletter.admin.send.preview')}</h4>
               <div className="space-y-1 text-sm">
                 {(() => {
@@ -187,10 +188,30 @@ export default function NewsletterNotifications() {
                     : selectedArticleData.title;
                   return (
                     <>
-                      <p><strong>{t('newsletter.admin.send.polishTitle')}</strong> {title?.pl || t('newsletter.admin.send.notAvailable')}</p>
-                      <p><strong>{t('newsletter.admin.send.englishTitle')}</strong> {title?.en || t('newsletter.admin.send.notAvailable')}</p>
-                      <p><strong>{t('newsletter.admin.send.slug')}</strong> {selectedArticleData.slug}</p>
-                      <p><strong>{t('newsletter.admin.send.status')}</strong> {selectedArticleData.isPublished ? t('newsletter.admin.send.published') : t('newsletter.admin.send.draft')}</p>
+                      <div className="grid grid-cols-[auto,1fr] gap-x-2">
+                        <strong>{t('newsletter.admin.send.polishTitle')}</strong>
+                        <span className="truncate" title={title?.pl || t('newsletter.admin.send.notAvailable')}>
+                          {title?.pl || t('newsletter.admin.send.notAvailable')}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-[auto,1fr] gap-x-2">
+                        <strong>{t('newsletter.admin.send.englishTitle')}</strong>
+                        <span className="truncate" title={title?.en || t('newsletter.admin.send.notAvailable')}>
+                          {title?.en || t('newsletter.admin.send.notAvailable')}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-[auto,1fr] gap-x-2">
+                        <strong>{t('newsletter.admin.send.slug')}</strong>
+                        <span className="truncate" title={selectedArticleData.slug}>
+                          {selectedArticleData.slug}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-[auto,1fr] gap-x-2">
+                        <strong>{t('newsletter.admin.send.status')}</strong>
+                        <span>
+                          {selectedArticleData.isPublished ? t('newsletter.admin.send.published') : t('newsletter.admin.send.draft')}
+                        </span>
+                      </div>
                     </>
                   );
                 })()}
@@ -198,24 +219,26 @@ export default function NewsletterNotifications() {
             </div>
           )}
 
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-2 w-full min-w-0 overflow-hidden">
             <Button
               onClick={() => openConfirmModal('pl')}
               disabled={!selectedArticle || isProcessing}
-              className="flex-1"
+              className="w-full justify-start px-3"
               variant="default"
+              size="sm"
             >
-              <Icon name="Mail" provider="lu" className="mr-2 h-4 w-4" />
-              {t('newsletter.admin.send.sendToPolish')} ({getSubscriberCount('pl')})
+              <Icon name="Mail" provider="lu" className="mr-2 h-4 w-4 flex-shrink-0" />
+              <span className="truncate">{t('newsletter.admin.send.sendToPolish')} ({getSubscriberCount('pl')})</span>
             </Button>
             <Button
               onClick={() => openConfirmModal('en')}
               disabled={!selectedArticle || isProcessing}
-              className="flex-1"
+              className="w-full justify-start px-3"
               variant="default"
+              size="sm"
             >
-              <Icon name="Mail" provider="lu" className="mr-2 h-4 w-4" />
-              {t('newsletter.admin.send.sendToEnglish')} ({getSubscriberCount('en')})
+              <Icon name="Mail" provider="lu" className="mr-2 h-4 w-4 flex-shrink-0" />
+              <span className="truncate">{t('newsletter.admin.send.sendToEnglish')} ({getSubscriberCount('en')})</span>
             </Button>
           </div>
         </CardContent>
@@ -223,7 +246,7 @@ export default function NewsletterNotifications() {
 
       {/* Confirmation Modal */}
       <Dialog open={isConfirmModalOpen} onOpenChange={setIsConfirmModalOpen}>
-        <DialogContent>
+        <DialogContent className="w-[95vw] max-w-[95vw] min-w-0 overflow-hidden">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Icon name="AlertTriangle" provider="lu" className="h-5 w-5 text-yellow-500" />

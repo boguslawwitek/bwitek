@@ -1,0 +1,107 @@
+{
+    "fileUpload": {
+        "uploading": "Przesyłanie...",
+        "dragAndDrop": "Przeciągnij i upuść obraz tutaj, lub",
+        "chooseFile": "Wybierz plik",
+        "clear": "Wyczyść",
+        "selectOrUploadImage": "Wybierz lub prześlij obraz"
+    },
+    "richEditor": {
+        "toolbar": {
+            "bold": "Pogrubienie",
+            "italic": "Kursywa",
+            "strikethrough": "Przekreślenie",
+            "code": "Kod wbudowany",
+            "heading1": "Nagłówek 1",
+            "heading2": "Nagłówek 2", 
+            "heading3": "Nagłówek 3",
+            "bulletList": "Lista punktowana",
+            "orderedList": "Lista numerowana",
+            "quote": "Cytat",
+            "addLink": "Dodaj link",
+            "addImage": "Dodaj obraz",
+            "addYoutube": "Dodaj wideo YouTube",
+            "addCodeBlock": "Dodaj blok kodu",
+            "undo": "Cofnij",
+            "redo": "Ponów"
+        },
+        "modals": {
+            "link": {
+              "title": "Dodaj Link",
+              "description": "Wprowadź URL strony do której chcesz linkować. Pozostaw puste aby usunąć link.",
+              "urlLabel": "URL",
+              "urlPlaceholder": "https://example.com",
+              "cancel": "Anuluj",
+              "addLink": "Dodaj Link",
+              "removeLink": "Usuń Link"
+            },
+            "youtube": {
+              "title": "Dodaj Video YouTube",
+              "description": "Wprowadź link do filmu YouTube w jednym z obsługiwanych formatów.",
+              "urlLabel": "URL YouTube",
+              "urlPlaceholder": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+              "supportedFormats": "Obsługiwane formaty:",
+              "formats": [
+                "https://www.youtube.com/watch?v=VIDEO_ID",
+                "https://youtu.be/VIDEO_ID", 
+                "https://www.youtube.com/embed/VIDEO_ID"
+              ],
+              "invalidUrl": "Nieprawidłowy format URL YouTube",
+              "cancel": "Anuluj",
+              "addVideo": "Dodaj Video"
+            },
+            "codeBlock": {
+              "title": "Dodaj Blok Kodu",
+              "description": "Wprowadź język programowania dla podświetlania składni (opcjonalnie).",
+              "languageLabel": "Język programowania",
+              "languagePlaceholder": "javascript, python, css...",
+              "popularLanguages": "Popularne języki:",
+              "languagesList": "javascript, typescript, python, css, html, json, sql, bash, php, java, cpp",
+              "noHighlighting": "Pozostaw puste dla zwykłego tekstu bez podświetlania.",
+              "cancel": "Anuluj",
+              "addCodeBlock": "Dodaj Blok Kodu"
+            },
+            "image": {
+              "title": "Dodaj Obraz",
+              "description": "Wybierz lub wgraj nowy obraz do artykułu.",
+              "cancel": "Anuluj"
+            }
+        }
+    },
+    "language": {
+        "switch": "Zmień język"
+    },
+    "userMenu": {
+        "signIn": "Zaloguj się",
+        "signOut": "Wyloguj się",
+        "myAccount": "Moje konto"
+    },
+    "theme": {
+        "toggle": "Przełącz motyw",
+        "light": "Jasny",
+        "dark": "Ciemny",
+        "system": "Systemowy"
+    },
+    "navigation": {
+        "home": "Powrót do strony",
+        "dashboard": "Panel",
+        "settings": "Ustawienia",
+        "keyboardHint": "Możesz użyć klawiszy strzałkowych do nawigacji",
+        "menu": "Menu"
+    },
+    "footer": {
+        "copyright": "Wszelkie prawa zastrzeżone"
+    },
+    "validation": {
+        "required": "To pole jest wymagane",
+        "min": "To pole musi mieć co najmniej {min} znaków",
+        "max": "To pole musi mieć co najwyżej {max} znaków",
+        "minLength": "To pole musi mieć co najmniej {min} znaków",
+        "maxLength": "To pole musi mieć co najwyżej {max} znaków",
+        "minValue": "To pole musi mieć co najmniej {min} wartość",
+        "maxValue": "To pole musi mieć co najwyżej {max} wartość",
+        "invalid": "To pole jest nieprawidłowe",
+        "invalidUrl": "Wprowadź prawidłowy adres URL (http:// lub https://)",
+        "turnstileRequired": "Proszę ukończyć weryfikację bezpieczeństwa"
+    }
+}

@@ -24,7 +24,7 @@ export default function UserMenu() {
   if (!session) {
     return (
       <Button variant="outline" asChild>
-        <Link href="/login">{t('userMenu.signIn')}</Link>
+        <Link href="/login">{t('components.userMenu.signIn')}</Link>
       </Button>
     );
   }
@@ -35,7 +35,7 @@ export default function UserMenu() {
         <Button variant="outline">{session.user.name}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-card">
-        <DropdownMenuLabel>{t('userMenu.myAccount')}</DropdownMenuLabel>
+        <DropdownMenuLabel>{t('components.userMenu.myAccount')}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>{session.user.email}</DropdownMenuItem>
         <DropdownMenuItem asChild>
@@ -52,7 +52,7 @@ export default function UserMenu() {
               });
             }}
           >
-            {t('userMenu.signOut')}
+            {t('components.userMenu.signOut')}
           </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>

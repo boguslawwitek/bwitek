@@ -1,0 +1,68 @@
+{
+  "login": {
+    "title": "Panel Administracyjny",
+    "email": "E-mail",
+    "password": "Hasło",
+    "signIn": "Zaloguj się",
+    "success": "Logowanie udane",
+    "submit": "Zaloguj się",
+    "noAccount": "Nie masz jeszcze konta?",
+    "register": "Zarejestruj się"
+  },
+  "register": {
+    "title": "Rejestracja",
+    "success": "Rejestracja udana",
+    "submit": "Zarejestruj się",
+    "haveAccount": "Masz już konto?",
+    "signIn": "Zaloguj się",
+    "name": "Imię i nazwisko",
+    "login": "Logowanie"
+  },
+  "dashboard": {
+    "title": "Panel administracyjny",
+    "welcome": "Witaj ponownie",
+    "welcomeUser": "Witaj {name}",
+    "privateData": "Prywatne dane: {{message}}",
+    "nav": {
+      "homepage": "Strona główna",
+      "skills": "Umiejętności",
+      "projects": "Projekty",
+      "navigation": "Nawigacja",
+      "topbar": "Górny pasek",
+      "contact": "Kontakt",
+      "blog": "Blog",
+      "privacyPolicy": "Polityka Prywatności",
+      "newsletter": "Newsletter"
+    }
+  },
+  "projects": {
+    "title": "Moje projekty",
+    "noProjects": "Brak projektów do wyświetlenia",
+    "github": "GitHub",
+    "gitea": "Gitea",
+    "demo": "Demo"
+  },
+  "skills": {
+    "title": "Umiejętności",
+    "noSkills": "Brak umiejętności w tej kategorii",
+    "noCategories": "Brak kategorii umiejętności"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "directContact": "Dane kontaktowe",
+    "quickMessage": "Wyślij wiadomość",
+    "form": {
+      "name": "Imię i nazwisko",
+      "email": "Adres e-mail",
+      "message": "Wiadomość",
+      "send": "Wyślij wiadomość",
+      "success": "Wiadomość została wysłana pomyślnie!",
+      "error": "Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie."
+    }
+  },
+  "notFound": {
+    "title": "Strona nie znaleziona",
+    "description": "Szukana strona nie została znaleziona. Możliwe, że została przeniesiona lub usunięta.",
+    "homepage": "Strona główna"
+  }
+}

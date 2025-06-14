@@ -22,7 +22,7 @@ export default function SkillsClientWrapper({ locale }: Props) {
     <MainLayout>
       <div className="max-w-screen-lg mx-auto px-6 md:px-24 py-8">
         <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-100">
-          {t('skills.title')}
+          {t('pages.skills.title')}
         </h1>
         
         {isLoading ? (
@@ -81,7 +81,7 @@ export default function SkillsClientWrapper({ locale }: Props) {
                       ))
                     ) : (
                       <div className="text-center py-4 text-gray-600 dark:text-gray-400">
-                        {t('skills.noSkills')}
+                        {t('pages.skills.noSkills')}
                       </div>
                     )}
                   </div>
@@ -91,7 +91,7 @@ export default function SkillsClientWrapper({ locale }: Props) {
           </Tabs>
         ) : (
           <div className="text-center py-8 text-gray-600 dark:text-gray-400">
-            {t('skills.noCategories')}
+            {t('pages.skills.noCategories')}
           </div>
         )}
       </div>

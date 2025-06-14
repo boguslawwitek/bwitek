@@ -31,7 +31,7 @@ export default function SignUpForm({
     },
     onSubmit: async ({ value }) => {
       if (!turnstileToken) {
-        setTurnstileError(t('validation.turnstileRequired'));
+        setTurnstileError(t('components.validation.turnstileRequired'));
         return;
       }
 
@@ -44,7 +44,7 @@ export default function SignUpForm({
         {
           onSuccess: () => {
             router.push("/admin");
-            toast.success(t('register.success'));
+            toast.success(t('pages.register.success'));
           },
           onError: (error) => {
             toast.error(error.error.message);
@@ -70,7 +70,7 @@ export default function SignUpForm({
 
   const handleTurnstileError = () => {
     setTurnstileToken("");
-    setTurnstileError(t('validation.turnstileRequired'));
+    setTurnstileError(t('components.validation.turnstileRequired'));
   };
 
   if (isPending) {
@@ -79,7 +79,7 @@ export default function SignUpForm({
 
   return (
     <div className="mx-auto w-full mt-10 max-w-md p-6">
-      <h1 className="mb-6 text-center text-3xl font-bold">{t('register.title')}</h1>
+      <h1 className="mb-6 text-center text-3xl font-bold">{t('pages.register.title')}</h1>
 
       <form
         onSubmit={(e) => {
@@ -93,7 +93,7 @@ export default function SignUpForm({
           <form.Field name="name">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>{t('register.name')}</Label>
+                <Label htmlFor={field.name}>{t('pages.register.name')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -115,7 +115,7 @@ export default function SignUpForm({
           <form.Field name="email">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>{t('login.email')}</Label>
+                <Label htmlFor={field.name}>{t('pages.login.email')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -138,7 +138,7 @@ export default function SignUpForm({
           <form.Field name="password">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>{t('login.password')}</Label>
+                <Label htmlFor={field.name}>{t('pages.login.password')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -176,20 +176,20 @@ export default function SignUpForm({
               className="w-full"
               disabled={!state.canSubmit || state.isSubmitting}
             >
-              {state.isSubmitting ? "Submitting..." : t('register.submit')}
+              {state.isSubmitting ? t('common.submitting') : t('pages.register.submit')}
             </Button>
           )}
         </form.Subscribe>
       </form>
 
       <div className="mt-4 text-center">
-        <p className="text-sm text-gray-600">{t('register.haveAccount')}</p>
+        <p className="text-sm text-gray-600">{t('pages.register.haveAccount')}</p>
         <Button
           variant="link"
           onClick={onSwitchToSignIn}
           className="text-indigo-600 hover:text-indigo-800"
         >
-          {t('register.signIn')}
+          {t('pages.register.signIn')}
         </Button>
       </div>
     </div>

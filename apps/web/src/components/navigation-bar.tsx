@@ -85,7 +85,7 @@ export default function NavigationBar() {
               })}
             </ul>
             <div className="hidden md:flex text-sm text-gray-900 dark:text-gray-100 mt-4 text-center items-center justify-center">
-              <Icon name="MoveLeft" provider="lu" className="inline mr-1" />{t('navigation.keyboardHint')}<Icon name="MoveRight" provider="lu" className="inline ml-1" />
+              <Icon name="MoveLeft" provider="lu" className="inline mr-1" />{t('components.navigation.keyboardHint')}<Icon name="MoveRight" provider="lu" className="inline ml-1" />
             </div>
           </div>
         )}

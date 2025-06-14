@@ -301,7 +301,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
           isActive={editor.isActive('bold')}
-          title={t('richEditor.toolbar.bold')}
+          title={t('components.richEditor.toolbar.bold')}
         >
           <Icon name="Bold" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -309,7 +309,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleItalic().run()}
           isActive={editor.isActive('italic')}
-          title={t('richEditor.toolbar.italic')}
+          title={t('components.richEditor.toolbar.italic')}
         >
           <Icon name="Italic" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -317,7 +317,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleStrike().run()}
           isActive={editor.isActive('strike')}
-          title={t('richEditor.toolbar.strikethrough')}
+          title={t('components.richEditor.toolbar.strikethrough')}
         >
           <Icon name="Strikethrough" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -325,7 +325,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleCode().run()}
           isActive={editor.isActive('code')}
-          title={t('richEditor.toolbar.code')}
+          title={t('components.richEditor.toolbar.code')}
         >
           <Icon name="Code" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -335,7 +335,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
           isActive={editor.isActive('heading', { level: 1 })}
-          title={t('richEditor.toolbar.heading1')}
+          title={t('components.richEditor.toolbar.heading1')}
         >
           <Icon name="Heading1" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -343,7 +343,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
           isActive={editor.isActive('heading', { level: 2 })}
-          title={t('richEditor.toolbar.heading2')}
+          title={t('components.richEditor.toolbar.heading2')}
         >
           <Icon name="Heading2" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -351,7 +351,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
           isActive={editor.isActive('heading', { level: 3 })}
-          title={t('richEditor.toolbar.heading3')}
+          title={t('components.richEditor.toolbar.heading3')}
         >
           <Icon name="Heading3" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -361,7 +361,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           isActive={editor.isActive('bulletList')}
-          title={t('richEditor.toolbar.bulletList')}
+          title={t('components.richEditor.toolbar.bulletList')}
         >
           <Icon name="List" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -369,7 +369,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           isActive={editor.isActive('orderedList')}
-          title={t('richEditor.toolbar.orderedList')}
+          title={t('components.richEditor.toolbar.orderedList')}
         >
           <Icon name="ListOrdered" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -377,7 +377,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           isActive={editor.isActive('blockquote')}
-          title={t('richEditor.toolbar.quote')}
+          title={t('components.richEditor.toolbar.quote')}
         >
           <Icon name="Quote" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -387,21 +387,21 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
         <ToolbarButton
           onClick={setLink}
           isActive={editor.isActive('link')}
-          title={t('richEditor.toolbar.addLink')}
+          title={t('components.richEditor.toolbar.addLink')}
         >
           <Icon name="Link" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <ToolbarButton
           onClick={addImage}
-          title={t('richEditor.toolbar.addImage')}
+          title={t('components.richEditor.toolbar.addImage')}
         >
           <Icon name="Image" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <ToolbarButton
           onClick={addYouTube}
-          title={t('richEditor.toolbar.addYoutube')}
+          title={t('components.richEditor.toolbar.addYoutube')}
         >
           <Icon name="Youtube" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -410,21 +410,21 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
 
         <ToolbarButton
           onClick={addCodeBlock}
-          title={t('richEditor.toolbar.addCodeBlock')}
+          title={t('components.richEditor.toolbar.addCodeBlock')}
         >
-          <Icon name="CodeBlock" provider="lu" className="h-4 w-4" />
+          <Icon name="SquareCode" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
 
         <ToolbarButton
           onClick={() => editor.chain().focus().undo().run()}
-          title={t('richEditor.toolbar.undo')}
+          title={t('components.richEditor.toolbar.undo')}
         >
           <Icon name="Undo" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
         
         <ToolbarButton
           onClick={() => editor.chain().focus().redo().run()}
-          title={t('richEditor.toolbar.redo')}
+          title={t('components.richEditor.toolbar.redo')}
         >
           <Icon name="Redo" provider="lu" className="h-4 w-4" />
         </ToolbarButton>
@@ -442,19 +442,19 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
           <DialogHeader>
             <DialogTitle>{t('common.addImage')}</DialogTitle>
             <DialogDescription>
-              {t('richEditor.modals.image.description')}
+              {t('components.richEditor.modals.image.description')}
             </DialogDescription>
           </DialogHeader>
           <div className="py-4">
             <FileUpload
               category="blog"
               onChange={handleImageUpload}
-              label={t('fileUpload.selectOrUploadImage')}
+              label={t('components.fileUpload.selectOrUploadImage')}
             />
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowImageUpload(false)}>
-              {t('richEditor.modals.image.cancel')}
+              {t('components.richEditor.modals.image.cancel')}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -464,28 +464,28 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
       <Dialog open={showLinkModal} onOpenChange={setShowLinkModal}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t('richEditor.modals.link.title')}</DialogTitle>
+            <DialogTitle>{t('components.richEditor.modals.link.title')}</DialogTitle>
             <DialogDescription>
-              {t('richEditor.modals.link.description')}
+              {t('components.richEditor.modals.link.description')}
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="link-url">{t('richEditor.modals.link.urlLabel')}</Label>
+              <Label htmlFor="link-url">{t('components.richEditor.modals.link.urlLabel')}</Label>
               <Input
                 id="link-url"
                 value={linkUrl}
                 onChange={(e) => setLinkUrl(e.target.value)}
-                placeholder={t('richEditor.modals.link.urlPlaceholder')}
+                placeholder={t('components.richEditor.modals.link.urlPlaceholder')}
               />
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowLinkModal(false)}>
-              {t('richEditor.modals.link.cancel')}
+              {t('components.richEditor.modals.link.cancel')}
             </Button>
             <Button onClick={handleLinkSubmit}>
-              {linkUrl ? t('richEditor.modals.link.addLink') : t('richEditor.modals.link.removeLink')}
+              {linkUrl ? t('components.richEditor.modals.link.addLink') : t('components.richEditor.modals.link.removeLink')}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -495,44 +495,44 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
       <Dialog open={showYoutubeModal} onOpenChange={setShowYoutubeModal}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t('richEditor.modals.youtube.title')}</DialogTitle>
+            <DialogTitle>{t('components.richEditor.modals.youtube.title')}</DialogTitle>
             <DialogDescription>
-              {t('richEditor.modals.youtube.description')}
+              {t('components.richEditor.modals.youtube.description')}
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="youtube-url">{t('richEditor.modals.youtube.urlLabel')}</Label>
+              <Label htmlFor="youtube-url">{t('components.richEditor.modals.youtube.urlLabel')}</Label>
               <Input
                 id="youtube-url"
                 value={youtubeUrl}
                 onChange={(e) => setYoutubeUrl(e.target.value)}
-                placeholder={t('richEditor.modals.youtube.urlPlaceholder')}
+                placeholder={t('components.richEditor.modals.youtube.urlPlaceholder')}
               />
               <div className="text-sm text-muted-foreground">
-                <p className="font-medium mb-1">{t('richEditor.modals.youtube.supportedFormats')}</p>
+                <p className="font-medium mb-1">{t('components.richEditor.modals.youtube.supportedFormats')}</p>
                 <ul className="list-disc list-inside space-y-1">
-                  {t.raw('richEditor.modals.youtube.formats').map((format: string, index: number) => (
+                  {t.raw('components.richEditor.modals.youtube.formats').map((format: string, index: number) => (
                     <li key={index}>{format}</li>
                   ))}
                 </ul>
               </div>
               {youtubeUrl && !/^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/)|youtu\.be\/)[\w-]+/.test(youtubeUrl) && (
                 <p className="text-sm text-destructive">
-                  {t('richEditor.modals.youtube.invalidUrl')}
+                  {t('components.richEditor.modals.youtube.invalidUrl')}
                 </p>
               )}
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowYoutubeModal(false)}>
-              {t('richEditor.modals.youtube.cancel')}
+              {t('components.richEditor.modals.youtube.cancel')}
             </Button>
             <Button 
               onClick={handleYoutubeSubmit}
               disabled={!youtubeUrl || !/^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/)|youtu\.be\/)[\w-]+/.test(youtubeUrl)}
             >
-              {t('richEditor.modals.youtube.addVideo')}
+              {t('components.richEditor.modals.youtube.addVideo')}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -542,33 +542,33 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
       <Dialog open={showCodeBlockModal} onOpenChange={setShowCodeBlockModal}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t('richEditor.modals.codeBlock.title')}</DialogTitle>
+            <DialogTitle>{t('components.richEditor.modals.codeBlock.title')}</DialogTitle>
             <DialogDescription>
-              {t('richEditor.modals.codeBlock.description')}
+              {t('components.richEditor.modals.codeBlock.description')}
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="code-language">{t('richEditor.modals.codeBlock.languageLabel')}</Label>
+              <Label htmlFor="code-language">{t('components.richEditor.modals.codeBlock.languageLabel')}</Label>
               <Input
                 id="code-language"
                 value={codeLanguage}
                 onChange={(e) => setCodeLanguage(e.target.value)}
-                placeholder={t('richEditor.modals.codeBlock.languagePlaceholder')}
+                placeholder={t('components.richEditor.modals.codeBlock.languagePlaceholder')}
               />
               <div className="text-sm text-muted-foreground">
-                <p className="font-medium mb-1">{t('richEditor.modals.codeBlock.popularLanguages')}</p>
-                <p>{t('richEditor.modals.codeBlock.languagesList')}</p>
-                <p className="mt-2">{t('richEditor.modals.codeBlock.noHighlighting')}</p>
+                <p className="font-medium mb-1">{t('components.richEditor.modals.codeBlock.popularLanguages')}</p>
+                <p>{t('components.richEditor.modals.codeBlock.languagesList')}</p>
+                <p className="mt-2">{t('components.richEditor.modals.codeBlock.noHighlighting')}</p>
               </div>
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowCodeBlockModal(false)}>
-              {t('richEditor.modals.codeBlock.cancel')}
+              {t('components.richEditor.modals.codeBlock.cancel')}
             </Button>
             <Button onClick={handleCodeBlockSubmit}>
-              {t('richEditor.modals.codeBlock.addCodeBlock')}
+              {t('components.richEditor.modals.codeBlock.addCodeBlock')}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -1,0 +1,97 @@
+{
+    "title": "Newsletter",
+    "description": "Get notified about new articles",
+    "email": "Email address",
+    "emailPlaceholder": "your@email.com",
+    "language": "Newsletter language",
+    "gdprConsent": "I consent to data processing for newsletter purposes in accordance with the",
+    "gdprConsentCompact": "I consent to the processing of my personal data for receiving the newsletter.",
+    "gdprConsentError": "You must consent to data processing",
+    "privacyPolicy": "privacy policy",
+    "subscribe": "Subscribe to newsletter",
+    "subscribeShort": "Subscribe",
+    "subscribing": "Subscribing...",
+    "successMessage": "Successfully subscribed to newsletter!",
+    "errorMessage": "An error occurred during subscription",
+    "blogSectionTitle": "Subscribe to Newsletter",
+    "blogSectionDescription": "Get notifications about new articles directly to your email inbox",
+    "articleSectionTitle": "Did you enjoy this article?",
+    "articleSectionDescription": "Subscribe to our newsletter to not miss the next ones!",
+    "contentPlaceholders": {
+      "privacyPolicyPl": "Enter privacy policy content in Polish...",
+      "privacyPolicyEn": "Enter privacy policy content in English..."
+    },
+    "languages": {
+      "polish": "Polish",
+      "english": "English"
+    },
+    "admin": {
+        "title": "Newsletter Management",
+        "description": "Manage newsletter subscriptions and send notifications to subscribers",
+        "stats": {
+            "title": "Newsletter Statistics",
+            "description": "Current subscriber counts by language",
+            "polish": "Polish Subscribers",
+            "english": "English Subscribers",
+            "total": "Total Subscribers",
+            "loading": "Loading statistics..."
+        },
+        "send": {
+            "title": "Send Newsletter",
+            "description": "Send a newsletter to subscribers about a published article",
+            "selectArticle": "Select Article",
+            "articlePlaceholder": "Choose an article to feature...",
+            "preview": "Selected Article Preview:",
+            "polishTitle": "Polish Title:",
+            "englishTitle": "English Title:",
+            "slug": "Slug:",
+            "status": "Status:",
+            "published": "Published",
+            "draft": "Draft",
+            "notAvailable": "Not available",
+            "sendToPolish": "Send to Polish Subscribers",
+            "sendToEnglish": "Send to English Subscribers",
+            "confirmTitle": "Confirm Newsletter Send",
+            "confirmDescription": "This action cannot be undone. The newsletter will be sent immediately to all subscribers.",
+            "confirmDetails": {
+            "article": "Article:",
+            "language": "Language:",
+            "recipients": "Recipients:",
+            "subscribers": "subscribers"
+            },
+            "cancel": "Cancel",
+            "sending": "Sending...",
+            "confirm": "Yes, Send Newsletter",
+            "selectArticleFirst": "Please select an article first",
+            "successMessage": "Newsletter sent to {count} {language} subscribers",
+            "polish": "Polish",
+            "english": "English",
+            "unsubscribe": {
+            "title": "Unsubscribe from newsletter",
+            "subtitle": "We're sorry to see you go. Your feedback will help us improve.",
+            "emailAddress": "Email address",
+            "emailPlaceholder": "your@email.com",
+            "reason": "Reason for unsubscribing (optional)",
+            "reasons": {
+                "too_frequent": "Too frequent emails",
+                "not_relevant": "Content is not relevant to me",
+                "never_subscribed": "I never subscribed",
+                "poor_content": "Poor content quality",
+                "technical_issues": "Technical issues",
+                "other": "Other reason"
+            },
+            "feedback": "Additional feedback",
+            "feedbackPlaceholder": "Tell us more about your feedback...",
+            "cancel": "Cancel",
+            "unsubscribeAction": "Unsubscribe",
+            "unsubscribing": "Unsubscribing...",
+            "emailRequired": "Email address is required",
+            "successTitle": "Unsubscribed successfully",
+            "successMessage": "You have been successfully unsubscribed from BWitek.dev newsletter. Thank you for your feedback!",
+            "feedbackNote": "Your feedback helps us better tailor our content to our readers' needs.",
+            "home": "Home",
+            "blog": "Blog"
+            }
+        }
+    }
+}

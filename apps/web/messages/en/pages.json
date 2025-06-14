@@ -1,0 +1,68 @@
+{
+  "login": {
+    "title": "Admin Panel",
+    "email": "Email address",
+    "password": "Password",
+    "signIn": "Sign in",
+    "success": "Sign in successful",
+    "submit": "Sign in",
+    "noAccount": "Don't have an account yet?",
+    "register": "Register"
+  },
+  "register": {
+    "title": "Register",
+    "success": "Registration successful",
+    "submit": "Register",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "name": "Full name",
+    "login": "Login"  
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back",
+    "welcomeUser": "Welcome {name}",
+    "privateData": "Private data: {{message}}",
+    "nav": {
+      "homepage": "Homepage",
+      "skills": "Skills",
+      "projects": "Projects",
+      "navigation": "Navigation",
+      "topbar": "Top Bar",
+      "contact": "Contact",
+      "blog": "Blog",
+      "privacyPolicy": "Privacy Policy",
+      "newsletter": "Newsletter"
+    }
+  },
+  "projects": {
+    "title": "My Projects",
+    "noProjects": "No projects to display",
+    "github": "GitHub",
+    "gitea": "Gitea",
+    "demo": "Demo"
+  },
+  "skills": {
+    "title": "Skills",
+    "noSkills": "No skills in this category",
+    "noCategories": "No skill categories"
+  },
+  "contact": {
+    "title": "Contact",
+    "directContact": "Contact Information",
+    "quickMessage": "Quick Message",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "message": "Message",
+      "send": "Send Message",
+      "success": "Message sent successfully!",
+      "error": "An error occurred while sending the message. Please try again."
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for was not found. It may have been moved or deleted.",
+    "homepage": "Homepage"
+  }
+}

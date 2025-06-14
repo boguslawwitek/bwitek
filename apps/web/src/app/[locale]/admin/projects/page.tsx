@@ -10,7 +10,7 @@ import {useTranslations} from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
-import { DataTable, type Column } from "@/components/admin/data-table";
+import { ResponsiveDataTable, type Column } from "@/components/admin/data-table/index";
 import { ProjectForm } from "@/components/admin/project-form";
 import { Icon } from '@/components/icon';
 import FileUpload from "@/components/admin/file-upload";
@@ -219,35 +219,52 @@ export default function AdminPanelProjects() {
       {
         key: "title.pl",
         header: t("admin.projects.titlePl"),
-        render: (item) => item.title.pl,
+        render: (item) => (
+          <div className="max-w-[180px] truncate" title={item.title.pl}>
+            {item.title.pl}
+          </div>
+        ),
         sortable: true,
-        searchable: true
+        searchable: true,
+        priority: 'high'
       },
       {
         key: "title.en",
         header: t("admin.projects.titleEn"),
-        render: (item) => item.title.en,
+        render: (item) => (
+          <div className="max-w-[180px] truncate" title={item.title.en}>
+            {item.title.en}
+          </div>
+        ),
         sortable: true,
-        searchable: true
+        searchable: true,
+        priority: 'medium'
       },
       {
         key: "url",
         header: t("admin.projects.url"),
-        render: (item) => item.url || "-",
+        render: (item) => (
+          <div className="max-w-[200px] truncate" title={item.url || "-"}>
+            {item.url || "-"}
+          </div>
+        ),
         sortable: true,
-        searchable: true
+        searchable: true,
+        priority: 'medium'
       },
       {
         key: "isActive",
         header: t("admin.projects.active"),
         render: (item) => item.isActive ? t("common.yes") : t("common.no"),
-        sortable: true
+        sortable: true,
+        priority: 'low'
       },
       {
         key: "order",
         header: t("admin.projects.order"),
         render: (item) => item.order,
-        sortable: true
+        sortable: true,
+        priority: 'low'
       }
     ];
   
@@ -374,7 +391,7 @@ export default function AdminPanelProjects() {
 
         <Card>
           <CardContent className="p-6">
-            <DataTable
+            <ResponsiveDataTable
               title={t("admin.projects.title")}
               addButtonText={t("admin.projects.addNew")}
               columns={projectColumns}

@@ -64,8 +64,8 @@ export const ContactForm = ({
 
   const schema = z.object({
     name: z.object({
-      pl: z.string().min(1, t("validation.required") as string),
-      en: z.string().min(1, t("validation.required") as string),
+      pl: z.string().min(1, t("components.validation.required") as string),
+      en: z.string().min(1, t("components.validation.required") as string),
     }),
     iconName: z.string().nullable().optional(),
     iconProvider: z.string().nullable().optional(),

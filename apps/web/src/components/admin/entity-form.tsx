@@ -62,9 +62,9 @@ export const EntityForm = ({
 
       if (field.required) {
         if (field.type === "number") {
-          validator = (validator as z.ZodNumber).min(0, t("validation.required") as string);
+          validator = (validator as z.ZodNumber).min(0, t("components.validation.required") as string);
         } else if (field.type !== "switch") {
-          validator = (validator as z.ZodString).min(1, t("validation.required") as string);
+          validator = (validator as z.ZodString).min(1, t("components.validation.required") as string);
         }
       } else {
         if (field.type !== "switch") {

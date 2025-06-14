@@ -148,7 +148,7 @@ export default function ProjectsClientWrapper({ locale }: Props) {
     <MainLayout>
       <div className="max-w-screen-lg mx-auto px-6 md:px-24 py-8">
         <h1 className="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">
-          {t('projects.title')}
+          {t('pages.projects.title')}
         </h1>
         
         {isLoading ? (
@@ -220,7 +220,7 @@ export default function ProjectsClientWrapper({ locale }: Props) {
                       onClick={() => project.repoUrl && window.open(project.repoUrl, '_blank', 'noopener,noreferrer')}
                     >
                       <Icon name="github" provider="si" className="text-rose-600 dark:text-rose-400" />
-                      {t('projects.github')}
+                      {t('pages.projects.github')}
                     </Button>
                   )}
                   {project.repoUrl2 && (
@@ -231,7 +231,7 @@ export default function ProjectsClientWrapper({ locale }: Props) {
                       onClick={() => project.repoUrl2 && window.open(project.repoUrl2, '_blank', 'noopener,noreferrer')}
                     >
                       <Icon name="gitea" provider="si" className="text-rose-600 dark:text-rose-400" />
-                      {t('projects.gitea')}
+                      {t('pages.projects.gitea')}
                     </Button>
                   )}
                   {project.url && (
@@ -242,7 +242,7 @@ export default function ProjectsClientWrapper({ locale }: Props) {
                       onClick={() => project.url && window.open(project.url, '_blank', 'noopener,noreferrer')}
                     >
                       <Icon name="ExternalLink" provider="lu" className="text-rose-600 dark:text-rose-400" />
-                      {t('projects.demo')}
+                      {t('pages.projects.demo')}
                     </Button>
                   )}
                 </CardFooter>
@@ -251,7 +251,7 @@ export default function ProjectsClientWrapper({ locale }: Props) {
           </div>
         ) : (
           <div className="text-center py-4 text-gray-600 dark:text-gray-400">
-            {t('projects.noProjects')}
+            {t('pages.projects.noProjects')}
           </div>
         )}
       </div>

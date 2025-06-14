@@ -10,7 +10,7 @@ import {useTranslations} from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
-import { DataTable, type Column } from "@/components/admin/data-table";
+import { ResponsiveDataTable, type Column } from "@/components/admin/data-table/index";
 import { SkillForm } from "@/components/admin/skill-form";
 import { SkillCategoryForm } from "@/components/admin/skill-category-form";
 import { Icon } from '@/components/icon';
@@ -308,20 +308,23 @@ export default function AdminPanelSkills() {
       header: t("admin.skills.namePl"),
       render: (item) => item.name.pl,
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'high'
     },
     {
       key: "name.en",
       header: t("admin.skills.nameEn"),
       render: (item) => item.name.en,
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'medium'
     },
     {
       key: "order",
       header: t("admin.skills.order"),
       render: (item) => item.order,
-      sortable: true
+      sortable: true,
+      priority: 'low'
     }
   ];
 
@@ -331,21 +334,24 @@ export default function AdminPanelSkills() {
       header: t("admin.skills.namePl"),
       render: (item) => item.name.pl,
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'high'
     },
     {
       key: "name.en",
       header: t("admin.skills.nameEn"),
       render: (item) => item.name.en,
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'medium'
     },
     {
       key: "category",
       header: t("admin.skills.category"),
       render: (item) => item.category ? `${item.category.pl} / ${item.category.en}` : "-",
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'medium'
     },
     {
       key: "icon",
@@ -355,19 +361,22 @@ export default function AdminPanelSkills() {
         return item.iconProvider ? `${item.iconName} (${item.iconProvider})` : item.iconName;
       },
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'low'
     },
     {
       key: "isActive",
       header: t("admin.skills.active"),
       render: (item) => item.isActive ? t("common.yes") : t("common.no"),
-      sortable: true
+      sortable: true,
+      priority: 'medium'
     },
     {
       key: "order",
       header: t("admin.skills.order"),
       render: (item) => item.order,
-      sortable: true
+      sortable: true,
+      priority: 'low'
     }
   ];
 
@@ -496,7 +505,7 @@ export default function AdminPanelSkills() {
       {/* Skills DataTables */}
       <Card>
         <CardContent className="p-6">
-          <DataTable
+          <ResponsiveDataTable
             title={t("admin.skills.categoriesTitle")}
             addButtonText={t("admin.skills.addNewCategory")}
             columns={categoryColumns}
@@ -513,7 +522,7 @@ export default function AdminPanelSkills() {
             showOrderButtons={true}
           />
 
-          <DataTable
+          <ResponsiveDataTable
             title={t("admin.skills.title")}
             addButtonText={t("admin.skills.addNew")}
             columns={skillColumns}

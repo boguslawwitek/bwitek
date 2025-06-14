@@ -43,13 +43,13 @@ export default function ContactClientWrapper({ locale }: Props) {
     const sendEmailMutation = useMutation(
       trpc.mail.sendContactForm.mutationOptions({
         onSuccess: () => {
-          toast.success(t('contact.form.success'));
+          toast.success(t('pages.contact.form.success'));
           setFormData({ name: '', email: '', message: '', turnstileToken: '' });
           setErrors({});
           turnstileRef.current?.reset();
         },
         onError: (error) => {
-          toast.error(t('contact.form.error'));
+          toast.error(t('pages.contact.form.error'));
           console.error('Error sending email:', error);
         }
       })
@@ -59,23 +59,23 @@ export default function ContactClientWrapper({ locale }: Props) {
       const newErrors: Partial<FormData> = {};
 
       if (!formData.name.trim()) {
-        newErrors.name = t('validation.required');
+        newErrors.name = t('components.validation.required');
       }
 
       if (!formData.email.trim()) {
-        newErrors.email = t('validation.required');
+        newErrors.email = t('components.validation.required');
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-        newErrors.email = t('validation.invalid');
+        newErrors.email = t('components.validation.invalid');
       }
 
       if (!formData.message.trim()) {
-        newErrors.message = t('validation.required');
+        newErrors.message = t('components.validation.required');
       } else if (formData.message.trim().length < 10) {
-        newErrors.message = t('validation.minLength', { min: 10 });
+        newErrors.message = t('components.validation.minLength', { min: 10 });
       }
 
       if (!formData.turnstileToken) {
-        newErrors.turnstileToken = t('validation.turnstileRequired');
+        newErrors.turnstileToken = t('components.validation.turnstileRequired');
       }
 
       setErrors(newErrors);
@@ -112,7 +112,7 @@ export default function ContactClientWrapper({ locale }: Props) {
       <MainLayout>
         <div className="max-w-screen-lg mx-auto px-6 md:px-24 py-8">
           <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-100">
-            {t('contact.title')}
+            {t('pages.contact.title')}
           </h1>
           
           {isLoading ? (
@@ -125,7 +125,7 @@ export default function ContactClientWrapper({ locale }: Props) {
               <Card className="border border-gray-200 dark:border-gray-800">
                 <CardContent className="p-6">
                   <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
-                    {t('contact.directContact')}
+                    {t('pages.contact.directContact')}
                   </h2>
                   
                   <div className="space-y-2">
@@ -175,16 +175,16 @@ export default function ContactClientWrapper({ locale }: Props) {
               <Card className="border border-gray-200 dark:border-gray-800">
                 <CardContent className="p-6">
                   <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
-                    {t('contact.quickMessage')}
+                    {t('pages.contact.quickMessage')}
                   </h2>
                   
                   <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="grid w-full items-center gap-1.5">
-                      <Label htmlFor="name">{t('contact.form.name')}</Label>
+                      <Label htmlFor="name">{t('pages.contact.form.name')}</Label>
                       <Input
                         type="text"
                         id="name"
-                        placeholder={t('contact.form.name')}
+                        placeholder={t('pages.contact.form.name')}
                         value={formData.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
                         className={errors.name ? 'border-rose-500' : ''}
@@ -195,11 +195,11 @@ export default function ContactClientWrapper({ locale }: Props) {
                     </div>
                     
                     <div className="grid w-full items-center gap-1.5">
-                      <Label htmlFor="email">{t('contact.form.email')}</Label>
+                      <Label htmlFor="email">{t('pages.contact.form.email')}</Label>
                       <Input
                         type="email"
                         id="email"
-                        placeholder={t('contact.form.email')}
+                        placeholder={t('pages.contact.form.email')}
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
                         className={errors.email ? 'border-rose-500' : ''}
@@ -210,10 +210,10 @@ export default function ContactClientWrapper({ locale }: Props) {
                     </div>
                     
                     <div className="grid w-full items-center gap-1.5">
-                      <Label htmlFor="message">{t('contact.form.message')}</Label>
+                      <Label htmlFor="message">{t('pages.contact.form.message')}</Label>
                       <Textarea
                         id="message"
-                        placeholder={t('contact.form.message')}
+                        placeholder={t('pages.contact.form.message')}
                         className={`min-h-[120px] ${errors.message ? 'border-rose-500' : ''}`}
                         value={formData.message}
                         onChange={(e) => handleInputChange('message', e.target.value)}
@@ -240,7 +240,7 @@ export default function ContactClientWrapper({ locale }: Props) {
                       className="w-full bg-rose-600 hover:bg-rose-700 text-white"
                       disabled={sendEmailMutation.isPending}
                     >
-                      {sendEmailMutation.isPending ? t('common.saving') : t('contact.form.send')}
+                      {sendEmailMutation.isPending ? t('common.saving') : t('pages.contact.form.send')}
                     </Button>
                   </form>
                 </CardContent>

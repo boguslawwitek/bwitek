@@ -32,7 +32,7 @@ export default function SignInForm({
     },
     onSubmit: async ({ value }) => {
       if (!turnstileToken) {
-        setTurnstileError(t('validation.turnstileRequired'));
+        setTurnstileError(t('components.validation.turnstileRequired'));
         return;
       }
 
@@ -44,7 +44,7 @@ export default function SignInForm({
         {
           onSuccess: () => {
             router.push("/admin")
-            toast.success(t('login.success'));
+            toast.success(t('pages.login.success'));
           },
           onError: (error) => {
             toast.error(error.error.message);
@@ -69,7 +69,7 @@ export default function SignInForm({
 
   const handleTurnstileError = () => {
     setTurnstileToken("");
-    setTurnstileError(t('validation.turnstileRequired'));
+    setTurnstileError(t('components.validation.turnstileRequired'));
   };
 
   if (isPending) {
@@ -78,7 +78,7 @@ export default function SignInForm({
 
   return (
     <div className="mx-auto w-full mt-10 max-w-md p-6">
-      <h1 className="mb-6 text-center text-3xl font-bold">{t('login.title')}</h1>
+      <h1 className="mb-6 text-center text-3xl font-bold">{t('pages.login.title')}</h1>
 
       <form
         onSubmit={(e) => {
@@ -92,7 +92,7 @@ export default function SignInForm({
           <form.Field name="email">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>{t('login.email')}</Label>
+                <Label htmlFor={field.name}>{t('pages.login.email')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -115,7 +115,7 @@ export default function SignInForm({
           <form.Field name="password">
             {(field) => (
               <div className="space-y-2">
-                <Label htmlFor={field.name}>{t('login.password')}</Label>
+                <Label htmlFor={field.name}>{t('pages.login.password')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -153,7 +153,7 @@ export default function SignInForm({
               className="w-full"
               disabled={!state.canSubmit || state.isSubmitting}
             >
-              {state.isSubmitting ? "Submitting..." : t('login.submit')}
+              {state.isSubmitting ? t('common.submitting') : t('pages.login.submit')}
             </Button>
           )}
         </form.Subscribe>
@@ -161,13 +161,13 @@ export default function SignInForm({
 
       {!disabledRegistration && (
         <div className="mt-4 text-center">
-          <p className="text-sm text-gray-600">{t('login.noAccount')}</p>
+          <p className="text-sm text-gray-600">{t('pages.login.noAccount')}</p>
           <Button
             variant="link"
             onClick={onSwitchToSignUp}
             className="text-indigo-600 hover:text-indigo-800"
           >
-            {t('login.register')}
+            {t('pages.login.register')}
           </Button>
         </div>
       )}

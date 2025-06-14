@@ -201,14 +201,14 @@ export default function FileUpload({
         {isPending ? (
           <div className="flex flex-col items-center gap-2">
             <Icon name="Loader" provider="lu" className="h-8 w-8 animate-spin" />
-            <p className="text-sm text-muted-foreground">{t("fileUpload.uploading")}</p>
+            <p className="text-sm text-muted-foreground">{t("components.fileUpload.uploading")}</p>
           </div>
         ) : (
           <div className="flex flex-col items-center gap-4">
             <Icon name="Image" provider="lu" className="h-8 w-8 text-muted-foreground" />
             <div className="space-y-2">
               <p className="text-sm text-muted-foreground">
-                {t("fileUpload.dragAndDrop")}
+                {t("components.fileUpload.dragAndDrop")}
               </p>
               <Button
                 type="button"
@@ -216,7 +216,7 @@ export default function FileUpload({
                 onClick={() => fileInputRef.current?.click()}
               >
                 <Icon name="Upload" provider="lu" className="h-4 w-4 mr-2" />
-                {t("fileUpload.chooseFile")}
+                {t("components.fileUpload.chooseFile")}
               </Button>
             </div>
           </div>
@@ -237,7 +237,7 @@ export default function FileUpload({
             size="sm"
             onClick={handleClear}
           >
-            {t("fileUpload.clear")}
+            {t("components.fileUpload.clear")}
           </Button>
         )}
       </div>

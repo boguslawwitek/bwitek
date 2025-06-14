@@ -245,12 +245,12 @@ export default function CommentsAdminPage() {
             {filteredComments.map((comment) => (
               <Card key={comment.id} className="border border-gray-200 dark:border-gray-700">
                 <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
+                  <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center">
                         <Icon name="User" provider="lu" className="text-red-600 dark:text-red-400" />
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <h3 className="font-semibold text-gray-900 dark:text-gray-100">
                             {comment.authorName}
@@ -259,7 +259,7 @@ export default function CommentsAdminPage() {
                             {comment.isApproved ? t('admin.comments.statusApproved') : t('admin.comments.statusPending')}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mt-1">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-gray-500 dark:text-gray-400 mt-1">
                           <div className="flex items-center gap-1">
                             <Icon name="Mail" provider="lu" className="text-red-600 dark:text-red-400" />
                             {comment.authorEmail}
@@ -280,13 +280,13 @@ export default function CommentsAdminPage() {
                       </div>
                     </div>
                     
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2 mt-2 sm:mt-0">
                       {!comment.isApproved && (
                         <Button
                           size="sm"
                           onClick={() => handleStatusUpdate(comment.id, true)}
                           disabled={updateStatusMutation.isPending}
-                          className="bg-green-600 hover:bg-green-700 text-white"
+                          className="bg-green-600 hover:bg-green-700 text-white w-full sm:w-auto"
                         >
                           <Icon name="Check" provider="lu" className="mr-1" />
                           {t('admin.comments.approve')}
@@ -299,6 +299,7 @@ export default function CommentsAdminPage() {
                           variant="outline"
                           onClick={() => handleStatusUpdate(comment.id, false)}
                           disabled={updateStatusMutation.isPending}
+                          className="w-full sm:w-auto"
                         >
                           <Icon name="X" provider="lu" className="mr-1" />
                           {t('admin.comments.reject')}
@@ -310,6 +311,7 @@ export default function CommentsAdminPage() {
                         variant="destructive"
                         onClick={() => handleDeleteClick(comment.id, comment.authorName)}
                         disabled={deleteCommentMutation.isPending}
+                        className="w-full sm:w-auto"
                       >
                         <Icon name="Trash" provider="lu" className="mr-1" />
                         {t('admin.comments.delete')}

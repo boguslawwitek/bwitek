@@ -6,7 +6,7 @@ import {useTranslations} from 'next-intl';
 import { Card, CardContent } from "@/components/ui/card";
 import { useMutation } from "@tanstack/react-query";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DataTable, type Column } from "@/components/admin/data-table";
+import { ResponsiveDataTable, type Column } from "@/components/admin/data-table/index";
 import { NavigationForm } from "@/components/admin/navigation-form";
 import { TopBarForm } from "@/components/admin/topbar-form";
 
@@ -224,35 +224,52 @@ export default function AdminPanelNavigation() {
       {
         key: "label.pl",
         header: t("admin.navigation.labelPl"),
-        render: (item) => item.label.pl,
+        render: (item) => (
+          <div className="max-w-[180px] truncate" title={item.label.pl}>
+            {item.label.pl}
+          </div>
+        ),
         sortable: true,
-        searchable: true
+        searchable: true,
+        priority: 'high'
       },
       {
         key: "label.en",
         header: t("admin.navigation.labelEn"),
-        render: (item) => item.label.en,
+        render: (item) => (
+          <div className="max-w-[180px] truncate" title={item.label.en}>
+            {item.label.en}
+          </div>
+        ),
         sortable: true,
-        searchable: true
+        searchable: true,
+        priority: 'medium'
       },
       {
         key: "url",
         header: t("admin.navigation.url"),
-        render: (item) => item.url || "-",
+        render: (item) => (
+          <div className="max-w-[200px] truncate" title={item.url || "-"}>
+            {item.url || "-"}
+          </div>
+        ),
         sortable: true,
-        searchable: true
+        searchable: true,
+        priority: 'medium'
       },
       {
         key: "isActive",
         header: t("admin.navigation.active"),
         render: (item) => item.isActive ? t("common.yes") : t("common.no"),
-        sortable: true
+        sortable: true,
+        priority: 'low'
       },
       {
         key: "order",
         header: t("admin.navigation.order"),
         render: (item) => item.order,
-        sortable: true
+        sortable: true,
+        priority: 'low'
       }
     ];
   
@@ -260,36 +277,53 @@ export default function AdminPanelNavigation() {
       {
         key: "name.pl",
         header: t("admin.topBar.namePl"),
-        render: (item) => item.name.pl,
+        render: (item) => (
+          <div className="max-w-[180px] truncate" title={item.name.pl}>
+            {item.name.pl}
+          </div>
+        ),
         sortable: true,
-        searchable: true
+        searchable: true,
+        priority: 'high'
       },
       {
         key: "name.en",
         header: t("admin.topBar.nameEn"),
-        render: (item) => item.name.en,
+        render: (item) => (
+          <div className="max-w-[180px] truncate" title={item.name.en}>
+            {item.name.en}
+          </div>
+        ),
         sortable: true,
-        searchable: true
+        searchable: true,
+        priority: 'medium'
       },
       {
         key: "iconName",
         header: t("admin.topBar.iconName"),
         render: (item) => item.iconName || "-",
         sortable: true,
-        searchable: true
+        searchable: true,
+        priority: 'medium'
       },
       {
         key: "url",
         header: t("admin.topBar.url"),
-        render: (item) => item.url || "-",
+        render: (item) => (
+          <div className="max-w-[200px] truncate" title={item.url || "-"}>
+            {item.url || "-"}
+          </div>
+        ),
         sortable: true,
-        searchable: true
+        searchable: true,
+        priority: 'medium'
       },
       {
         key: "order",
         header: t("admin.topBar.order"),
         render: (item) => item.order,
-        sortable: true
+        sortable: true,
+        priority: 'low'
       }
     ];
   
@@ -307,7 +341,7 @@ export default function AdminPanelNavigation() {
             </TabsList>
             
             <TabsContent value="navigation">
-              <DataTable
+              <ResponsiveDataTable
                 title={t("admin.navigation.title")}
                 addButtonText={t("admin.navigation.addNew")}
                 columns={navigationColumns}
@@ -326,7 +360,7 @@ export default function AdminPanelNavigation() {
             </TabsContent>
             
             <TabsContent value="topbar">
-              <DataTable
+              <ResponsiveDataTable
                 title={t("admin.topBar.title")}
                 addButtonText={t("admin.topBar.addNew")}
                 columns={topBarColumns}

@@ -18,7 +18,7 @@ export default function AdminHeader() {
             className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-foreground/80"
           >
             <Icon name="House" provider="lu" className="h-5 w-5" />
-            <span className="hidden sm:inline">{t('navigation.home')}</span>
+            <span className="hidden sm:inline">{t('components.navigation.home')}</span>
           </Link>
 
           <div className="flex items-center gap-2">

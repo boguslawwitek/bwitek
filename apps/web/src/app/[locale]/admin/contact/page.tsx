@@ -10,7 +10,7 @@ import {useTranslations} from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
-import { DataTable, type Column } from "@/components/admin/data-table";
+import { ResponsiveDataTable, type Column } from "@/components/admin/data-table/index";
 import { ContactForm } from "@/components/admin/contact-form";
 import { Icon } from '@/components/icon';
 import FileUpload from "@/components/admin/file-upload";
@@ -213,29 +213,45 @@ export default function AdminPanelContact() {
     {
       key: "name.pl",
       header: t("admin.contact.namePl"),
-      render: (item) => item.name.pl,
+      render: (item) => (
+        <div className="max-w-[180px] truncate" title={item.name.pl}>
+          {item.name.pl}
+        </div>
+      ),
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'high'
     },
     {
       key: "name.en",
       header: t("admin.contact.nameEn"),
-      render: (item) => item.name.en,
+      render: (item) => (
+        <div className="max-w-[180px] truncate" title={item.name.en}>
+          {item.name.en}
+        </div>
+      ),
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'medium'
     },
     {
       key: "url",
       header: t("admin.contact.url"),
-      render: (item) => item.url || "-",
+      render: (item) => (
+        <div className="max-w-[200px] truncate" title={item.url || "-"}>
+          {item.url || "-"}
+        </div>
+      ),
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'medium'
     },
     {
       key: "order",
       header: t("admin.contact.order"),
       render: (item) => item.order,
-      sortable: true
+      sortable: true,
+      priority: 'low'
     }
   ];
 
@@ -362,7 +378,7 @@ export default function AdminPanelContact() {
 
       <Card>
         <CardContent className="p-6">
-          <DataTable
+          <ResponsiveDataTable
             title={t("admin.contact.title")}
             addButtonText={t("admin.contact.addNew")}
             columns={contactColumns}

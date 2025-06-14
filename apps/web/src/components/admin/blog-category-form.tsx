@@ -69,10 +69,10 @@ export const BlogCategoryForm = ({
 
   const schema = z.object({
     name: z.object({
-      pl: z.string().min(1, t("validation.required") as string),
-      en: z.string().min(1, t("validation.required") as string),
+      pl: z.string().min(1, t("components.validation.required") as string),
+      en: z.string().min(1, t("components.validation.required") as string),
     }),
-    slug: z.string().min(1, t("validation.required") as string),
+    slug: z.string().min(1, t("components.validation.required") as string),
     description: z.object({
       pl: z.string().optional(),
       en: z.string().optional(),

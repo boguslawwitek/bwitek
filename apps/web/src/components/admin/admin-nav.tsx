@@ -13,12 +13,12 @@ interface AdminNavProps {
 const navItems = [
   {
     path: "/admin",
-    labelKey: "dashboard.nav.homepage",
+    labelKey: "pages.dashboard.nav.homepage",
     icon: "House"
   },
   {
     path: "/admin/blog",
-    labelKey: "dashboard.nav.blog",
+    labelKey: "pages.dashboard.nav.blog",
     icon: "FileText"
   },
   {
@@ -28,32 +28,32 @@ const navItems = [
   },
   {
     path: "/admin/projects",
-    labelKey: "dashboard.nav.projects",
+    labelKey: "pages.dashboard.nav.projects",
     icon: "Briefcase"
   },
   {
     path: "/admin/skills",
-    labelKey: "dashboard.nav.skills",
+    labelKey: "pages.dashboard.nav.skills",
     icon: "Award"
   },
   {
     path: "/admin/contact",
-    labelKey: "dashboard.nav.contact",
+    labelKey: "pages.dashboard.nav.contact",
     icon: "Mail"
   },
   {
     path: "/admin/privacy-policy",
-    labelKey: "dashboard.nav.privacyPolicy",
+    labelKey: "pages.dashboard.nav.privacyPolicy",
     icon: "Shield"
   },
   {
     path: "/admin/navigation",
-    labelKey: "dashboard.nav.navigation",
+    labelKey: "pages.dashboard.nav.navigation",
     icon: "Menu"
   },
   {
     path: "/admin/newsletter",
-    labelKey: "dashboard.nav.newsletter",
+    labelKey: "pages.dashboard.nav.newsletter",
     icon: "Send"
   },
 ];

@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { BlogCategoryForm } from "@/components/admin/blog-category-form";
 import FileUpload from "@/components/admin/file-upload";
-import { DataTable, type Column } from "@/components/admin/data-table";
+import { ResponsiveDataTable, type Column } from "@/components/admin/data-table/index";
 import DeleteConfirmationModal from "@/components/admin/delete-confirmation-modal";
 
 type TranslatedField = {
@@ -249,35 +249,40 @@ export default function AdminBlogPage() {
       header: t("admin.blog.categoryNamePl"),
       render: (item) => item.name?.pl || "Unnamed",
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'high'
     },
     {
       key: "name.en", 
       header: t("admin.blog.categoryNameEn"),
       render: (item) => item.name?.en || "Unnamed",
       sortable: true,
-      searchable: true
+      searchable: true,
+      priority: 'medium'
     },
     {
       key: "iconName",
       header: t("admin.blog.iconName"),
       render: (item) => item.iconName ? `${item.iconName} (${item.iconProvider})` : "-",
       sortable: true,
-      searchable: false
+      searchable: false,
+      priority: 'medium'
     },
     {
       key: "isActive",
       header: t("admin.blog.categoryActive"),
       render: (item) => item.isActive ? t("common.yes") : t("common.no"),
       sortable: true,
-      searchable: false
+      searchable: false,
+      priority: 'low'
     },
     {
       key: "order",
       header: t("admin.blog.order"),
       render: (item) => item.order,
       sortable: true,
-      searchable: false
+      searchable: false,
+      priority: 'low'
     }
   ];
 
@@ -302,6 +307,58 @@ export default function AdminBlogPage() {
     });
   };
 
+  const postColumns: Column[] = [
+    {
+      key: "title",
+      header: t("admin.blog.title"),
+      render: (item) => (
+        <div>
+          <div className="font-medium truncate max-w-[250px]" title={item.title?.pl || item.title?.en || t('common.untitled')}>
+            {item.title?.pl || item.title?.en || t('common.untitled')}
+          </div>
+          <div className="text-sm text-muted-foreground truncate max-w-[200px]" title={`Slug: ${item.slug}`}>
+            Slug: {item.slug}
+          </div>
+        </div>
+      ),
+      sortable: true,
+      searchable: true,
+      priority: 'high'
+    },
+    {
+      key: "category",
+      header: t("admin.blog.category"),
+      render: (item) => item.category?.name?.pl || item.category?.name?.en || t("admin.blog.noCategory"),
+      sortable: true,
+      searchable: true,
+      priority: 'medium'
+    },
+    {
+      key: "status",
+      header: t("admin.blog.status"),
+      render: (item) => getStatusBadge(item.isPublished),
+      sortable: true,
+      searchable: false,
+      priority: 'medium'
+    },
+    {
+      key: "publishedAt",
+      header: t("admin.blog.publishedAt"),
+      render: (item) => formatDate(item.publishedAt),
+      sortable: true,
+      searchable: false,
+      priority: 'low'
+    },
+    {
+      key: "views",
+      header: t("admin.blog.views"),
+      render: (item) => item.viewCount || 0,
+      sortable: true,
+      searchable: false,
+      priority: 'low'
+    }
+  ];
+
   const renderPostsTable = () => {
     if (!blogPosts.data || blogPosts.data.length === 0) {
       return (
@@ -312,67 +369,40 @@ export default function AdminBlogPage() {
     }
 
     return (
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{t("admin.blog.title")}</TableHead>
-            <TableHead>{t("admin.blog.category")}</TableHead>
-            <TableHead>{t("admin.blog.status")}</TableHead>
-            <TableHead>{t("admin.blog.publishedAt")}</TableHead>
-            <TableHead>{t("admin.blog.views")}</TableHead>
-            <TableHead>{t("admin.blog.actions")}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {blogPosts.data.map((post: any) => (
-            <TableRow key={post.id}>
-              <TableCell>
-                <div>
-                  <div className="font-medium">{post.title?.pl || post.title?.en || t('common.untitled')}</div>
-                  <div className="text-sm text-muted-foreground">Slug: {post.slug}</div>
-                </div>
-              </TableCell>
-              <TableCell>
-                {post.category?.name?.pl || post.category?.name?.en || t("admin.blog.noCategory")}
-              </TableCell>
-              <TableCell>
-                {getStatusBadge(post.isPublished)}
-              </TableCell>
-              <TableCell>
-                {formatDate(post.publishedAt)}
-              </TableCell>
-              <TableCell>
-                {post.viewCount || 0}
-              </TableCell>
-              <TableCell>
-                <div className="flex gap-2">
-                  <Link href={`/admin/blog/${post.id}`}>
-                    <Button variant="outline" size="sm">
-                      <Icon name="Eye" provider="lu" className="w-4 h-4 mr-1" />
-                      {t("admin.blog.view")}
-                    </Button>
-                  </Link>
-                  <Link href={`/admin/blog/${post.id}/edit`}>
-                    <Button variant="outline" size="sm">
-                      <Icon name="Pencil" provider="lu" className="w-4 h-4 mr-1" />
-                      {t("admin.blog.edit")}
-                    </Button>
-                  </Link>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleDeletePost(post.id, post.title?.pl || post.title?.en || t('common.untitled'))}
-                    className="text-red-600 hover:text-red-700"
-                  >
-                    <Icon name="Trash2" provider="lu" className="w-4 h-4 mr-1" />
-                    {t("admin.blog.delete")}
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <ResponsiveDataTable
+        title=""
+        addButtonText=""
+        columns={postColumns}
+        data={blogPosts.data}
+        showAddButton={false}
+        showOrderButtons={false}
+        searchPlaceholder={t("admin.blog.searchPosts")}
+        customActions={(item: any) => (
+          <div className="flex gap-1 flex-wrap w-full justify-end">
+            <Link href={`/admin/blog/${item.id}`} className="flex-shrink-0">
+              <Button variant="outline" size="sm" className="w-full">
+                <Icon name="Eye" provider="lu" className="w-4 h-4 mr-1" />
+                {t("admin.blog.view")}
+              </Button>
+            </Link>
+            <Link href={`/admin/blog/${item.id}/edit`} className="flex-shrink-0">
+              <Button variant="outline" size="sm" className="w-full">
+                <Icon name="Pencil" provider="lu" className="w-4 h-4 mr-1" />
+                {t("admin.blog.edit")}
+              </Button>
+            </Link>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleDeletePost(item.id, item.title?.pl || item.title?.en || t('common.untitled'))}
+              className="text-red-600 hover:text-red-700 flex-shrink-0"
+            >
+              <Icon name="Trash2" provider="lu" className="w-4 h-4 mr-1" />
+              {t("admin.blog.delete")}
+            </Button>
+          </div>
+        )}
+      />
     );
   };
 
@@ -413,7 +443,7 @@ export default function AdminBlogPage() {
         <TabsContent value="categories">
           <Card>
             <CardContent className="p-6">
-              <DataTable
+              <ResponsiveDataTable
                 title={t("admin.blog.categoriesManagement")}
                 addButtonText={t("admin.blog.addCategory")}
                 columns={categoryColumns}

@@ -126,7 +126,7 @@ export default function NewBlogPostPage() {
 
   const handleSubmit = () => {
     if (!formData.title.pl || !formData.title.en || !formData.slug) {
-      toast.error(t("validation.required"));
+      toast.error(t("components.validation.required"));
       return;
     }
 

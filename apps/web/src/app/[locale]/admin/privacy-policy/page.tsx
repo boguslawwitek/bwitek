@@ -169,8 +169,8 @@ export default function AdminPanelPrivacyPolicy() {
           >
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold leading-none tracking-tight">Privacy Policy Page Meta Tags</h3>
-                <p className="text-sm text-muted-foreground mt-1">SEO settings for privacy policy page</p>
+                <h3 className="text-lg font-semibold leading-none tracking-tight">{t("admin.privacy-policy.metaTags")}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{t("admin.privacy-policy.metaTagsDescription")}</p>
               </div>
               {isMetaExpanded ? (
                 <Icon name="ChevronUp" provider="lu" className="h-4 w-4" />
@@ -279,11 +279,11 @@ export default function AdminPanelPrivacyPolicy() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Privacy Policy Content</CardTitle>
+            <CardTitle>{t("admin.privacy-policy.content")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-4">
-              <Label>Polish Content</Label>
+              <Label>{t("admin.privacy-policy.plContent")}</Label>
               <RichTextEditor
                 content={privacyPolicyFormData.content.pl}
                 onChange={(content) => handlePrivacyPolicyFieldChange("pl", content)}
@@ -292,7 +292,7 @@ export default function AdminPanelPrivacyPolicy() {
             </div>
 
             <div className="space-y-4">
-              <Label>English Content</Label>
+              <Label>{t("admin.privacy-policy.enContent")}</Label>
               <RichTextEditor
                 content={privacyPolicyFormData.content.en}
                 onChange={(content) => handlePrivacyPolicyFieldChange("en", content)}

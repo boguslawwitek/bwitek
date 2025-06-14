@@ -1,0 +1,26 @@
+{
+  "title": "Blog",
+  "subtitle": "Articles about programming, technology and software development",
+  "searchPlaceholder": "Search articles...",
+  "allCategories": "All",
+  "featuredArticles": "Featured Articles",
+  "allArticles": "All Articles",
+  "noArticlesFound": "No articles found matching your search criteria.",
+  "relatedArticles": "Related Articles",
+  "backToBlog": "Back to blog",
+  "articleNotFound": "Article not found",
+  "readMore": "Read more",
+  "featured": "Featured",
+  "views": "views",
+  "rssFeed": "RSS Feed",
+  "share": {
+    "title": "Share article",
+    "facebook": "Share on Facebook",
+    "twitter": "Share on Twitter",
+    "linkedin": "Share on LinkedIn", 
+    "whatsapp": "Share via WhatsApp",
+    "email": "Share via email",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied to clipboard!"
+  }
+}

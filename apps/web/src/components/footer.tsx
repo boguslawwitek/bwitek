@@ -33,7 +33,7 @@ export default function Footer() {
           <div className="flex items-center gap-6 flex-wrap justify-center">
 
             <div className="flex flex-col items-center gap-1">
-              <span className="text-sm text-gray-700 dark:text-gray-200">{t('theme.toggle')}</span>
+              <span className="text-sm text-gray-700 dark:text-gray-200">{t('components.theme.toggle')}</span>
               <Tabs 
                 id="theme-tabs"
                 defaultValue={theme}
@@ -47,7 +47,7 @@ export default function Footer() {
                     aria-controls="theme-light-content"
                     tabIndex={theme === 'light' ? 0 : -1}>
                     <Icon name="Sun" provider="lu" />
-                    <span>{t('theme.light')}</span>
+                    <span>{t('components.theme.light')}</span>
                   </TabsTrigger>
                   <TabsTrigger 
                     value="dark" 
@@ -56,7 +56,7 @@ export default function Footer() {
                     aria-controls="theme-dark-content"
                     tabIndex={theme === 'dark' ? 0 : -1}>
                     <Icon name="Moon" provider="lu" />
-                    <span>{t('theme.dark')}</span>
+                    <span>{t('components.theme.dark')}</span>
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="light" id="theme-light-content" className="hidden" />
@@ -65,7 +65,7 @@ export default function Footer() {
             </div>
             
             <div className="flex flex-col items-center gap-1">
-              <span className="text-sm text-gray-700 dark:text-gray-200">{t('language.switch')}</span>
+              <span className="text-sm text-gray-700 dark:text-gray-200">{t('components.language.switch')}</span>
               <Tabs 
                 id="language-tabs"
                 defaultValue={locale} 
@@ -110,7 +110,7 @@ export default function Footer() {
                 </Link>
               </div>
               <div>
-                &copy; {currentYear} {t('footer.copyright')}
+                &copy; {currentYear} {t('components.footer.copyright')}
               </div>
             </div>
           </div>

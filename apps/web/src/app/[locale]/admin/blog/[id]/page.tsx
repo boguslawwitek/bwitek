@@ -48,8 +48,8 @@ export default function ViewBlogPostPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      <div className="flex items-center justify-between flex-col md:flex-row">
+        <div className="flex items-center gap-4 flex-col md:flex-row">
           <Link href="/admin/blog">
             <Button variant="outline" size="sm">
               <Icon name="ArrowLeft" provider="lu" className="w-4 h-4 mr-2" />
