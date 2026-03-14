@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import {useTranslations, useLocale} from 'next-intl';
+import {useTranslations} from 'next-intl';
+import {useTypedLocale} from '@/i18n/use-typed-locale';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
@@ -30,7 +31,7 @@ type HomepageFormData = {
 
 export default function AdminPanel() {
   const t = useTranslations();
-  const currentLang = useLocale();
+  const currentLang = useTypedLocale();
 
   const homepage = useQuery(trpc.content.getHomepage.queryOptions());
   const [isMetaExpanded, setIsMetaExpanded] = useState(false);

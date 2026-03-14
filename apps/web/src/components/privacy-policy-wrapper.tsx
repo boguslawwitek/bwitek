@@ -2,10 +2,11 @@
 import { trpc } from "@/utils/trpc";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from 'next-intl';
+import type { Locale } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface PrivacyPolicyClientWrapperProps {
-  locale: string;
+  locale: Locale;
 }
 
 export default function PrivacyPolicyClientWrapper({ locale }: PrivacyPolicyClientWrapperProps) {
@@ -46,7 +47,7 @@ export default function PrivacyPolicyClientWrapper({ locale }: PrivacyPolicyClie
     );
   }
 
-  const content = privacyPolicy.data?.content?.[locale as 'pl' | 'en'];
+  const content = privacyPolicy.data?.content?.[locale];
 
   if (!content) {
     return (

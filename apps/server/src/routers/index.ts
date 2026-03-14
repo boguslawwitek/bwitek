@@ -13,6 +13,9 @@ export const appRouter = router({
   getRegistrationStatus: publicProcedure.query(() => {
     return { enabled: process.env.REGISTRATION_ENABLED === "true" };
   }),
+  getNewsletterStatus: publicProcedure.query(() => {
+    return { enabled: process.env.NEWSLETTER_ENABLED === "true" };
+  }),
   healthCheck: publicProcedure.query(() => {
     return "OK";
   }),

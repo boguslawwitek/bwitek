@@ -1,5 +1,6 @@
 "use client"
-import {useTranslations, useLocale} from 'next-intl';
+import {useTranslations} from 'next-intl';
+import {useTypedLocale} from '@/i18n/use-typed-locale';
 import {Link, useRouter, usePathname} from '@/i18n/navigation';
 import {useParams} from 'next/navigation';
 import { useTheme } from "next-themes";
@@ -12,7 +13,7 @@ export default function Footer() {
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
-  const locale = useLocale();
+  const locale = useTypedLocale();
   const { theme, setTheme } = useTheme();
   const currentYear = new Date().getFullYear();
   

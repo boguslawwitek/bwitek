@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTheme } from "next-themes"
 import parse, { type HTMLReactParserOptions, Element } from 'html-react-parser'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -11,26 +11,12 @@ interface ArticleContentProps {
 }
 
 export default function ArticleContent({ content, className = "" }: ArticleContentProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
   const { theme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
   }, [])
-
-  useEffect(() => {
-    if (containerRef.current) {
-      const preElements = containerRef.current.querySelectorAll('pre code')
-      console.log('TipTap HTML structure:')
-      preElements.forEach((code, index) => {
-        console.log(`Block ${index}:`)
-        console.log('- className:', code.className)
-        console.log('- textContent:', code.textContent?.substring(0, 100))
-        console.log('- parentElement classes:', code.parentElement?.className)
-      })
-    }
-  }, [content])
 
   const contentStyles = `
     [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-6 [&_h1]:mb-4 [&_h1]:leading-tight
@@ -136,7 +122,6 @@ export default function ArticleContent({ content, className = "" }: ArticleConte
 
   return (
     <div
-      ref={containerRef}
       className={allStyles}
       suppressHydrationWarning={true}
     >

@@ -2,6 +2,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { trpc } from "@/utils/trpc";
 import {useTranslations} from 'next-intl';
+import type { Locale } from '@/lib/types';
 import MainLayout from "@/components/main-layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,7 @@ import { useState, useRef } from "react";
 import { toast } from "sonner";
 
 interface Props {
-  locale: string;
+  locale: Locale;
 }
 
 interface FormData {
@@ -158,10 +159,10 @@ export default function ContactClientWrapper({ locale }: Props) {
                                   rel={contact.external ? "noopener noreferrer" : undefined} 
                                   className="hover:text-rose-600 dark:hover:text-rose-400 hover:underline cursor-pointer"
                                 >
-                                  {contact.name?.[locale as 'pl' | 'en']}
+                                  {contact.name?.[locale]}
                                 </a>
                               ) : (
-                                contact.name?.[locale as 'pl' | 'en']
+                                contact.name?.[locale]
                               )}
                             </h3>
                           </div>

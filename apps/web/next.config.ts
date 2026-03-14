@@ -1,5 +1,11 @@
+import { config } from 'dotenv';
+import { resolve } from 'path';
 import type {NextConfig} from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
+
+// Load .env from monorepo root
+config({ path: resolve(import.meta.dirname, '../../.env') });
+
 
 const devOrigins = process.env.ALLOWED_DEV_ORIGINS
   ? process.env.ALLOWED_DEV_ORIGINS.split(',')

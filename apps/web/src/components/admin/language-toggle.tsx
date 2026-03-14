@@ -6,7 +6,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Icon } from '@/components/icon';
-import {useTranslations, useLocale} from 'next-intl';
+import {useTranslations} from 'next-intl';
+import {useTypedLocale} from '@/i18n/use-typed-locale';
 import {useRouter, usePathname} from '@/i18n/navigation';
 import {useParams} from 'next/navigation';
 
@@ -20,7 +21,7 @@ export function LanguageToggle() {
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
-  const locale = useLocale();
+  const locale = useTypedLocale();
 
   return (
     <DropdownMenu>

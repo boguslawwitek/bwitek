@@ -8,71 +8,21 @@ import { Button } from "@/components/ui/button";
 import { Icon } from '@/components/icon';
 import { Link } from '@/i18n/navigation';
 import { trpc } from "@/utils/trpc";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import ArticleContent from "@/components/admin/article-content";
 import CommentsSection from "@/components/blog/comments-section";
 import NewsletterSignup from '@/components/newsletter-signup';
 import SocialShare from '@/components/blog/social-share';
-
-interface Translation {
-  pl: string;
-  en: string;
-}
-
-interface BlogCategory {
-  id: string;
-  name: Translation;
-  slug: string;
-  description?: Translation;
-  iconName?: string;
-  iconProvider?: string;
-  order: number;
-  isActive: boolean;
-}
-
-interface BlogPost {
-  id: string;
-  title: Translation;
-  slug: string;
-  content: Translation;
-  excerpt?: Translation;
-  ogImage?: string;
-  isPublished: boolean;
-  publishedAt?: string;
-  isFeatured: boolean;
-  viewCount: number;
-  category?: BlogCategory;
-}
+import { type Locale, type BlogPost, mapIconProvider } from '@/lib/types';
+import { getFullImageUrl } from '@/lib/url';
+import { stripHtml, truncateText } from '@/lib/text';
+import { formatDate } from '@/lib/format';
 
 interface BlogPostClientProps {
-  locale: string;
+  locale: Locale;
   postData: BlogPost;
   relatedPosts: BlogPost[];
 }
-
-const getFullImageUrl = (url: string): string => {
-  if (!url) return '';
-  if (url.startsWith('http')) return url;
-  if (url.startsWith('/api/uploads/')) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`;
-  }
-  if (url.startsWith('/uploads/')) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}/api${url}`;
-  }
-  return url;
-};
-
-const getIcon = (iconName: string | null | undefined, iconProvider: string | null | undefined, size = 16) => {
-  if (!iconName) return null;
-  
-  if (iconProvider === 'lucide') {
-    return <Icon name={iconName} provider="lu" className="text-current" />;
-  } else if (iconProvider === 'simple-icons') {
-    return <Icon name={iconName} provider="si" className="text-current" />;
-  }
-  
-  return null;
-};
 
 export default function BlogPostClient({ 
   locale, 
@@ -80,6 +30,10 @@ export default function BlogPostClient({
   relatedPosts 
 }: BlogPostClientProps) {
   const t = useTranslations();
+
+  const { data: newsletterStatus } = useQuery(
+    trpc.getNewsletterStatus.queryOptions()
+  );
 
   const { mutate: incrementViewCount } = useMutation(
     trpc.blog.incrementViewCount.mutationOptions({
@@ -94,29 +48,6 @@ export default function BlogPostClient({
       incrementViewCount(postData.id);
     }
   }, [postData?.id, incrementViewCount]);
-
-  const formatDate = (dateString?: string) => {
-    if (!dateString) return '';
-    return new Date(dateString).toLocaleDateString(locale === 'pl' ? 'pl-PL' : 'en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  const truncateText = (text: string, maxLength: number = 100) => {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength).trim() + '...';
-  };
-
-  const stripHtml = (html: string) => {
-    if (typeof window === 'undefined') {
-      return html.replace(/<[^>]*>/g, '');
-    }
-    const tmp = document.createElement('div');
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || '';
-  };
 
   const processHtmlContent = (html: string) => {
     return html.replace(/src="([^"]*\/(?:api\/)?uploads\/[^"]*)"/g, (match, url) => {
@@ -163,19 +94,21 @@ export default function BlogPostClient({
             )}
             {postData.category && (
               <Badge variant="outline" className="flex items-center gap-1">
-                {getIcon(postData.category.iconName, postData.category.iconProvider, 14)}
-                {postData.category.name[locale as 'pl' | 'en']}
+                {postData.category.iconName && mapIconProvider(postData.category.iconProvider) && (
+                  <Icon name={postData.category.iconName} provider={mapIconProvider(postData.category.iconProvider)!} className="text-current" />
+                )}
+                {postData.category.name[locale]}
               </Badge>
             )}
           </div>
 
           <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
-            {postData.title[locale as 'pl' | 'en']}
+            {postData.title[locale]}
           </h1>
 
           {postData.excerpt && (
             <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
-              {stripHtml(postData.excerpt[locale as 'pl' | 'en'])}
+              {stripHtml(postData.excerpt[locale])}
             </p>
           )}
 
@@ -183,7 +116,7 @@ export default function BlogPostClient({
             <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
               <div className="flex items-center gap-1">
                 <Icon name="Calendar" provider="lu" className="h-4 w-4" />
-                {formatDate(postData.publishedAt)}
+                {formatDate(postData.publishedAt, { locale })}
               </div>
               <div className="flex items-center gap-1">
                 <Icon name="Eye" provider="lu" className="h-4 w-4" />
@@ -192,8 +125,8 @@ export default function BlogPostClient({
             </div>
             <SocialShare 
               url={`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001'}/${locale}/blog/${postData.slug}`}
-              title={postData.title[locale as 'pl' | 'en']}
-              description={postData.excerpt ? stripHtml(postData.excerpt[locale as 'pl' | 'en']) : undefined}
+              title={postData.title[locale]}
+              description={postData.excerpt ? stripHtml(postData.excerpt[locale]) : undefined}
             />
           </div>
 
@@ -201,7 +134,7 @@ export default function BlogPostClient({
             <div className="aspect-video overflow-hidden rounded-lg mb-8">
               <img
                 src={getFullImageUrl(postData.ogImage)}
-                alt={postData.title[locale as 'pl' | 'en']}
+                alt={postData.title[locale]}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -209,7 +142,7 @@ export default function BlogPostClient({
         </header>
 
         <ArticleContent 
-          content={processHtmlContent(postData.content[locale as 'pl' | 'en'])}
+          content={processHtmlContent(postData.content[locale])}
           className="border-0 p-0 bg-transparent"
         />
       </article>
@@ -226,7 +159,7 @@ export default function BlogPostClient({
                   <div className="aspect-video overflow-hidden rounded-t-lg">
                     <img
                       src={getFullImageUrl(post.ogImage)}
-                      alt={post.title[locale as 'pl' | 'en']}
+                      alt={post.title[locale]}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                     />
                   </div>
@@ -240,28 +173,30 @@ export default function BlogPostClient({
                     )}
                     {post.category && (
                       <Badge variant="outline" className="text-xs flex items-center gap-1">
-                        {getIcon(post.category.iconName, post.category.iconProvider, 12)}
-                        {post.category.name[locale as 'pl' | 'en']}
+                        {post.category.iconName && mapIconProvider(post.category.iconProvider) && (
+                          <Icon name={post.category.iconName} provider={mapIconProvider(post.category.iconProvider)!} className="text-current" />
+                        )}
+                        {post.category.name[locale]}
                       </Badge>
                     )}
                   </div>
                   <CardTitle className="text-lg line-clamp-2 group-hover:text-primary transition-colors">
                     <Link href={`/blog/${post.slug}`}>
-                      {post.title[locale as 'pl' | 'en']}
+                      {post.title[locale]}
                     </Link>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   {post.excerpt && (
                     <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2 text-sm">
-                      {truncateText(stripHtml(post.excerpt[locale as 'pl' | 'en']))}
+                      {truncateText(stripHtml(post.excerpt[locale]))}
                     </p>
                   )}
                   <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-1">
                         <Icon name="Calendar" provider="lu" className="h-3 w-3" />
-                        {formatDate(post.publishedAt)}
+                        {formatDate(post.publishedAt, { locale })}
                       </div>
                       <div className="flex items-center gap-1">
                         <Icon name="Eye" provider="lu" className="h-3 w-3" />
@@ -282,23 +217,25 @@ export default function BlogPostClient({
       )}
 
       {/* Newsletter Signup */}
-      <section className="border-t pt-12">
-        <div className="text-center mb-6">
-          <h3 className="text-xl font-semibold mb-2">
-            {t('newsletter.articleSectionTitle')}
-          </h3>
-          <p className="text-muted-foreground text-sm">
-            {t('newsletter.articleSectionDescription')}
-          </p>
-        </div>
-        <div className="max-w-sm mx-auto">
-          <NewsletterSignup 
-            source="article" 
-            compact={true}
-            showLanguageSelector={true}
-          />
-        </div>
-      </section>
+      {newsletterStatus?.enabled && (
+        <section className="border-t pt-12">
+          <div className="text-center mb-6">
+            <h3 className="text-xl font-semibold mb-2">
+              {t('newsletter.articleSectionTitle')}
+            </h3>
+            <p className="text-muted-foreground text-sm">
+              {t('newsletter.articleSectionDescription')}
+            </p>
+          </div>
+          <div className="max-w-sm mx-auto">
+            <NewsletterSignup
+              source="article"
+              compact={true}
+              showLanguageSelector={true}
+            />
+          </div>
+        </section>
+      )}
 
       {postData && postData.id && (
         <CommentsSection postId={postData.id} />

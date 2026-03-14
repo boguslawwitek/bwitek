@@ -50,6 +50,9 @@ export class BrevoService {
     this.englishListId = process.env.BREVO_EN_LIST_ID || '';
     this.contactsLimit = parseInt(process.env.BREVO_CONTACTS_LIMIT || '100');
 
+    if (process.env.NEWSLETTER_ENABLED !== 'true') {
+      return;
+    }
     if (!this.apiKey) {
       throw new Error('BREVO_API_KEY is required');
     }

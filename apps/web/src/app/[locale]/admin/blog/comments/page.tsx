@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { trpc } from "@/utils/trpc";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
+import { useTypedLocale } from "@/i18n/use-typed-locale";
+import { formatDate } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -36,7 +38,7 @@ interface Comment {
 
 export default function CommentsAdminPage() {
   const t = useTranslations();
-  const locale = useLocale();
+  const locale = useTypedLocale();
   const queryClient = useQueryClient();
   
   const [currentPage, setCurrentPage] = useState(1);
@@ -115,15 +117,6 @@ export default function CommentsAdminPage() {
     setDeleteModal({ isOpen: false, commentId: null, authorName: '' });
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pl-PL', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
 
   const getPostTitle = (comment: Comment) => {
     if (!comment.postTitle) {
@@ -274,7 +267,7 @@ export default function CommentsAdminPage() {
                           )}
                           <div className="flex items-center gap-1">
                             <Icon name="Calendar" provider="lu" className="text-red-600 dark:text-red-400" />
-                            {formatDate(comment.createdAt)}
+                            {formatDate(comment.createdAt, { locale, shortMonth: true, includeTime: true })}
                           </div>
                         </div>
                       </div>

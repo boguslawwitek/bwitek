@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
+import { useTypedLocale } from '@/i18n/use-typed-locale';
 import { useMutation } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,19 +15,19 @@ export default function NewsletterConfirmClient() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const t = useTranslations();
-  const locale = useLocale();
+  const locale = useTypedLocale();
   
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [message, setMessage] = useState('');
 
   const confirmMutation = useMutation(
     trpc.newsletter.confirmSubscription.mutationOptions({
-      onSuccess: (data: any) => {
+      onSuccess: (data) => {
         setStatus('success');
         setMessage(data.message);
         toast.success(data.message);
       },
-      onError: (error: any) => {
+      onError: (error) => {
         setStatus('error');
         setMessage(error.message);
         toast.error(error.message);

@@ -1,16 +1,4 @@
-if (process.env.NODE_ENV === 'production') {
-  // In production, try to load .env.production but don't fail if it doesn't exist
-  // Docker-compose environment variables will take precedence anyway
-  try {
-    const { config } = await import('dotenv');
-    config({ path: '.env.production' });
-  } catch (error) {
-    // .env.production file doesn't exist, rely on system environment variables
-    console.log('No .env.production file found, using system environment variables');
-  }
-} else {
-  await import('dotenv/config');
-}
+import './env';
 
 const args = process.argv.slice(2);
 const portIndex = args.indexOf('--port');

@@ -1,5 +1,6 @@
 "use client"
 import { trpc } from "@/utils/trpc";
+import { formatDate } from "@/lib/format";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useTranslations } from 'next-intl';
@@ -298,14 +299,6 @@ export default function AdminBlogPage() {
     );
   };
 
-  const formatDate = (date: string | null) => {
-    if (!date) return t("admin.blog.neverPublished");
-    return new Date(date).toLocaleDateString('pl-PL', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
-  };
 
   const postColumns: Column[] = [
     {
@@ -344,7 +337,7 @@ export default function AdminBlogPage() {
     {
       key: "publishedAt",
       header: t("admin.blog.publishedAt"),
-      render: (item) => formatDate(item.publishedAt),
+      render: (item) => formatDate(item.publishedAt, { locale: 'pl', nullText: t("admin.blog.neverPublished") }),
       sortable: true,
       searchable: false,
       priority: 'low'

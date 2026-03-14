@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
+import { useTypedLocale } from "@/i18n/use-typed-locale";
 import { Link } from "@/i18n/navigation";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,14 +21,22 @@ interface NewsletterSignupProps {
   showLanguageSelector?: boolean;
 }
 
-export default function NewsletterSignup({ 
-  source = 'blog', 
+export default function NewsletterSignup({
+  source = 'blog',
   compact = false,
   minimal = false,
-  showLanguageSelector = false 
+  showLanguageSelector = false
 }: NewsletterSignupProps) {
   const t = useTranslations();
-  const currentLocale = useLocale() as 'pl' | 'en';
+  const currentLocale = useTypedLocale();
+
+  const { data: newsletterStatus } = useQuery(
+    trpc.getNewsletterStatus.queryOptions()
+  );
+
+  if (newsletterStatus && !newsletterStatus.enabled) {
+    return null;
+  }
   
   const [email, setEmail] = useState('');
   const [language, setLanguage] = useState<'pl' | 'en'>(currentLocale);

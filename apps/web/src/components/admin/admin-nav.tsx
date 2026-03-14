@@ -2,8 +2,10 @@
 import { cn } from "@/lib/utils";
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
+import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent } from "@/components/ui/card";
 import { Icon } from "@/components/icon";
+import { trpc } from "@/utils/trpc";
 
 interface AdminNavProps {
   onNavItemClick?: () => void;
@@ -61,6 +63,9 @@ const navItems = [
 export default function AdminNav({ onNavItemClick, isMobile = false }: AdminNavProps) {
   const t = useTranslations();
   const pathname = usePathname();
+  const { data: newsletterStatus } = useQuery(
+    trpc.getNewsletterStatus.queryOptions()
+  );
 
   const handleClick = () => {
     if (onNavItemClick) {
@@ -68,9 +73,16 @@ export default function AdminNav({ onNavItemClick, isMobile = false }: AdminNavP
     }
   };
 
+  const filteredNavItems = navItems.filter((item) => {
+    if (item.path === "/admin/newsletter" && !newsletterStatus?.enabled) {
+      return false;
+    }
+    return true;
+  });
+
   const NavLinks = () => (
     <div className={cn("space-y-2", isMobile && "p-4 pt-14")}>
-      {navItems.map((item) => (
+      {filteredNavItems.map((item) => (
         <Link
           key={item.path}
           href={item.path}

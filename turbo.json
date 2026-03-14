@@ -18,7 +18,7 @@
 		"lint": {
 			"dependsOn": ["^lint"]
 		},
-		"check": {
+		"check-types": {
 			"dependsOn": ["^check-types"]
 		},
 		"dev": {
@@ -40,6 +40,9 @@
 		"db:generate": {
 			"cache": false,
 			"persistent": true
+		},
+		"test": {
+			"cache": false
 		}
 	}
 }

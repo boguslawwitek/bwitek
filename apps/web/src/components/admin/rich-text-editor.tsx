@@ -23,24 +23,13 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { getFullImageUrl } from "@/lib/url"
 
 interface RichTextEditorProps {
   content: string
   onChange: (content: string) => void
   placeholder?: string
 }
-
-const getFullImageUrl = (url: string): string => {
-  if (!url) return '';
-  if (url.startsWith('http')) return url;
-  if (url.startsWith('/api/uploads/')) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`;
-  }
-  if (url.startsWith('/uploads/')) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}/api${url}`;
-  }
-  return url;
-};
 
 const extractImageUrls = (html: string): string[] => {
   if (!html) return [];
@@ -84,14 +73,13 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
 
   const { mutate: deleteOldImage } = useMutation(
     trpc.upload.deleteImageByUrl.mutationOptions({
-      onError: (error: any) => {
+      onError: (error) => {
         console.warn("Failed to delete old image:", error);
       }
     })
   );
 
   const handleImageDelete = useCallback((src: string) => {
-    console.log('Attempting to delete image:', src);
     if (src.includes('/api/uploads/') || src.includes('/uploads/')) {
       let apiUrl = src;
       if (src.includes('/uploads/') && !src.includes('/api/uploads/')) {
@@ -100,8 +88,6 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
       if (src.includes('/api/uploads/')) {
         apiUrl = src.substring(src.indexOf('/api/uploads/'));
       }
-      
-      console.log('Deleting upload path:', apiUrl);
       deleteOldImage({ url: apiUrl });
     }
   }, [deleteOldImage]);
@@ -147,23 +133,12 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
     },
     onUpdate: ({ editor }) => {
       const newContent = editor.getHTML();
-      
-      console.log('Content updated');
-      console.log('Previous content:', previousContent);
-      console.log('New content:', newContent);
-      
+
       const oldImages = extractImageUrls(previousContent);
       const newImages = extractImageUrls(newContent);
-      
-      console.log('Old images:', oldImages);
-      console.log('New images:', newImages);
-      
       const deletedImages = oldImages.filter(oldImg => !newImages.includes(oldImg));
-      
-      console.log('Deleted images:', deletedImages);
-      
+
       deletedImages.forEach(src => {
-        console.log('Deleting image:', src);
         handleImageDelete(src);
       });
       
@@ -255,14 +230,12 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
 
   useEffect(() => {
     if (content && !previousContent) {
-      console.log('Initializing previous content:', content);
       setPreviousContent(content);
     }
   }, [content, previousContent]);
 
   useEffect(() => {
     if (editor && content !== editor.getHTML()) {
-      console.log('Setting editor content:', content);
       editor.commands.setContent(content);
       setPreviousContent(content);
     }

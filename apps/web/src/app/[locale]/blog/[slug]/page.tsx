@@ -3,47 +3,15 @@ import { notFound } from 'next/navigation';
 import MainLayout from "@/components/main-layout";
 import { unstable_noStore as noStore } from 'next/cache';
 import BlogPostClient from '@/components/blog/blog-slug-wrapper';
+import type { Locale, Translation, BlogCategory, BlogPost } from '@/lib/types';
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
 }
 
-interface Translation {
-  pl: string;
-  en: string;
-}
-
-interface BlogCategory {
-  id: string;
-  name: Translation;
-  slug: string;
-  description?: Translation;
-  iconName?: string;
-  iconProvider?: string;
-  order: number;
-  isActive: boolean;
-}
-
-interface BlogPost {
-  id: string;
-  title: Translation;
-  slug: string;
-  content: Translation;
-  excerpt?: Translation;
-  metaTitle?: Translation;
-  metaDescription?: Translation;
-  metaKeywords?: Translation;
-  ogImage?: string;
-  isPublished: boolean;
-  publishedAt?: string;
-  isFeatured: boolean;
-  viewCount: number;
-  categoryId?: string;
-  category?: BlogCategory;
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { locale: rawLocale, slug } = await params;
+  const locale = rawLocale as Locale;
   
   noStore();
   
@@ -61,13 +29,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       const post: BlogPost = result.result?.data;
       
       if (post && post.isPublished) {
-        const title = post.metaTitle?.[locale as 'pl' | 'en'] || post.title[locale as 'pl' | 'en'];
-        const description = post.metaDescription?.[locale as 'pl' | 'en'] || post.excerpt?.[locale as 'pl' | 'en'] || '';
+        const title = post.metaTitle?.[locale] || post.title[locale];
+        const description = post.metaDescription?.[locale] || post.excerpt?.[locale] || '';
         
         return {
           title: `${title} - BWitek.dev`,
           description,
-          keywords: post.metaKeywords?.[locale as 'pl' | 'en']?.split(',').map((k: string) => k.trim()),
+          keywords: post.metaKeywords?.[locale]?.split(',').map((k: string) => k.trim()),
           openGraph: {
             title,
             description,
@@ -95,7 +63,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const { locale, slug } = await params;
+  const { locale: rawLocale, slug } = await params;
+  const locale = rawLocale as Locale;
   
   noStore();
   

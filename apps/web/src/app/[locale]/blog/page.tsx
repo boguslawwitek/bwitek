@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { useLocale } from 'next-intl';
 import MainLayout from "@/components/main-layout";
 import { unstable_noStore as noStore } from 'next/cache';
 import BlogPageClient from '@/components/blog/blog-wrapper';
+import type { Locale } from '@/lib/types';
 
 interface Props {
   params: Promise<{ locale: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale as Locale;
   
   noStore();
   
@@ -28,18 +29,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       
       if (data && data.metaTitle && data.metaDescription) {
         return {
-          title: data.metaTitle[locale as 'pl' | 'en'] || "Blog - BWitek.dev",
-          description: data.metaDescription[locale as 'pl' | 'en'],
-          keywords: data.metaKeywords?.[locale as 'pl' | 'en']?.split(',').map((k: string) => k.trim()),
+          title: data.metaTitle[locale] || "Blog - BWitek.dev",
+          description: data.metaDescription[locale],
+          keywords: data.metaKeywords?.[locale]?.split(',').map((k: string) => k.trim()),
           openGraph: {
-            title: data.metaTitle[locale as 'pl' | 'en'] || "Blog - BWitek.dev",
-            description: data.metaDescription[locale as 'pl' | 'en'],
+            title: data.metaTitle[locale] || "Blog - BWitek.dev",
+            description: data.metaDescription[locale],
             images: data.ogImage ? [{ url: data.ogImage }] : undefined,
           },
           twitter: {
             card: 'summary_large_image',
-            title: data.metaTitle[locale as 'pl' | 'en'] || "Blog - BWitek.dev",
-            description: data.metaDescription[locale as 'pl' | 'en'],
+            title: data.metaTitle[locale] || "Blog - BWitek.dev",
+            description: data.metaDescription[locale],
             images: data.ogImage ? [data.ogImage] : undefined,
           }
         };
@@ -56,7 +57,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPage({ params }: Props) {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale as Locale;
   
   noStore();
   

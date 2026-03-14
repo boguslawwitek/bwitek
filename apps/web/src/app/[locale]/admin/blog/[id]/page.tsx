@@ -9,6 +9,7 @@ import Link from "next/link";
 import { trpc } from "@/utils/trpc";
 import { useQuery } from "@tanstack/react-query";
 import ArticleContent from "@/components/admin/article-content";
+import { formatDate } from "@/lib/format";
 
 export default function ViewBlogPostPage() {
   const params = useParams();
@@ -37,14 +38,6 @@ export default function ViewBlogPostPage() {
     );
   }
 
-  const formatDate = (date: string | null) => {
-    if (!date) return t("admin.blog.neverPublished");
-    return new Date(date).toLocaleDateString('pl-PL', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
-  };
 
   return (
     <div className="space-y-6">
@@ -85,7 +78,7 @@ export default function ViewBlogPostPage() {
             
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Icon name="Calendar" provider="lu" className="w-4 h-4" />
-              {formatDate(post.publishedAt)}
+              {formatDate(post.publishedAt, { locale: 'pl', nullText: t("admin.blog.neverPublished") })}
             </div>
             
             <div className="flex items-center gap-2 text-sm text-muted-foreground">

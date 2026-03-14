@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icon } from '@/components/icon';
 import { cn } from "@/lib/utils";
+import { getFullImageUrl } from "@/lib/url";
 import { trpc } from "@/utils/trpc";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -23,18 +24,6 @@ interface FileUploadProps {
   label?: string;
   placeholder?: string;
 }
-
-const getFullImageUrl = (url: string): string => {
-  if (!url) return '';
-  if (url.startsWith('http')) return url;
-  if (url.startsWith('/api/uploads/')) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${url}`;
-  }
-  if (url.startsWith('/uploads/')) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}/api${url}`;
-  }
-  return url;
-};
 
 export default function FileUpload({
   value,
@@ -55,7 +44,7 @@ export default function FileUpload({
 
   const { mutate: uploadImage, isPending } = useMutation(
     trpc.upload.uploadImage.mutationOptions({
-      onSuccess: (data: any) => {
+      onSuccess: (data) => {
         if (value && value !== data.url && onOldFileDelete) {
           onOldFileDelete(value);
         }
@@ -64,7 +53,7 @@ export default function FileUpload({
         setUrlInput(data.url);
         toast.success("Image uploaded successfully");
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
     })

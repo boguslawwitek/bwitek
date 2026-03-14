@@ -3,12 +3,13 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { trpc } from '@/utils/trpc';
 import { Icon } from '@/components/icon';
-import {useTranslations, useLocale} from 'next-intl';
+import {useTranslations} from 'next-intl';
+import {useTypedLocale} from '@/i18n/use-typed-locale';
 import {Link, useRouter, usePathname} from '@/i18n/navigation';
 
 export default function NavigationBar() {
   const t = useTranslations();
-  const locale = useLocale();
+  const locale = useTypedLocale();
   const pathname = usePathname();
   const router = useRouter();
   

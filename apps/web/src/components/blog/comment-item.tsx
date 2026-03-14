@@ -3,8 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Icon } from '@/components/icon';
+import { useTypedLocale } from '@/i18n/use-typed-locale';
+import { formatDate } from '@/lib/format';
 import CommentForm from "./comment-form";
 import type { Comment, CommentFormData } from "./types";
+import type { useTranslations } from 'next-intl';
 
 interface CommentItemProps {
   comment: Comment;
@@ -17,7 +20,7 @@ interface CommentItemProps {
   onSubmit: (e: React.FormEvent) => void;
   onCancelReply: () => void;
   isSubmitting: boolean;
-  t: any;
+  t: ReturnType<typeof useTranslations>;
 }
 
 export default function CommentItem({ 
@@ -33,15 +36,7 @@ export default function CommentItem({
   isSubmitting, 
   t 
 }: CommentItemProps) {
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pl-PL', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
+  const locale = useTypedLocale();
 
   return (
     <div className={`${isReply ? 'ml-6 mt-3' : 'mb-6'}`}>
@@ -85,7 +80,7 @@ export default function CommentItem({
                     )}
                     <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
                       <Icon name="Calendar" provider="lu" className="text-rose-600 dark:text-rose-400" />
-                      {formatDate(comment.createdAt)}
+                      {formatDate(comment.createdAt, { locale, includeTime: true })}
                     </div>
                   </div>
                 </div>

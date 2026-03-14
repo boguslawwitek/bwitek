@@ -9,6 +9,7 @@ import { Icon } from '@/components/icon';
 import { TurnstileWrapper, type TurnstileRef } from "@/components/turnstile";
 import { useRef } from "react";
 import type { CommentFormData } from "./types";
+import type { useTranslations } from 'next-intl';
 
 interface CommentFormProps {
   isReply?: boolean;
@@ -18,7 +19,7 @@ interface CommentFormProps {
   onSubmit: (e: React.FormEvent) => void;
   onCancel?: () => void;
   isSubmitting: boolean;
-  t: any;
+  t: ReturnType<typeof useTranslations>;
 }
 
 export default function CommentForm({ 

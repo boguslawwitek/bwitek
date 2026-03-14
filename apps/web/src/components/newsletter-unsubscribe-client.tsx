@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
+import { useTypedLocale } from '@/i18n/use-typed-locale';
 import { useMutation } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -29,7 +30,7 @@ export default function NewsletterUnsubscribeClient() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const t = useTranslations('newsletter.unsubscribe');
-  const locale = useLocale() as 'pl' | 'en';
+  const locale = useTypedLocale();
   
   const [email, setEmail] = useState(searchParams.get('email') || '');
   const [reason, setReason] = useState<UnsubscribeReason | ''>('');
@@ -38,11 +39,11 @@ export default function NewsletterUnsubscribeClient() {
 
   const unsubscribeMutation = useMutation(
     trpc.newsletter.unsubscribeWithFeedback.mutationOptions({
-      onSuccess: (data: any) => {
+      onSuccess: (data) => {
         setIsSubmitted(true);
         toast.success(data.message);
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
     })

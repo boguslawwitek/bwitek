@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "author": "Bogusław Witek",
   "devDependencies": {
-    "turbo": "^2.5.4"
+    "turbo": "^2.8.17",
+    "vitest": "^4.1.0"
   },
   "license": "GPL-3.0-only",
   "packageManager": "bun@1.2.13",
@@ -20,10 +21,18 @@
     "db:push": "turbo -F server db:push",
     "db:studio": "turbo -F server db:studio",
     "db:generate": "turbo -F server db:generate",
-    "db:migrate": "turbo -F server db:migrate"
+    "db:migrate": "turbo -F server db:migrate",
+    "test": "turbo test",
+    "test:web": "turbo -F web test",
+    "test:server": "turbo -F server test"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
+  ],
+  "trustedDependencies": [
+    "@parcel/watcher",
+    "@swc/core",
+    "unrs-resolver"
   ]
 }

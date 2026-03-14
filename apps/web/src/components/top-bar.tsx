@@ -2,11 +2,12 @@
 import { Icon } from '@/components/icon';
 import { useQuery } from '@tanstack/react-query';
 import { trpc } from '@/utils/trpc';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
+import { useTypedLocale } from '@/i18n/use-typed-locale';
 
 export default function TopBar() {
   const t = useTranslations();
-  const locale = useLocale() as 'pl' | 'en';
+  const locale = useTypedLocale();
   const { data: topBarItems, isLoading } = useQuery(trpc.content.getTopBar.queryOptions());
 
   const getIcon = (iconName: string | null | undefined, iconProvider: string | null | undefined) => {

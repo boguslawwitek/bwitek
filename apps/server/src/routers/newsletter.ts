@@ -34,11 +34,21 @@ const cleanupSubscriberSchema = z.object({
   targetLanguage: z.enum(['pl', 'en']),
 });
 
+function assertNewsletterEnabled() {
+  if (process.env.NEWSLETTER_ENABLED !== "true") {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Newsletter is currently disabled",
+    });
+  }
+}
+
 export const newsletterRouter = router({
   // Subscribe to newsletter (now with double opt-in)
   subscribe: publicProcedure
     .input(subscribeSchema)
     .mutation(async ({ input }) => {
+      assertNewsletterEnabled();
       try {
         // Request subscription with double opt-in
         const result = await senderService.requestSubscription({
