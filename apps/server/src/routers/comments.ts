@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, protectedProcedure, router } from "../lib/trpc";
+import { publicProcedure, protectedProcedure, rateLimitedProcedure, router } from "../lib/trpc";
 import { db } from "../db";
 import { blogComments, blogPosts } from "../db/schema/blog";
 import { eq, and, isNull, desc, asc, inArray } from "drizzle-orm";
@@ -7,13 +7,19 @@ import { v4 as uuidv4 } from "uuid";
 import { emailService } from "../services/email";
 import { verifyTurnstileToken } from "../lib/turnstile";
 import { TRPCError } from "@trpc/server";
+import { isSafeUrl } from "../lib/sanitize";
+
+const safeUrlSchema = z.string().url().refine(
+  (url) => url === '' || isSafeUrl(url),
+  { message: "Only http and https URLs are allowed" }
+);
 
 const createCommentSchema = z.object({
   postId: z.string().min(1, "Post ID is required"),
   parentId: z.string().min(1).optional(),
   authorName: z.string().min(1, "Name is required").max(100),
   authorEmail: z.string().email("Valid email is required").max(255),
-  authorWebsite: z.string().url().optional().or(z.literal("")),
+  authorWebsite: safeUrlSchema.optional().or(z.literal("")),
   content: z.string().min(1, "Content is required").max(2000),
   turnstileToken: z.string().min(1, "Turnstile verification is required"),
 });
@@ -59,9 +65,9 @@ export const commentsRouter = router({
       return rootComments;
     }),
 
-  createComment: publicProcedure
+  createComment: rateLimitedProcedure(5, 15 * 60 * 1000, 'comment')
     .input(createCommentSchema)
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       // Verify Turnstile token
       const isValidToken = await verifyTurnstileToken(input.turnstileToken);
       if (!isValidToken) {
@@ -95,8 +101,8 @@ export const commentsRouter = router({
         authorWebsite: input.authorWebsite || null,
         content: input.content,
         isApproved: false,
-        ipAddress: 'unknown',
-        userAgent: 'unknown',
+        ipAddress: ctx.ip,
+        userAgent: ctx.userAgent,
       };
 
       await db.insert(blogComments).values(newComment);

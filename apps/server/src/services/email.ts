@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import type { EmailTemplate, ContactFormData, NewCommentData } from '../templates';
 import { EmailType, contactFormTemplate, newCommentTemplate } from '../templates';
+import { sanitizeEmailHeader } from '../lib/sanitize';
 
 const createTransporter = () => {
   return nodemailer.createTransport({
@@ -64,20 +65,23 @@ export class EmailService {
   }
 
   async sendContactForm(data: ContactFormData) {
+    const safeName = sanitizeEmailHeader(data.name);
+    const safeEmail = sanitizeEmailHeader(data.email);
     const options: SendEmailOptions = {
       to: process.env.CONTACT_EMAIL || process.env.SMTP_USER!,
-      from: `"${data.name}" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
-      replyTo: data.email,
+      from: `"${safeName}" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+      replyTo: safeEmail,
     };
 
     return this.sendWithTemplate(contactFormTemplate, data, options);
   }
 
   async sendNewCommentNotification(data: NewCommentData) {
+    const safeEmail = sanitizeEmailHeader(data.authorEmail);
     const options: SendEmailOptions = {
       to: process.env.CONTACT_EMAIL || process.env.SMTP_USER!,
       from: `"BWitek.dev Komentarze" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
-      replyTo: data.authorEmail,
+      replyTo: safeEmail,
     };
 
     return this.sendWithTemplate(newCommentTemplate, data, options);

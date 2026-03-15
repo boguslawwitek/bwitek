@@ -5,6 +5,7 @@ import { db } from '../db';
 import { pendingNewsletterSubscriptions, unsubscribeFeedback } from '../db/schema/newsletter';
 import { eq, lt } from 'drizzle-orm';
 import { buildConfirmationEmailContent } from '../templates';
+import { escapeHtml } from '../lib/sanitize';
 
 interface SubscriberData {
   email: string;
@@ -650,7 +651,7 @@ export class BrevoService {
       <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
           <td align="center" style="padding: 20px 0;">
-            <img src="${buildFullImageUrl(data.articleOgImage)}" alt="${data.articleTitle}" class="article-image" style="width: 100%; max-width: 500px; height: auto; border-radius: 0.5rem;" />
+            <img src="${buildFullImageUrl(data.articleOgImage)}" alt="${escapeHtml(data.articleTitle)}" class="article-image" style="width: 100%; max-width: 500px; height: auto; border-radius: 0.5rem;" />
           </td>
         </tr>
       </table>
@@ -674,7 +675,7 @@ export class BrevoService {
       .replace(/\{\{GREETING\}\}/g, greeting)
       .replace(/\{\{INTRO\}\}/g, intro)
       .replace(/\{\{ARTICLE_IMAGE\}\}/g, articleImageSection)
-      .replace(/\{\{ARTICLE_TITLE\}\}/g, data.articleTitle)
+      .replace(/\{\{ARTICLE_TITLE\}\}/g, escapeHtml(data.articleTitle))
       .replace(/\{\{ARTICLE_EXCERPT\}\}/g, excerptSection)
       .replace(/\{\{ARTICLE_URL\}\}/g, articleUrl)
       .replace(/\{\{READ_MORE\}\}/g, readMore)
@@ -687,7 +688,7 @@ export class BrevoService {
     const text = textTemplate
       .replace(/\{\{GREETING\}\}/g, greeting)
       .replace(/\{\{INTRO\}\}/g, intro)
-      .replace(/\{\{ARTICLE_TITLE\}\}/g, data.articleTitle)
+      .replace(/\{\{ARTICLE_TITLE\}\}/g, escapeHtml(data.articleTitle))
       .replace(/\{\{ARTICLE_EXCERPT\}\}/g, cleanExcerpt ? `\n${cleanExcerpt}\n` : '')
       .replace(/\{\{ARTICLE_URL\}\}/g, articleUrl)
       .replace(/\{\{READ_MORE\}\}/g, readMore)

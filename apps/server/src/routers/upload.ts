@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../lib/trpc";
+import { protectedProcedure, router } from "../lib/trpc";
 import { db } from "../db";
 import { uploads } from "../db/schema/uploads";
 import { eq } from "drizzle-orm";
@@ -7,13 +7,20 @@ import fs from "fs/promises";
 import path from "path";
 import { writeFile, mkdir } from "fs/promises";
 import { nanoid } from "nanoid";
+import { extFromMime, validateMagicBytes } from "../lib/sanitize";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
+const uploadsDir = path.resolve(process.cwd(), "uploads");
+
 const deleteFileFromDisk = async (filePath: string) => {
   try {
-    const fullPath = path.join(process.cwd(), "uploads", filePath);
+    const fullPath = path.resolve(path.join(uploadsDir, filePath));
+    if (!fullPath.startsWith(uploadsDir + path.sep)) {
+      console.error(`Path traversal attempt blocked: ${filePath}`);
+      return;
+    }
     await fs.unlink(fullPath);
     console.log(`Deleted file: ${filePath}`);
   } catch (error) {
@@ -22,7 +29,7 @@ const deleteFileFromDisk = async (filePath: string) => {
 };
 
 export const uploadRouter = router({
-  uploadImage: publicProcedure
+  uploadImage: protectedProcedure
     .input(z.object({
       file: z.object({
         name: z.string(),
@@ -43,14 +50,19 @@ export const uploadRouter = router({
         throw new Error("File too large. Maximum size is 5MB.");
       }
 
-      const ext = path.extname(file.name);
-      const filename = `${Date.now()}-${Math.random().toString(36).substring(7)}${ext}`;
-      
-      const uploadDir = path.join(process.cwd(), "uploads", category);
-      await mkdir(uploadDir, { recursive: true });
-      
-      const filepath = path.join(uploadDir, filename);
       const buffer = Buffer.from(file.data, "base64");
+
+      if (!validateMagicBytes(buffer, file.type)) {
+        throw new Error("File content does not match declared type.");
+      }
+
+      const ext = extFromMime(file.type);
+      const filename = `${Date.now()}-${Math.random().toString(36).substring(7)}${ext}`;
+
+      const uploadDir = path.join(uploadsDir, category);
+      await mkdir(uploadDir, { recursive: true });
+
+      const filepath = path.join(uploadDir, filename);
       await writeFile(filepath, buffer);
 
       const relativePath = `${category}/${filename}`;
@@ -74,13 +86,13 @@ export const uploadRouter = router({
       };
     }),
 
-  deleteImage: publicProcedure
+  deleteImage: protectedProcedure
     .input(z.object({
       id: z.string(),
     }))
     .mutation(async ({ input }) => {
       const results = await db.select().from(uploads).where(eq(uploads.id, input.id));
-      
+
       if (!results[0]) {
         throw new Error("File not found");
       }
@@ -90,7 +102,7 @@ export const uploadRouter = router({
       return db.delete(uploads).where(eq(uploads.id, input.id));
     }),
 
-  getUploads: publicProcedure
+  getUploads: protectedProcedure
     .input(z.object({
       category: z.enum(["blog", "meta", "general"]).optional(),
       limit: z.number().min(1).max(100).default(50),
@@ -102,19 +114,19 @@ export const uploadRouter = router({
           .limit(input.limit)
           .orderBy(uploads.createdAt);
       }
-      
+
       return await db.select().from(uploads)
         .limit(input.limit)
         .orderBy(uploads.createdAt);
     }),
 
-  deleteImageByUrl: publicProcedure
+  deleteImageByUrl: protectedProcedure
     .input(z.object({
       url: z.string(),
     }))
     .mutation(async ({ input }) => {
       const results = await db.select().from(uploads).where(eq(uploads.url, input.url));
-      
+
       if (!results[0]) {
         console.warn("File not found in database:", input.url);
         return { success: false };
@@ -126,4 +138,4 @@ export const uploadRouter = router({
 
       return { success: true };
     }),
-}); 
+});

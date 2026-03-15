@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, protectedProcedure, router } from "../lib/trpc";
+import { publicProcedure, protectedProcedure, rateLimitedProcedure, router } from "../lib/trpc";
 import { senderService } from "../services/brevo";
 import { TRPCError } from "@trpc/server";
 import { db } from "../db";
@@ -20,7 +20,7 @@ const confirmSubscriptionSchema = z.object({
 const unsubscribeWithFeedbackSchema = z.object({
   email: z.string().email("Valid email is required"),
   reason: z.enum(['too_frequent', 'not_relevant', 'never_subscribed', 'poor_content', 'technical_issues', 'other']),
-  feedback: z.string().optional(),
+  feedback: z.string().max(1000).optional(),
   language: z.enum(['pl', 'en']),
 });
 
@@ -45,7 +45,7 @@ function assertNewsletterEnabled() {
 
 export const newsletterRouter = router({
   // Subscribe to newsletter (now with double opt-in)
-  subscribe: publicProcedure
+  subscribe: rateLimitedProcedure(5, 15 * 60 * 1000, 'newsletter-sub')
     .input(subscribeSchema)
     .mutation(async ({ input }) => {
       assertNewsletterEnabled();
@@ -232,7 +232,7 @@ export const newsletterRouter = router({
     }),
 
   // Cleanup subscriber
-  cleanupSubscriber: publicProcedure
+  cleanupSubscriber: protectedProcedure
     .input(cleanupSubscriberSchema)
     .mutation(async ({ input }) => {
       try {

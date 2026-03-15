@@ -1,18 +1,18 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../lib/trpc";
+import { rateLimitedProcedure, router } from "../lib/trpc";
 import { emailService } from "../services/email";
 import { verifyTurnstileToken } from "../lib/turnstile";
 import { TRPCError } from "@trpc/server";
 
 const contactFormSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Valid email is required"),
-  message: z.string().min(10, "Message must be at least 10 characters long"),
+  name: z.string().min(1, "Name is required").max(100),
+  email: z.string().email("Valid email is required").max(255),
+  message: z.string().min(10, "Message must be at least 10 characters long").max(5000),
   turnstileToken: z.string().min(1, "Turnstile verification is required"),
 });
 
 export const mailRouter = router({
-  sendContactForm: publicProcedure
+  sendContactForm: rateLimitedProcedure(3, 15 * 60 * 1000, 'contact')
     .input(contactFormSchema)
     .mutation(async ({ input }) => {
       // Verify Turnstile token
