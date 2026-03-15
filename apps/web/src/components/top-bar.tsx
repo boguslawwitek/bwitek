@@ -38,7 +38,7 @@ export default function TopBar() {
                     {isLoading ? (
                       <div className="text-gray-300">{t('common.loading')}</div>
                     ) : (
-                      topBarItems?.map((item, index) => {
+                      topBarItems?.map((item) => {
                         const icon = getIcon(item.iconName, item.iconProvider);
                         if (!icon) return null;
                         

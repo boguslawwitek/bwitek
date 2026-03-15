@@ -24,7 +24,7 @@ export default function AdminPanelNavigation() {
         toast.success(t("common.saved"));
         navigationItems.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -40,7 +40,7 @@ export default function AdminPanelNavigation() {
         toast.success(t("common.updated"));
         navigationItems.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -56,7 +56,7 @@ export default function AdminPanelNavigation() {
         toast.success(t("common.deleted"));
         navigationItems.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -72,7 +72,7 @@ export default function AdminPanelNavigation() {
         toast.success(t("common.updated"));
         navigationItems.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -88,7 +88,7 @@ export default function AdminPanelNavigation() {
         toast.success(t("common.saved"));
         topBarItems.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -104,7 +104,7 @@ export default function AdminPanelNavigation() {
         toast.success(t("common.updated"));
         topBarItems.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -120,7 +120,7 @@ export default function AdminPanelNavigation() {
         toast.success(t("common.deleted"));
         topBarItems.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -136,7 +136,7 @@ export default function AdminPanelNavigation() {
         toast.success(t("common.updated"));
         topBarItems.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {

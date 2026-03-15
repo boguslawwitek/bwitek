@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 
 async function loadMessagesFromDirectory(locale: string) {
-  let messages: Record<string, any> = {};
+  let messages: Record<string, Record<string, string>> = {};
   
   try {
     const messagesDirectory = path.join(process.cwd(), 'messages', locale);

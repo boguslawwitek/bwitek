@@ -2,9 +2,17 @@ import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { EntityForm, type FieldConfig } from "@/components/admin/entity-form";
 
+export type NavigationFormData = {
+  label: { pl: string; en: string };
+  url?: string | null;
+  external: boolean;
+  newTab: boolean;
+  isActive: boolean;
+};
+
 type NavigationFormProps = {
-  initialData?: any;
-  onSubmit: (data: any) => void;
+  initialData?: NavigationFormData;
+  onSubmit: (data: NavigationFormData) => void;
   onCancel: () => void;
 };
 

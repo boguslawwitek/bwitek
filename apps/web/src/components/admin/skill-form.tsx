@@ -4,9 +4,17 @@ import { useQuery } from "@tanstack/react-query";
 import { trpc } from "@/utils/trpc";
 import { EntityForm, type FieldConfig } from "@/components/admin/entity-form";
 
+export type SkillFormData = {
+  name: { pl: string; en: string };
+  categoryId: string | null;
+  iconName?: string | null;
+  iconProvider?: string | null;
+  isActive: boolean;
+};
+
 type SkillFormProps = {
-  initialData?: any;
-  onSubmit: (data: any) => void;
+  initialData?: SkillFormData;
+  onSubmit: (data: SkillFormData) => void;
   onCancel: () => void;
 };
 

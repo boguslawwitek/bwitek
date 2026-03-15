@@ -34,10 +34,6 @@ export default function NewsletterSignup({
     trpc.getNewsletterStatus.queryOptions()
   );
 
-  if (newsletterStatus && !newsletterStatus.enabled) {
-    return null;
-  }
-  
   const [email, setEmail] = useState('');
   const [language, setLanguage] = useState<'pl' | 'en'>(currentLocale);
   const [gdprConsent, setGdprConsent] = useState(false);
@@ -58,6 +54,10 @@ export default function NewsletterSignup({
       },
     })
   );
+
+  if (newsletterStatus && !newsletterStatus.enabled) {
+    return null;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

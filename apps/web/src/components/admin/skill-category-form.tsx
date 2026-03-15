@@ -2,9 +2,13 @@ import { useTranslations } from "next-intl";
 import { z } from "zod";
 import { EntityForm, type FieldConfig } from "@/components/admin/entity-form";
 
+export type SkillCategoryFormData = {
+  name: { pl: string; en: string };
+};
+
 type SkillCategoryFormProps = {
-  initialData?: any;
-  onSubmit: (data: any) => void;
+  initialData?: SkillCategoryFormData;
+  onSubmit: (data: SkillCategoryFormData) => void;
   onCancel: () => void;
 };
 

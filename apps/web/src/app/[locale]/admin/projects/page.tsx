@@ -43,7 +43,7 @@ export default function AdminPanelProjects() {
         toast.success(t("common.saved"));
         projectsPageMeta.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -59,7 +59,7 @@ export default function AdminPanelProjects() {
         toast.success(t("common.saved"));
         projects.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -75,7 +75,7 @@ export default function AdminPanelProjects() {
         toast.success(t("common.updated"));
         projects.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -91,7 +91,7 @@ export default function AdminPanelProjects() {
         toast.success(t("common.deleted"));
         projects.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -107,7 +107,7 @@ export default function AdminPanelProjects() {
         toast.success(t("common.updated"));
         projects.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -117,7 +117,7 @@ export default function AdminPanelProjects() {
 
     const { mutate: deleteOldImage } = useMutation(
       trpc.upload.deleteImageByUrl.mutationOptions({
-        onError: (error: any) => {
+        onError: (error) => {
           console.warn("Failed to delete old image:", error);
         }
       })

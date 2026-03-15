@@ -2,9 +2,18 @@ import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { EntityForm, type FieldConfig } from "@/components/admin/entity-form";
 
+export type ContactFormData = {
+  name: { pl: string; en: string };
+  iconName?: string | null;
+  iconProvider?: string | null;
+  url?: string | null;
+  external: boolean;
+  newTab: boolean;
+};
+
 type ContactFormProps = {
-  initialData?: any;
-  onSubmit: (data: any) => void;
+  initialData?: ContactFormData;
+  onSubmit: (data: ContactFormData) => void;
   onCancel: () => void;
 };
 

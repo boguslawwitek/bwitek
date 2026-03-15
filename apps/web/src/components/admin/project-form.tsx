@@ -2,9 +2,19 @@ import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { EntityForm, type FieldConfig } from "@/components/admin/entity-form";
 
+export type ProjectFormData = {
+  title: { pl: string; en: string };
+  description: { pl: string; en: string };
+  url?: string | null;
+  repoUrl?: string | null;
+  repoUrl2?: string | null;
+  imageUrl?: string | null;
+  isActive: boolean;
+};
+
 type ProjectFormProps = {
-  initialData?: any;
-  onSubmit: (data: any) => void;
+  initialData?: ProjectFormData;
+  onSubmit: (data: ProjectFormData) => void;
   onCancel: () => void;
 };
 

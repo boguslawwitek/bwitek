@@ -93,8 +93,13 @@ export default function RichTextEditor({ content, onChange, placeholder }: RichT
   }, [deleteOldImage]);
 
   const editor = useEditor({
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: true,
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        link: false,
+        codeBlock: false,
+      }),
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {

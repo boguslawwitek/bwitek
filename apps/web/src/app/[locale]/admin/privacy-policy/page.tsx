@@ -46,7 +46,7 @@ export default function AdminPanelPrivacyPolicy() {
         toast.success(t("common.saved"));
         privacyPolicyPageMeta.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -62,7 +62,7 @@ export default function AdminPanelPrivacyPolicy() {
         toast.success(t("common.saved"));
         privacyPolicy.refetch();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error(error.message);
       },
       onSettled: () => {
@@ -72,7 +72,7 @@ export default function AdminPanelPrivacyPolicy() {
 
     const { mutate: deleteOldImage } = useMutation(
       trpc.upload.deleteImageByUrl.mutationOptions({
-        onError: (error: any) => {
+        onError: (error) => {
           console.warn("Failed to delete old image:", error);
         }
       })

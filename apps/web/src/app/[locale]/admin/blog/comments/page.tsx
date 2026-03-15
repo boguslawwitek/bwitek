@@ -339,7 +339,7 @@ export default function CommentsAdminPage() {
                           </span>
                         </div>
                         <p className="text-sm text-blue-600 dark:text-blue-400 italic">
-                          "{comment.parentComment.content}"
+                          &ldquo;{comment.parentComment.content}&rdquo;
                         </p>
                       </div>
                     )}

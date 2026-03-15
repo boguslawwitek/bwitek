@@ -111,16 +111,16 @@ export default function ProjectsClientWrapper({ locale }: Props) {
                                   </a>
                                 );
                               },
-                              h1: ({ node, ...props }) => (
+                              h1: ({ ...props }) => (
                                 <h1 className="font-mono text-gray-700 dark:text-gray-200 text-xl font-semibold" {...props} />
                               ),
-                              h2: ({ node, ...props }) => (
+                              h2: ({ ...props }) => (
                                 <h2 className="font-mono text-gray-700 dark:text-gray-200 text-lg font-semibold" {...props} />
                               ),
-                              h3: ({ node, ...props }) => (
+                              h3: ({ ...props }) => (
                                 <h3 className="font-mono text-gray-700 dark:text-gray-200 text-base font-semibold" {...props} />
                               ),
-                              h4: ({ node, ...props }) => (
+                              h4: ({ ...props }) => (
                                 <h4 className="font-mono text-gray-700 dark:text-gray-200 text-sm font-semibold" {...props} />
                               ),
                             }}

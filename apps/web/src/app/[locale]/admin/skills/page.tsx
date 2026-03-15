@@ -45,7 +45,7 @@ export default function AdminPanelSkills() {
       toast.success(t("common.saved"));
       skillsPageMeta.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -115,7 +115,7 @@ export default function AdminPanelSkills() {
       toast.success(t("common.saved"));
       skills.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -131,7 +131,7 @@ export default function AdminPanelSkills() {
       toast.success(t("common.updated"));
       skills.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -147,7 +147,7 @@ export default function AdminPanelSkills() {
       toast.success(t("common.deleted"));
       skills.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -163,7 +163,7 @@ export default function AdminPanelSkills() {
       toast.success(t("common.updated"));
       skills.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -179,7 +179,7 @@ export default function AdminPanelSkills() {
       toast.success(t("common.saved"));
       categories.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -195,7 +195,7 @@ export default function AdminPanelSkills() {
       toast.success(t("common.updated"));
       categories.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -211,7 +211,7 @@ export default function AdminPanelSkills() {
       toast.success(t("common.deleted"));
       categories.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -227,7 +227,7 @@ export default function AdminPanelSkills() {
       toast.success(t("common.updated"));
       categories.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -237,7 +237,7 @@ export default function AdminPanelSkills() {
 
   const { mutate: deleteOldImage } = useMutation(
     trpc.upload.deleteImageByUrl.mutationOptions({
-      onError: (error: any) => {
+      onError: (error) => {
         console.warn("Failed to delete old image:", error);
       }
     })

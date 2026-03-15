@@ -2,9 +2,18 @@ import { useTranslations } from "next-intl";
 import { z } from "zod";
 import { EntityForm, type FieldConfig } from "@/components/admin/entity-form";
 
+export type BlogCategoryFormData = {
+  name: { pl: string; en: string };
+  slug: string;
+  description?: { pl?: string; en?: string };
+  iconName?: string | null;
+  iconProvider?: string | null;
+  isActive: boolean;
+};
+
 type BlogCategoryFormProps = {
-  initialData?: any;
-  onSubmit: (data: any) => void;
+  initialData?: BlogCategoryFormData;
+  onSubmit: (data: BlogCategoryFormData) => void;
   onCancel: () => void;
 };
 

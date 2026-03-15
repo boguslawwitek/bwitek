@@ -2,9 +2,18 @@ import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { EntityForm, type FieldConfig } from "@/components/admin/entity-form";
 
+export type TopBarFormData = {
+  name: { pl: string; en: string };
+  iconName?: string | null;
+  iconProvider?: string | null;
+  url?: string | null;
+  external: boolean;
+  newTab: boolean;
+};
+
 type TopBarFormProps = {
-  initialData?: any;
-  onSubmit: (data: any) => void;
+  initialData?: TopBarFormData;
+  onSubmit: (data: TopBarFormData) => void;
   onCancel: () => void;
 };
 

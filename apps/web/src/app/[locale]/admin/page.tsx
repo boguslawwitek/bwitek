@@ -54,7 +54,7 @@ export default function AdminPanel() {
 
   const { mutate: deleteOldImage } = useMutation(
     trpc.upload.deleteImageByUrl.mutationOptions({
-      onError: (error: any) => {
+      onError: (error) => {
         console.warn("Failed to delete old image:", error);
       }
     })

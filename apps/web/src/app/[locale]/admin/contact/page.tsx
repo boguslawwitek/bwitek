@@ -43,7 +43,7 @@ export default function AdminPanelContact() {
       toast.success(t("common.saved"));
       contactPageMeta.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -53,7 +53,7 @@ export default function AdminPanelContact() {
 
   const { mutate: deleteOldImage } = useMutation(
     trpc.upload.deleteImageByUrl.mutationOptions({
-      onError: (error: any) => {
+      onError: (error) => {
         console.warn("Failed to delete old image:", error);
       }
     })
@@ -118,7 +118,7 @@ export default function AdminPanelContact() {
       toast.success(t("common.saved"));
       contacts.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -134,7 +134,7 @@ export default function AdminPanelContact() {
       toast.success(t("common.updated"));
       contacts.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -150,7 +150,7 @@ export default function AdminPanelContact() {
       toast.success(t("common.deleted"));
       contacts.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
@@ -166,7 +166,7 @@ export default function AdminPanelContact() {
       toast.success(t("common.updated"));
       contacts.refetch();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(error.message);
     },
     onSettled: () => {
