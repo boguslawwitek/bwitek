@@ -31,7 +31,9 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(logger());
 }
 
-app.use(secureHeaders());
+app.use(secureHeaders({
+  crossOriginResourcePolicy: 'cross-origin',
+}));
 
 app.use(
   "/*",
